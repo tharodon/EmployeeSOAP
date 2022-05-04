@@ -21,7 +21,7 @@ public class EmployeeEndpoint {
 
     private final MapperService mapperService;
     private final EmployeeService employeeService;
-    private static final String NAME_SPACE = "http://spring.io/guides/gs-producing-web-service";
+    private static final String NAME_SPACE = "http://spring.io/guides/gs-producing-web-service"; //todo вкусовщина, но приятно видеть консты выше)) + почему такой текст ?
 
     @PayloadRoot(namespace = NAME_SPACE, localPart = "addEmployeeRequest")
     @ResponsePayload

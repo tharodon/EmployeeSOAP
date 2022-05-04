@@ -18,7 +18,9 @@ public enum Positions {
         this.salaryMax = salaryMax;
     }
 
+    //todo параметр не сокращай + название лучше сделать define
     public static Positions getDefine(String pos){
+        //todo можно сделать импорт констант и избавиться от Positions. Это облегчит читаемость кода
         if (Positions.JUNIOR.getPosition().equals(pos)) {
             return JUNIOR;
         } else if (Positions.MIDDLE.getPosition().equals(pos)) {
@@ -28,9 +30,10 @@ public enum Positions {
         } else if (Positions.MANAGER.getPosition().equals(pos)) {
             return MANAGER;
         }
+        //todo пробросить pos ?
         throw new InvalidPositionException();
     }
-
+    //todo лучше использовать lombok))
     public String getPosition() {
         return position;
     }

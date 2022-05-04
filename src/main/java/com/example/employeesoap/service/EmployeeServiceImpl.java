@@ -5,11 +5,11 @@ import com.example.employeesoap.exceptions.EmployeeNotFoundException;
 import com.example.employeesoap.repository.EmployeeRepository;
 import org.springframework.scheduling.annotation.Scheduled;
 
-public class EmployeeServiceImpl implements EmployeeService{
+public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository) { //todo lombok
         this.employeeRepository = employeeRepository;
     }
 
@@ -32,9 +32,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public void delete(Long id) {
-        try{
+        try {
             employeeRepository.deleteById(id);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("employee with id : " + id + " doesn't exist");
         }
     }

@@ -9,13 +9,13 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 @Configuration
 @EnableScheduling
-public class CronTabConfig {
+public class CronTabConfig { //todo название не говорит, что делает класс + почему Configuration
 
     @Autowired
-    EmployeeRepository employeeRepository;
+    EmployeeRepository employeeRepository; //todo private ?
 
-    @Scheduled(cron = "1 * * * * *")
+    @Scheduled(cron = "1 * * * * *")    //todo хранить в properties ?
     public void cron(){
         employeeRepository.deleteByMaxId();
-    }
+    } //todo то есть будет удалять новые записи, а не старые
 }

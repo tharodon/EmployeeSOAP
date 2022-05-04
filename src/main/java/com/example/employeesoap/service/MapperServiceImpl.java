@@ -34,6 +34,7 @@ public class MapperServiceImpl implements MapperService{
 
     private EmployeeDto convertToDto(Employee employee) {
         EmployeeDto dto = new EmployeeDto();
+        //todo через билдер ?
         dto.setId(employee.getId());
         dto.setName(employee.getName());
         dto.setSurname(employee.getSurname());

@@ -25,6 +25,8 @@ public class Employee {
     @Column
     private Long salary;
 
+
+    //todo используй lombok)))
     public String getName() {
         return name;
     }
