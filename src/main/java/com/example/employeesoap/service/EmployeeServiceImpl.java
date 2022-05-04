@@ -3,15 +3,15 @@ package com.example.employeesoap.service;
 import com.example.employeesoap.entity.Employee;
 import com.example.employeesoap.exceptions.EmployeeNotFoundException;
 import com.example.employeesoap.repository.EmployeeRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
 
+@Service
+@RequiredArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
-
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository) { //todo lombok
-        this.employeeRepository = employeeRepository;
-    }
 
     @Override
     public Employee findEmployeeById(Long id) {

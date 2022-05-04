@@ -8,6 +8,8 @@
 
 package io.spring.guides.gs_producing_web_service;
 
+import lombok.*;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -40,6 +42,11 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * 
  */
+@Builder(toBuilder = true)
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "employeeDto", propOrder = {
     "id",
@@ -66,173 +73,4 @@ public class EmployeeDto {
     private Long age;
     @XmlElement(required = true)
     private String description;
-
-    /**
-     * Gets the value of the id property.
-     * 
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * Sets the value of the id property.
-     * 
-     */
-    public void setId(Long value) {
-        this.id = value;
-    }
-
-    /**
-     * Gets the value of the name property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Sets the value of the name property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setName(String value) {
-        this.name = value;
-    }
-
-    /**
-     * Gets the value of the surname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getSurname() {
-        return surname;
-    }
-
-    /**
-     * Sets the value of the surname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSurname(String value) {
-        this.surname = value;
-    }
-
-    /**
-     * Gets the value of the position property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getPosition() {
-        return position;
-    }
-
-    /**
-     * Sets the value of the position property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setPosition(String value) {
-        this.position = value;
-    }
-
-    /**
-     * Gets the value of the salary property.
-     * 
-     */
-    public long getSalary() {
-        return salary;
-    }
-
-    /**
-     * Sets the value of the salary property.
-     * 
-     */
-    public void setSalary(long value) {
-        this.salary = value;
-    }
-
-    /**
-     * Gets the value of the grade property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getGrade() {
-        return grade;
-    }
-
-    /**
-     * Sets the value of the grade property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setGrade(String value) {
-        this.grade = value;
-    }
-
-    /**
-     * Gets the value of the age property.
-     * 
-     */
-    public long getAge() {
-        return age;
-    }
-
-    /**
-     * Sets the value of the age property.
-     * 
-     */
-    public void setAge(long value) {
-        this.age = value;
-    }
-
-    /**
-     * Gets the value of the description property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * Sets the value of the description property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setDescription(String value) {
-        this.description = value;
-    }
-
 }
