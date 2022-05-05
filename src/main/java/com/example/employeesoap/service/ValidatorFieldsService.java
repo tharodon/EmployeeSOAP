@@ -13,8 +13,8 @@ import static com.example.employeesoap.enums.Positions.*;
 @RequiredArgsConstructor
 public class ValidatorFieldsService {
 
-    private final EmployeeError employeeError; //todo название пиши лучше полностью // done
-    private final EmployeeRepository employeeRepository;
+    private final EmployeeError employeeError;
+    private final EmployeeRepository employeeRepository; //todo не используется
 
     public void validCheck(Employee employee) throws InvalidPositionException {
         employeeError.addFieldsEmpty(checkRequiredFields(employee));

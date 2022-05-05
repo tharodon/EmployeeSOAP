@@ -1,5 +1,5 @@
 package com.example.employeesoap.enums;
-
+//todo пакет лучше назвать type. На будущие пакеты во множественном числе не называют
 import com.example.employeesoap.exceptions.InvalidPositionException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +13,7 @@ public enum Positions {
     MANAGER("Manager", 21L, 70_000L, 150_000L);
 
     private final String position;
-    private final Long minAge; //todo а почему тут без обертки ?)) Long использовал. В одном стиле лучше писать //done
+    private final Long minAge;
     private final Long salaryMin;
     private final Long salaryMax;
 

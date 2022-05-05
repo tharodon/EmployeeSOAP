@@ -25,8 +25,6 @@ public class EmployeeEndpoint {
     private final EmployeeMapper mapperService;
     private final EmployeeService employeeService;
 
-    //todo общие замечание. делай по чаще reformat code // done
-
     @PayloadRoot(namespace = NAME_SPACE, localPart = "addEmployeeRequest")
     @ResponsePayload
     public EmployeeResponse addEmployee(@RequestPayload AddEmployeeRequest request) throws InvalidPositionException {
@@ -34,7 +32,6 @@ public class EmployeeEndpoint {
         return mapperService.getResponseFromEmployee(employee);
     }
 
-    //todo название с update // done
     @PayloadRoot(namespace = NAME_SPACE, localPart = "patchEmployeeRequest")
     @ResponsePayload
     public EmployeeResponse updateEmployee(@RequestPayload PatchEmployeeRequest request) throws InvalidPositionException {

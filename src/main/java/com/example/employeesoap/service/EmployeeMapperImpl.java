@@ -38,20 +38,6 @@ public class EmployeeMapperImpl implements EmployeeMapper {
     }
 
     private EmployeeDto convertToDto(Employee employee) {
-        /*
-        todo на всякий)) можно еще так писать билдер
-            EmployeeDto.builder()
-                    .id(employee.getId())
-                    .name(employee.getName())
-                    .surname(employee.getSurname())
-                    .position(employee.getPosition())
-                    .grade(employee.getGrade())
-                    .description(employee.getDescription())
-                    .age(employee.getAge())
-                    .salary(employee.getSalary())
-                    .build();
-                    // done у меня вроде так же, только toBuilder
-         */
         return new EmployeeDto()
                 .toBuilder()
                 .id(employee.getId())

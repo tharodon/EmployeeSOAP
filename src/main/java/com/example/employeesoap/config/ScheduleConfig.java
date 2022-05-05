@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 @Configuration
 @EnableScheduling
 @RequiredArgsConstructor
-public class ScheduleConfig { //todo подумал над названием лучше наверное ScheduleConfig. Поставить Configuration. Имя пакет либо scheduler или config // done
+public class ScheduleConfig {
 
     private final EmployeeRepository employeeRepository;
 

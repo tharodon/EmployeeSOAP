@@ -24,22 +24,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Transactional
     @Override
-    public Employee save(Employee employee) { //todo @Transactional ? // done
+    public Employee save(Employee employee) {
         employeeRepository.save(employee);
         return employee;
     }
 
     @Transactional
     @Override
-    public Employee update(Employee employee) { //todo @Transactional ? // done
+    public Employee update(Employee employee) {
         employeeRepository.save(employee);
         return employee;
     }
 
     @Transactional
     @Override
-    public void delete(Employee employee) { //todo @Transactional ? // done
-        //todo зачем try-catch ? // done
+    public void delete(Employee employee) {
         employeeRepository.delete(employee);
     }
 }

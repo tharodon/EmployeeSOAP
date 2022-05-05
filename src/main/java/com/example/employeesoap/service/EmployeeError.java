@@ -5,9 +5,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Getter
-public class EmployeeError { //todo Название сбивает. Лучше EmployeeError // done
-    private final StringBuilder messageError; //todo название messageError // done
-
+public class EmployeeError {
+    private final StringBuilder messageError;
 
     public EmployeeError() {
         messageError = new StringBuilder();
@@ -22,7 +21,7 @@ public class EmployeeError { //todo Название сбивает. Лучше 
     }
 
     public void addIllegalArgumentMessage(String message) {
-        if (!message.isEmpty()) {
+        if (!message.isEmpty()) { //todo так себе проверка. это просто проверка value.length == 0. То есть NPE может вылететь
             messageError.append(message)
                     .append("\n");
         }
