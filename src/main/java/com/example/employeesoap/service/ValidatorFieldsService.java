@@ -1,11 +1,12 @@
 package com.example.employeesoap.service;
 
-import com.example.employeesoap.api.repository.EmployeeRepository;
 import com.example.employeesoap.entity.Employee;
 import com.example.employeesoap.enums.Positions;
 import com.example.employeesoap.exceptions.InvalidPositionException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.*;
 
 import static com.example.employeesoap.enums.Positions.*;
 
@@ -13,16 +14,19 @@ import static com.example.employeesoap.enums.Positions.*;
 @RequiredArgsConstructor
 public class ValidatorFieldsService {
 
-    private final EmployeeError employeeError; //todo название пиши лучше полностью // done
-    private final EmployeeRepository employeeRepository;
+    private final EmployeesError employeeError;
 
-    public void validCheck(Employee employee) throws InvalidPositionException {
-        employeeError.addFieldsEmpty(checkRequiredFields(employee));
-        employeeError.addIllegalArgumentMessage(
-                checkSalary(Positions.getDefine(employee.getPosition()), employee.getSalary()));
-        employeeError.addFieldsEmpty(checkAge(Positions.getDefine(employee.getPosition()), employee.getAge()));
-        if (employeeError.getMessageError().length() > 0) {
-            throw new IllegalArgumentException(employeeError.getMessageError().toString());
+
+    public void validCheck(List<Employee> employees) throws InvalidPositionException {
+        for (Employee employee : employees) {
+            employeeError.addFieldsEmpty(checkRequiredFields(employee));
+            employeeError.addIllegalArgumentMessage(
+                    checkSalary(Positions.getDefine(employee.getPosition()), employee.getSalary()));
+            employeeError.addFieldsEmpty(checkAge(Positions.getDefine(employee.getPosition()), employee.getAge()));
+            if (employeeError.getMessageError().length() > 0){
+                employeeError.flushEmployee(employee);
+                employees.remove(employee);
+            }
         }
     }
 

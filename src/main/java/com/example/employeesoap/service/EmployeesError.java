@@ -1,16 +1,22 @@
 package com.example.employeesoap.service;
 
+import com.example.employeesoap.entity.Employee;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @Getter
-public class EmployeeError { //todo Название сбивает. Лучше EmployeeError // done
-    private final StringBuilder messageError; //todo название messageError // done
+public class EmployeesError {
+    private final StringBuilder messageError =  new StringBuilder();
+    private final Map<Employee, String> invalidEmployees = new HashMap<>();
 
-
-    public EmployeeError() {
-        messageError = new StringBuilder();
+    public void flushEmployee(Employee employee) {
+        invalidEmployees.put(employee, messageError.toString());
+        messageError.setLength(0);
     }
 
     public void addFieldsEmpty(String fields) {

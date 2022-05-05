@@ -1,0 +1,33 @@
+POST http://localhost:8081/server/employee/
+Content-Type: application/json
+
+[
+  {
+    "name": "1",
+    "surname": "bbbd",
+    "position": "Junior",
+    "grade": 123,
+    "age": 18,
+    "salary": 550001
+  },
+
+  {
+    "name": "2",
+    "surname": "bbbd",
+    "position": "Senior",
+    "grade": 123,
+    "age": 18,
+    "salary": 550001
+  },
+
+  {
+    "name": "3",
+    "surname": "bbbd",
+    "position": "Junior",
+    "grade": 123,
+    "age": 18,
+    "salary": 55000
+  }
+]
+
+###
