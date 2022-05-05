@@ -1,7 +1,9 @@
 package com.example.employeesoap.service;
 
+import com.example.employeesoap.api.repository.EmployeeRepository;
 import com.example.employeesoap.entity.Employee;
 import com.example.employeesoap.enums.Positions;
+import com.example.employeesoap.exceptions.InvalidPositionException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,15 +13,16 @@ import static com.example.employeesoap.enums.Positions.*;
 @RequiredArgsConstructor
 public class ValidatorFieldsService {
 
-    private final InvalidParamsErrorCollector collector; //todo название пиши лучше полностью
+    private final EmployeeError employeeError; //todo название пиши лучше полностью // done
+    private final EmployeeRepository employeeRepository;
 
-    public void validCheck(Employee employee) {
-        collector.addFieldsEmpty(checkRequiredFields(employee));
-        collector.addIllegalArgumentMessage(
+    public void validCheck(Employee employee) throws InvalidPositionException {
+        employeeError.addFieldsEmpty(checkRequiredFields(employee));
+        employeeError.addIllegalArgumentMessage(
                 checkSalary(Positions.getDefine(employee.getPosition()), employee.getSalary()));
-        collector.addFieldsEmpty(checkAge(Positions.getDefine(employee.getPosition()), employee.getAge()));
-        if (collector.getTrace().length() > 0){
-            throw new IllegalArgumentException(collector.getTrace().toString());
+        employeeError.addFieldsEmpty(checkAge(Positions.getDefine(employee.getPosition()), employee.getAge()));
+        if (employeeError.getMessageError().length() > 0) {
+            throw new IllegalArgumentException(employeeError.getMessageError().toString());
         }
     }
 
@@ -36,53 +39,53 @@ public class ValidatorFieldsService {
     }
 
     private String checkAge(Positions position, Long age) {
-        if (age != null && age < position.getMinAge()){
+        if (age != null && age < position.getMinAge()) {
             return "Invalid age. Expected: from "
                     + position.getMinAge()
-                    + " receiced: " + age;
+                    + " received: " + age;
         }
         return "";
     }
 
-    private String checkRequiredFields(Employee employee) {
+    private String checkRequiredFields(Employee employee) throws InvalidPositionException {
         StringBuilder trace = new StringBuilder();
-        if (employee.getName() == null){
+        if (employee.getName() == null) {
             trace.append("name ");
         }
-        if (employee.getSurname() == null){
+        if (employee.getSurname() == null) {
             trace.append("surname ");
         }
-        if (employee.getPosition() == null){
+        if (employee.getPosition() == null) {
             trace.append("position ");
         }
-        if (employee.getAge() == null){
+        if (employee.getAge() == null) {
             trace.append("age ");
         }
-        if (employee.getSalary() == null){
+        if (employee.getSalary() == null) {
             trace.append("salary ");
         }
-        if (getDefine(employee.getPosition()) == SENIOR){
+        if (getDefine(employee.getPosition()) == SENIOR) {
             trace.append(requiredFieldsSenior(employee));
-        }else if (getDefine(employee.getPosition()) == MANAGER){
+        } else if (getDefine(employee.getPosition()) == MANAGER) {
             trace.append(requiredFieldsManager(employee));
         }
         return trace.toString();
     }
 
-    private String requiredFieldsSenior(Employee employee){
+    private String requiredFieldsSenior(Employee employee) {
         StringBuilder trace = new StringBuilder();
-        if (employee.getGrade() == null){
+        if (employee.getGrade() == null) {
             trace.append("grade ");
         }
-        if (employee.getDescription() == null){
+        if (employee.getDescription() == null) {
             trace.append("description ");
         }
         return trace.toString();
     }
 
-    private String requiredFieldsManager(Employee employee){
+    private String requiredFieldsManager(Employee employee) {
         StringBuilder trace = new StringBuilder();
-        if (employee.getGrade() == null){
+        if (employee.getGrade() == null) {
             trace.append("grade ");
         }
         return trace.toString();

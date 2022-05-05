@@ -1,8 +1,8 @@
 package com.example.employeesoap.exceptions;
 
-public class EmployeeNotFoundException extends RuntimeException { //todo сделай от Exception
+public class EmployeeNotFoundException extends Exception { //todo сделай от Exception //done
 
-    public EmployeeNotFoundException() {
-        super("EmployeeNotFound");
+    public EmployeeNotFoundException(Long id) {
+        super("Employee with id: " + id + " not found");
     }
 }

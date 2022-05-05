@@ -1,12 +1,13 @@
 package com.example.employeesoap.service;
 
+import com.example.employeesoap.api.EmployeeService;
 import com.example.employeesoap.entity.Employee;
 import com.example.employeesoap.exceptions.EmployeeNotFoundException;
-import com.example.employeesoap.repository.EmployeeRepository;
+import com.example.employeesoap.api.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -15,29 +16,30 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
 
     @Override
-    public Employee findEmployeeById(Long id) {
-        return employeeRepository.findById(id).orElseThrow(EmployeeNotFoundException::new);
+    public Employee findEmployeeById(Long id) throws EmployeeNotFoundException {
+        return employeeRepository
+                .findById(id)
+                .orElseThrow(() -> new EmployeeNotFoundException(id));
     }
 
+    @Transactional
     @Override
-    public Employee save(Employee employee) { //todo @Transactional ?
+    public Employee save(Employee employee) { //todo @Transactional ? // done
         employeeRepository.save(employee);
         return employee;
     }
 
+    @Transactional
     @Override
-    public Employee update(Employee employee) { //todo @Transactional ?
+    public Employee update(Employee employee) { //todo @Transactional ? // done
         employeeRepository.save(employee);
         return employee;
     }
 
+    @Transactional
     @Override
-    public void delete(Long id) { //todo @Transactional ?
-        //todo зачем try-catch ?
-        try {
-            employeeRepository.deleteById(id);
-        } catch (Exception e) {
-            System.out.println("employee with id : " + id + " doesn't exist");
-        }
+    public void delete(Employee employee) { //todo @Transactional ? // done
+        //todo зачем try-catch ? // done
+        employeeRepository.delete(employee);
     }
 }

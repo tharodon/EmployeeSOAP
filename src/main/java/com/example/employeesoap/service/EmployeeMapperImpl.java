@@ -1,6 +1,8 @@
 package com.example.employeesoap.service;
 
+import com.example.employeesoap.mapper.EmployeeMapper;
 import com.example.employeesoap.entity.Employee;
+import com.example.employeesoap.exceptions.InvalidPositionException;
 import io.spring.guides.gs_producing_web_service.EmployeeDto;
 import io.spring.guides.gs_producing_web_service.EmployeeResponse;
 import lombok.RequiredArgsConstructor;
@@ -8,12 +10,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class MapperToFromEmployeeServiceImpl implements MapperToFromEmployeeService {
+public class EmployeeMapperImpl implements EmployeeMapper {
 
     private final ValidatorFieldsService validatorService;
 
     @Override
-    public Employee fromEmployeeDto(EmployeeDto dto) {
+    public Employee fromEmployeeDto(EmployeeDto dto) throws InvalidPositionException {
         Employee employee = new Employee().toBuilder()
                 .id(dto.getId())
                 .name(dto.getName())
@@ -48,6 +50,7 @@ public class MapperToFromEmployeeServiceImpl implements MapperToFromEmployeeServ
                     .age(employee.getAge())
                     .salary(employee.getSalary())
                     .build();
+                    // done у меня вроде так же, только toBuilder
          */
         return new EmployeeDto()
                 .toBuilder()
