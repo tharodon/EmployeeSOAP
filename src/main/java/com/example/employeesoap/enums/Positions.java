@@ -13,7 +13,7 @@ public enum Positions {
     MANAGER("Manager", 21, 70_000L, 150_000L);
 
     private final String position;
-    private final int minAge;
+    private final int minAge; //todo а почему тут без обертки ?)) Long использовал. В одном стиле лучше писать
     private final Long salaryMin;
     private final Long salaryMax;
 

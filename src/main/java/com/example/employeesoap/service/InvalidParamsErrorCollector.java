@@ -6,8 +6,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Getter
-public class InvalidParamsErrorCollector {
-    private final StringBuilder trace;
+public class InvalidParamsErrorCollector { //todo Название сбивает. Лучше EmployeeError
+    private final StringBuilder trace; //todo название messageError
+
 
     public InvalidParamsErrorCollector() {
         trace = new StringBuilder();

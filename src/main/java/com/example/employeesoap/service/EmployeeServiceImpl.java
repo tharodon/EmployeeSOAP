@@ -6,6 +6,7 @@ import com.example.employeesoap.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,19 +20,20 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee save(Employee employee) {
+    public Employee save(Employee employee) { //todo @Transactional ?
         employeeRepository.save(employee);
         return employee;
     }
 
     @Override
-    public Employee update(Employee employee) {
+    public Employee update(Employee employee) { //todo @Transactional ?
         employeeRepository.save(employee);
         return employee;
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(Long id) { //todo @Transactional ?
+        //todo зачем try-catch ?
         try {
             employeeRepository.deleteById(id);
         } catch (Exception e) {

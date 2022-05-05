@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class DeleteOneEntryEveryMinute {
+public class DeleteOneEntryEveryMinute { //todo подумал над названием лучше наверное ScheduleConfig. Поставить Configuration. Имя пакет либо scheduler или config
 
     private final EmployeeRepository employeeRepository;
 

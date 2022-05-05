@@ -11,7 +11,7 @@ import static com.example.employeesoap.enums.Positions.*;
 @RequiredArgsConstructor
 public class ValidatorFieldsService {
 
-    private final InvalidParamsErrorCollector collector;
+    private final InvalidParamsErrorCollector collector; //todo название пиши лучше полностью
 
     public void validCheck(Employee employee) {
         collector.addFieldsEmpty(checkRequiredFields(employee));
