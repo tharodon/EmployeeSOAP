@@ -2,7 +2,7 @@ package com.example.employeesoap.service;
 
 import com.example.employeesoap.api.EmployeeService;
 import com.example.employeesoap.entity.Employee;
-import com.example.employeesoap.exceptions.EmployeeNotFoundException;
+import com.example.employeesoap.dto.EmployeeErrorResponse;
 import com.example.employeesoap.exceptions.InvalidPositionException;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -18,24 +18,34 @@ public class DaoProcessing {
     private final EmployeeService employeeService;
     private final ValidatorFieldsService validatorFieldsService;
 
-    public void addEmployees(List<Employee> employees){
-        try {
-            validatorFieldsService.validCheck(employees);
-        } catch (InvalidPositionException e) {
-            e.printStackTrace();
+    public EmployeeErrorResponse addEmployees(List<Employee> employees){
+        EmployeeErrorResponse employeeErrorResponse = new EmployeeErrorResponse();
+        for (int i = 0; i < employees.size(); i++){
+            try {
+                validatorFieldsService.validCheck(employees.get(i));
+            } catch (InvalidPositionException | IllegalArgumentException e) {
+                employeeErrorResponse.addTrace(employees.get(i), e.getMessage());
+                employees.remove(i);
+                i--;
+            }
         }
         employeeService.save(employees);
+        return employeeErrorResponse;
     }
 
-    @SneakyThrows
-    public void updateEmployee(Employee employee) {
-        validatorFieldsService.validCheck(Collections.singletonList(employee));
-        employeeService.save(Collections.singletonList(employee));
+    public EmployeeErrorResponse updateEmployee(Employee employee) {
+        EmployeeErrorResponse employeeErrorResponse = new EmployeeErrorResponse();
+        try {
+            validatorFieldsService.validCheck(employee);
+            employeeService.save(Collections.singletonList(employee));
+        } catch (InvalidPositionException | IllegalArgumentException e) {
+            employeeErrorResponse.addTrace(employee, e.getMessage());
+        }
+        return employeeErrorResponse;
     }
 
-    @SneakyThrows
     public void deleteEmployee(Long id){
-        employeeService.delete(employeeService.findEmployeeById(id));
+        employeeService.delete(id);
     }
 
     @SneakyThrows

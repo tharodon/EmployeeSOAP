@@ -6,27 +6,26 @@ import com.example.employeesoap.exceptions.InvalidPositionException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-
 import static com.example.employeesoap.enums.Positions.*;
 
 @Service
 @RequiredArgsConstructor
 public class ValidatorFieldsService {
 
-    private final EmployeesError employeeError;
+    public void validCheck(Employee employee) throws InvalidPositionException {
+        EmployeeMessageError employeeMessageError = new EmployeeMessageError();
+        employeeMessageError.addFieldsEmpty(checkRequiredFields(employee));
 
+        employeeMessageError.addIllegalArgumentMessage(
+                checkSalary(Positions.getDefine(employee.getPosition()), employee.getSalary()));
 
-    public void validCheck(List<Employee> employees) throws InvalidPositionException {
-        for (Employee employee : employees) {
-            employeeError.addFieldsEmpty(checkRequiredFields(employee));
-            employeeError.addIllegalArgumentMessage(
-                    checkSalary(Positions.getDefine(employee.getPosition()), employee.getSalary()));
-            employeeError.addFieldsEmpty(checkAge(Positions.getDefine(employee.getPosition()), employee.getAge()));
-            if (employeeError.getMessageError().length() > 0){
-                employeeError.flushEmployee(employee);
-                employees.remove(employee);
-            }
+        employeeMessageError.addFieldsEmpty(checkAge(getDefine(employee.getPosition()), employee.getAge()));
+
+        employeeMessageError.addIllegalArgumentMessage(checkAdmissibleTaskCount(
+                getDefine(employee.getPosition()), (long) employee.getTasks().size()));
+
+        if (employeeMessageError.getMessageError().length() > 0) {
+            throw new IllegalArgumentException(employeeMessageError.getMessageError().toString());
         }
     }
 
@@ -93,5 +92,16 @@ public class ValidatorFieldsService {
             trace.append("grade ");
         }
         return trace.toString();
+    }
+
+    private String checkAdmissibleTaskCount(Positions position, Long countTasks) {
+        if (countTasks > position.getCountTasksMax()) {
+            return "Invalid count task. Max count for position "
+                    + position.getPosition()
+                    + ": "
+                    + position.getCountTasksMax()
+                    + " received: " + countTasks;
+        }
+        return "";
     }
 }

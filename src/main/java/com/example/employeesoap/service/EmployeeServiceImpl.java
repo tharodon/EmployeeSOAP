@@ -38,7 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Transactional
     @Override
-    public void delete(Employee employee) {
-        employeeRepository.delete(employee);
+    public void delete(Long id) {
+        employeeRepository.deleteById(id);
     }
 }

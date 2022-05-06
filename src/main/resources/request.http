@@ -8,18 +8,40 @@ Content-Type: application/json
     "position": "Junior",
     "grade": 123,
     "age": 18,
-    "salary": 550001
+    "salary": 550001,
+    "tasks": [
+      {
+        "description": "task1"
+      },
+      {
+        "description": "task2"
+      },
+      {
+        "description": "task3"
+      },
+      {
+        "description": "task4"
+      },
+      {
+        "description": "task5"
+      },
+      {
+        "description": "task6"
+      },
+      {
+        "description": "task7"
+      }
+    ]
   },
-
   {
     "name": "2",
     "surname": "bbbd",
     "position": "Senior",
     "grade": 123,
-    "age": 18,
-    "salary": 550001
+    "age": 30,
+    "salary": 350000,
+    "description": "text..."
   },
-
   {
     "name": "3",
     "surname": "bbbd",
