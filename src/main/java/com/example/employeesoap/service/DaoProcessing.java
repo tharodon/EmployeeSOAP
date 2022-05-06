@@ -1,16 +1,19 @@
 package com.example.employeesoap.service;
 
 import com.example.employeesoap.api.EmployeeService;
+import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.entity.Employee;
 import com.example.employeesoap.dto.EmployeeErrorResponse;
 import com.example.employeesoap.exceptions.InvalidPositionException;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class DaoProcessing {
@@ -24,6 +27,7 @@ public class DaoProcessing {
             try {
                 validatorFieldsService.validCheck(employees.get(i));
             } catch (InvalidPositionException | IllegalArgumentException e) {
+                log.debug("Invalid employee parameter: {}, traces: {}", employees.get(i), e.getMessage());
                 employeeErrorResponse.addTrace(employees.get(i), e.getMessage());
                 employees.remove(i);
                 i--;
@@ -37,8 +41,9 @@ public class DaoProcessing {
         EmployeeErrorResponse employeeErrorResponse = new EmployeeErrorResponse();
         try {
             validatorFieldsService.validCheck(employee);
-            employeeService.save(Collections.singletonList(employee));
+            employeeService.update(employee);
         } catch (InvalidPositionException | IllegalArgumentException e) {
+            log.debug("Invalid employee parameter: {}, traces: {}", employee, e.getMessage());
             employeeErrorResponse.addTrace(employee, e.getMessage());
         }
         return employeeErrorResponse;
@@ -49,7 +54,7 @@ public class DaoProcessing {
     }
 
     @SneakyThrows
-    public Employee getEmployeeById(Long id) {
+    public EmployeeDto getEmployeeById(Long id) {
         return employeeService.findEmployeeById(id);
     }
 

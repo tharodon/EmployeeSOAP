@@ -1,26 +1,32 @@
 package com.example.employeesoap.service;
 
 import com.example.employeesoap.api.EmployeeService;
+import com.example.employeesoap.api.MapperFromEmployeeService;
+import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.entity.Employee;
 import com.example.employeesoap.exceptions.EmployeeNotFoundException;
 import com.example.employeesoap.api.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+    private final MapperFromEmployeeService mapperFromEmployeeService;
 
     @Override
-    public Employee findEmployeeById(Long id) throws EmployeeNotFoundException {
-        return employeeRepository
+    public EmployeeDto findEmployeeById(Long id) throws EmployeeNotFoundException {
+        return mapperFromEmployeeService.convertFromEmployee(employeeRepository
                 .findById(id)
-                .orElseThrow(() -> new EmployeeNotFoundException(id));
+                .orElseThrow(() -> new EmployeeNotFoundException(id)));
     }
 
     @Transactional
@@ -31,9 +37,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Transactional
     @Override
-    public Employee update(Employee employee) {
+    public EmployeeDto update(Employee employee) {
         employeeRepository.save(employee);
-        return employee;
+        return mapperFromEmployeeService.convertFromEmployee(employee);
     }
 
     @Transactional
