@@ -16,7 +16,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class DaoProcessing {
+public class DaoProcessing { //todo не очень название. EmployeeDao. + если это dao то вынести в отдельный пакет dao
 
     private final EmployeeService employeeService;
     private final ValidatorFieldsService validatorFieldsService;
@@ -24,9 +24,10 @@ public class DaoProcessing {
     public EmployeeErrorResponse addEmployees(List<Employee> employees){
         EmployeeErrorResponse employeeErrorResponse = new EmployeeErrorResponse();
         for (int i = 0; i < employees.size(); i++){
+            //todo не нравиться завязка на try-catch. переписать лучше
             try {
                 validatorFieldsService.validCheck(employees.get(i));
-            } catch (InvalidPositionException | IllegalArgumentException e) {
+            } catch (InvalidPositionException | IllegalArgumentException e) { //todo почему такое "ИЛИ" ?
                 log.debug("Invalid employee parameter: {}, traces: {}", employees.get(i), e.getMessage());
                 employeeErrorResponse.addTrace(employees.get(i), e.getMessage());
                 employees.remove(i);
@@ -42,7 +43,7 @@ public class DaoProcessing {
         try {
             validatorFieldsService.validCheck(employee);
             employeeService.update(employee);
-        } catch (InvalidPositionException | IllegalArgumentException e) {
+        } catch (InvalidPositionException | IllegalArgumentException e) { //todo почему такое "ИЛИ" ?
             log.debug("Invalid employee parameter: {}, traces: {}", employee, e.getMessage());
             employeeErrorResponse.addTrace(employee, e.getMessage());
         }

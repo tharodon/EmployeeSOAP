@@ -43,6 +43,8 @@ public class Employee {
     )
     private List<Task> tasks = new ArrayList<>();
 
+
+    //todo используй lombok
     @Override
     public String toString() {
         return "Employee{" +

@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class MapperFromEmployeeServiceImpl implements MapperFromEmployeeService {
     @Override
-    public EmployeeDto convertFromEmployee(Employee employee) {
+    public EmployeeDto convertFromEmployee(Employee employee) { //todo название employeeToEmployeeDto
         return EmployeeDto.builder()
                 .id(employee.getId())
                 .name(employee.getName())
