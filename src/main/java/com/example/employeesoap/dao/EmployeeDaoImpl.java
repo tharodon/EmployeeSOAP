@@ -1,8 +1,6 @@
 package com.example.employeesoap.dao;
 
 import com.example.employeesoap.api.EmployeeDao;
-import com.example.employeesoap.api.EmployeeMapper;
-import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.entity.Employee;
 import com.example.employeesoap.exceptions.EmployeeNotFoundException;
 import com.example.employeesoap.repository.EmployeeRepository;
@@ -19,15 +17,11 @@ import java.util.List;
 public class EmployeeDaoImpl implements EmployeeDao {
 
     private final EmployeeRepository employeeRepository;
-    private final EmployeeMapper employeeMapper;
 
     @Override
-    public EmployeeDto findEmployeeById(Long id) throws EmployeeNotFoundException {
-        return employeeMapper.employeeToEmployeeDto(employeeRepository
-                .findById(id)
-                .orElseThrow(() -> new EmployeeNotFoundException(id)));
+    public Employee findEmployeeById(Long id) throws EmployeeNotFoundException {
+        return employeeRepository.findById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
     }
-
     @Transactional
     @Override
     public void save(List<Employee> employees) {
@@ -36,9 +30,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Transactional
     @Override
-    public EmployeeDto update(Employee employee) {
+    public Employee update(Employee employee) {
         employeeRepository.save(employee);
-        return employeeMapper.employeeToEmployeeDto(employee);
+        return employee;
     }
 
     @Transactional

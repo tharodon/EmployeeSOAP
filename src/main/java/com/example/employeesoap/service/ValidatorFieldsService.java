@@ -1,10 +1,13 @@
 package com.example.employeesoap.service;
 
+import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.entity.Employee;
-import com.example.employeesoap.enums.Positions;
 import com.example.employeesoap.exceptions.InvalidPositionException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.example.employeesoap.enums.Positions.*;
 
@@ -12,99 +15,27 @@ import static com.example.employeesoap.enums.Positions.*;
 @RequiredArgsConstructor
 public class ValidatorFieldsService {
 
-    public void validCheck(Employee employee) throws InvalidPositionException {
-        EmployeeMessageError employeeMessageError = new EmployeeMessageError();
-        employeeMessageError.addFieldsEmpty(checkRequiredFields(employee));
+    private final EmployeeChecker employeeChecker;
 
-        //todo вынести в переменную. + Positions можно убрать
-        //done
-        employeeMessageError.addIllegalArgumentMessage(
-                checkSalary(getDefine(employee.getPosition()), employee.getSalary()));
+    public EmployeeDto validCheck(Employee employee) {
+        EmployeeErrorDtoBuilder employeeMessageError = new EmployeeErrorDtoBuilder();
 
-        employeeMessageError.addFieldsEmpty(checkAge(getDefine(employee.getPosition()), employee.getAge()));
+        try {
+            employeeMessageError.addFieldsEmpty(employeeChecker.checkRequiredFields(employee));
 
-        employeeMessageError.addIllegalArgumentMessage(checkAdmissibleTaskCount(
-                getDefine(employee.getPosition()), (long) employee.getTasks().size()));
+            employeeMessageError.addIllegalArgumentMessage(
+                    employeeChecker.checkAge(getDefine(employee.getPosition()), employee.getAge()));
 
-        if (employeeMessageError.getMessageError().length() > 0) { //todo ммм не оч проверка
-            throw new IllegalArgumentException(employeeMessageError.getMessageError().toString());
+            employeeMessageError.addIllegalArgumentMessage(
+                    employeeChecker.checkSalary(getDefine(employee.getPosition()), employee.getSalary()));
+            employeeChecker.checkAdmissibleTaskCount(getDefine(employee.getPosition()), (long) employee.getTasks().size());
+        } catch (InvalidPositionException e) {
+            employeeMessageError.addIllegalArgumentMessage(
+                    new HashMap<String, String>(){{put("position", e.getMessage());}});
         }
-    }
-
-    //todo можно вынести в другой класс EmployeeChecker все проверки
-    private String checkSalary(Positions position, Long salary) {
-        if (salary != null &&
-                (salary < position.getSalaryMin() || salary > position.getSalaryMax())) {
-            return "Illegal salary. Expected: from "
-                    + position.getSalaryMin()
-                    + ", to "
-                    + position.getSalaryMax()
-                    + " received: " + salary + "\n";
+        if (employeeMessageError.hasErrors()) {
+            return employeeMessageError.getEmployeeErrorDto();
         }
-        return "";
-    }
-
-    private String checkAge(Positions position, Long age) {
-        if (age != null && age < position.getMinAge()) {
-            return "Invalid age. Expected: from "
-                    + position.getMinAge()
-                    + " received: " + age;
-        }
-        return "";
-    }
-
-    private String checkRequiredFields(Employee employee) throws InvalidPositionException {
-        StringBuilder trace = new StringBuilder();
-        if (employee.getName() == null) {
-            trace.append("name ");
-        }
-        if (employee.getSurname() == null) {
-            trace.append("surname ");
-        }
-        if (employee.getPosition() == null) {
-            trace.append("position ");
-        }
-        if (employee.getAge() == null) {
-            trace.append("age ");
-        }
-        if (employee.getSalary() == null) {
-            trace.append("salary ");
-        }
-        if (getDefine(employee.getPosition()) == SENIOR) {
-            trace.append(requiredFieldsSenior(employee));
-        } else if (getDefine(employee.getPosition()) == MANAGER) {
-            trace.append(requiredFieldsManager(employee));
-        }
-        return trace.toString();
-    }
-
-    private String requiredFieldsSenior(Employee employee) {
-        StringBuilder trace = new StringBuilder();
-        if (employee.getGrade() == null) {
-            trace.append("grade ");
-        }
-        if (employee.getDescription() == null) {
-            trace.append("description ");
-        }
-        return trace.toString();
-    }
-
-    private String requiredFieldsManager(Employee employee) {
-        StringBuilder trace = new StringBuilder();
-        if (employee.getGrade() == null) {
-            trace.append("grade ");
-        }
-        return trace.toString();
-    }
-
-    private String checkAdmissibleTaskCount(Positions position, Long countTasks) {
-        if (countTasks > position.getCountTasksMax()) {
-            return "Invalid count task. Max count for position "
-                    + position.getPosition()
-                    + ": "
-                    + position.getCountTasksMax()
-                    + " received: " + countTasks;
-        }
-        return "";
+        return null;
     }
 }
