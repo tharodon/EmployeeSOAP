@@ -6,7 +6,7 @@ import com.example.employeesoap.exceptions.EmployeeNotFoundException;
 
 import java.util.List;
 
-public interface EmployeeService {
+public interface EmployeeDao {
     EmployeeDto findEmployeeById(Long id) throws EmployeeNotFoundException;
 
     void save(List<Employee> employees);

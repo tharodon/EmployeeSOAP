@@ -13,6 +13,8 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@EqualsAndHashCode(exclude = {"id", "tasks"})
+@ToString(exclude = {"id", "tasks"})
 @Table(name = "employee")
 public class Employee {
     @Id
@@ -45,35 +47,5 @@ public class Employee {
 
 
     //todo используй lombok
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", position='" + position + '\'' +
-                ", grade='" + grade + '\'' +
-                ", description='" + description + '\'' +
-                ", age=" + age +
-                ", salary=" + salary +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Employee employee = (Employee) o;
-        return Objects.equals(name, employee.name)
-                && Objects.equals(surname, employee.surname)
-                && Objects.equals(position, employee.position)
-                && Objects.equals(grade, employee.grade)
-                && Objects.equals(description, employee.description)
-                && Objects.equals(age, employee.age)
-                && Objects.equals(salary, employee.salary);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, surname, position, grade, description, age, salary);
-    }
+    //done
 }

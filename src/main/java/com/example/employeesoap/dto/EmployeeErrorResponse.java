@@ -8,16 +8,19 @@ import lombok.Setter;
 import java.util.HashMap;
 import java.util.Map;
 
-@Getter //todo он используется ?
+
 @NoArgsConstructor
 public class EmployeeErrorResponse {
+    private static int EMPTY = 0;
     private final Map<Employee, String> invalidEmployeesAndTraces = new HashMap<>();
 
     public void addTrace(Employee employee, String trace) {
         invalidEmployeesAndTraces.put(employee, trace);
     }
 
+    //todo волшебное значение. Вынести в константу
+    //done
     public boolean hasError() {
-        return invalidEmployeesAndTraces.size() > 0; //todo волшебное значение. Вынести в константу
+        return invalidEmployeesAndTraces.size() > EMPTY;
     }
 }

@@ -16,8 +16,10 @@ public class ValidatorFieldsService {
         EmployeeMessageError employeeMessageError = new EmployeeMessageError();
         employeeMessageError.addFieldsEmpty(checkRequiredFields(employee));
 
+        //todo вынести в переменную. + Positions можно убрать
+        //done
         employeeMessageError.addIllegalArgumentMessage(
-                checkSalary(Positions.getDefine(employee.getPosition()), employee.getSalary())); //todo вынести в переменную. + Positions можно убрать
+                checkSalary(getDefine(employee.getPosition()), employee.getSalary()));
 
         employeeMessageError.addFieldsEmpty(checkAge(getDefine(employee.getPosition()), employee.getAge()));
 

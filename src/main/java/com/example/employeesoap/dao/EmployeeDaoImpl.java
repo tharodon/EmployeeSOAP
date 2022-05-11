@@ -1,14 +1,13 @@
-package com.example.employeesoap.service;
+package com.example.employeesoap.dao;
 
-import com.example.employeesoap.api.EmployeeService;
-import com.example.employeesoap.api.MapperFromEmployeeService;
+import com.example.employeesoap.api.EmployeeDao;
+import com.example.employeesoap.api.EmployeeMapper;
 import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.entity.Employee;
 import com.example.employeesoap.exceptions.EmployeeNotFoundException;
-import com.example.employeesoap.api.repository.EmployeeRepository;
+import com.example.employeesoap.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -17,14 +16,14 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class EmployeeServiceImpl implements EmployeeService {
+public class EmployeeDaoImpl implements EmployeeDao {
 
     private final EmployeeRepository employeeRepository;
-    private final MapperFromEmployeeService mapperFromEmployeeService;
+    private final EmployeeMapper employeeMapper;
 
     @Override
     public EmployeeDto findEmployeeById(Long id) throws EmployeeNotFoundException {
-        return mapperFromEmployeeService.convertFromEmployee(employeeRepository
+        return employeeMapper.employeeToEmployeeDto(employeeRepository
                 .findById(id)
                 .orElseThrow(() -> new EmployeeNotFoundException(id)));
     }
@@ -39,7 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeDto update(Employee employee) {
         employeeRepository.save(employee);
-        return mapperFromEmployeeService.convertFromEmployee(employee);
+        return employeeMapper.employeeToEmployeeDto(employee);
     }
 
     @Transactional

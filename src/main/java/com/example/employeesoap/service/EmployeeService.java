@@ -1,6 +1,6 @@
 package com.example.employeesoap.service;
 
-import com.example.employeesoap.api.EmployeeService;
+import com.example.employeesoap.api.EmployeeDao;
 import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.entity.Employee;
 import com.example.employeesoap.dto.EmployeeErrorResponse;
@@ -10,15 +10,16 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class DaoProcessing { //todo не очень название. EmployeeDao. + если это dao то вынести в отдельный пакет dao
+//todo не очень название. EmployeeDao. + если это dao то вынести в отдельный пакет dao
+//done выяснилось, что не этот класс dao, а другой
+public class EmployeeService {
 
-    private final EmployeeService employeeService;
+    private final EmployeeDao employeeService;
     private final ValidatorFieldsService validatorFieldsService;
 
     public EmployeeErrorResponse addEmployees(List<Employee> employees){

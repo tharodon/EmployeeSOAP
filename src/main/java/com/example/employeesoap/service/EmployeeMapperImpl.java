@@ -1,6 +1,6 @@
 package com.example.employeesoap.service;
 
-import com.example.employeesoap.api.MapperFromEmployeeService;
+import com.example.employeesoap.api.EmployeeMapper;
 import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.entity.Employee;
 import com.example.employeesoap.entity.Task;
@@ -9,9 +9,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class MapperFromEmployeeServiceImpl implements MapperFromEmployeeService {
+public class EmployeeMapperImpl implements EmployeeMapper {
+
+    //todo название employeeToEmployeeDto
+    //done
     @Override
-    public EmployeeDto convertFromEmployee(Employee employee) { //todo название employeeToEmployeeDto
+    public EmployeeDto employeeToEmployeeDto(Employee employee) {
         return EmployeeDto.builder()
                 .id(employee.getId())
                 .name(employee.getName())
