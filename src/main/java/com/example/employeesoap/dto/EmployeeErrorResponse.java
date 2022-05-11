@@ -8,7 +8,7 @@ import lombok.Setter;
 import java.util.HashMap;
 import java.util.Map;
 
-@Getter
+@Getter //todo он используется ?
 @NoArgsConstructor
 public class EmployeeErrorResponse {
     private final Map<Employee, String> invalidEmployeesAndTraces = new HashMap<>();
@@ -18,6 +18,6 @@ public class EmployeeErrorResponse {
     }
 
     public boolean hasError() {
-        return invalidEmployeesAndTraces.size() > 0;
+        return invalidEmployeesAndTraces.size() > 0; //todo волшебное значение. Вынести в константу
     }
 }

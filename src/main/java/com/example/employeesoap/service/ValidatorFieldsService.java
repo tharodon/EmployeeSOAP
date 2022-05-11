@@ -17,18 +17,19 @@ public class ValidatorFieldsService {
         employeeMessageError.addFieldsEmpty(checkRequiredFields(employee));
 
         employeeMessageError.addIllegalArgumentMessage(
-                checkSalary(Positions.getDefine(employee.getPosition()), employee.getSalary()));
+                checkSalary(Positions.getDefine(employee.getPosition()), employee.getSalary())); //todo вынести в переменную. + Positions можно убрать
 
         employeeMessageError.addFieldsEmpty(checkAge(getDefine(employee.getPosition()), employee.getAge()));
 
         employeeMessageError.addIllegalArgumentMessage(checkAdmissibleTaskCount(
                 getDefine(employee.getPosition()), (long) employee.getTasks().size()));
 
-        if (employeeMessageError.getMessageError().length() > 0) {
+        if (employeeMessageError.getMessageError().length() > 0) { //todo ммм не оч проверка
             throw new IllegalArgumentException(employeeMessageError.getMessageError().toString());
         }
     }
 
+    //todo можно вынести в другой класс EmployeeChecker все проверки
     private String checkSalary(Positions position, Long salary) {
         if (salary != null &&
                 (salary < position.getSalaryMin() || salary > position.getSalaryMax())) {

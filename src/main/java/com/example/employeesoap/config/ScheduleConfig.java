@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
-//@EnableScheduling
+//@EnableScheduling //todo коммент в коде
 @Configuration
 @RequiredArgsConstructor
 public class ScheduleConfig {
