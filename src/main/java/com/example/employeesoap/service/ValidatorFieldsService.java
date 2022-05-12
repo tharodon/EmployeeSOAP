@@ -1,93 +1,45 @@
 package com.example.employeesoap.service;
 
-import com.example.employeesoap.api.repository.EmployeeRepository;
+import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.entity.Employee;
-import com.example.employeesoap.enums.Positions;
-import com.example.employeesoap.exceptions.InvalidPositionException;
+import com.example.employeesoap.type.Position;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import static com.example.employeesoap.enums.Positions.*;
+import java.util.HashMap;
+
+import static com.example.employeesoap.type.Position.*;
 
 @Service
 @RequiredArgsConstructor
 public class ValidatorFieldsService {
 
-    private final EmployeeError employeeError;
-    private final EmployeeRepository employeeRepository; //todo не используется
+    public static final String POSITION = "position";
 
-    public void validCheck(Employee employee) throws InvalidPositionException {
-        employeeError.addFieldsEmpty(checkRequiredFields(employee));
-        employeeError.addIllegalArgumentMessage(
-                checkSalary(Positions.getDefine(employee.getPosition()), employee.getSalary()));
-        employeeError.addFieldsEmpty(checkAge(Positions.getDefine(employee.getPosition()), employee.getAge()));
-        if (employeeError.getMessageError().length() > 0) {
-            throw new IllegalArgumentException(employeeError.getMessageError().toString());
-        }
-    }
+    public EmployeeDto validCheck(Employee employee) {
+        EmployeeChecker employeeChecker = new EmployeeChecker();
+        EmployeeErrorDtoBuilder employeeMessageError = new EmployeeErrorDtoBuilder();
 
-    private String checkSalary(Positions position, Long salary) {
-        if (salary != null &&
-                (salary < position.getSalaryMin() || salary > position.getSalaryMax())) {
-            return "Illegal salary. Expected: from "
-                    + position.getSalaryMin()
-                    + ", to "
-                    + position.getSalaryMax()
-                    + " received: " + salary + "\n";
-        }
-        return "";
-    }
+            employeeMessageError.addFieldsEmpty(employeeChecker.checkRequiredFields(employee));
 
-    private String checkAge(Positions position, Long age) {
-        if (age != null && age < position.getMinAge()) {
-            return "Invalid age. Expected: from "
-                    + position.getMinAge()
-                    + " received: " + age;
-        }
-        return "";
-    }
+            Position position = getDefine(employee.getPosition());
 
-    private String checkRequiredFields(Employee employee) throws InvalidPositionException {
-        StringBuilder trace = new StringBuilder();
-        if (employee.getName() == null) {
-            trace.append("name ");
-        }
-        if (employee.getSurname() == null) {
-            trace.append("surname ");
-        }
-        if (employee.getPosition() == null) {
-            trace.append("position ");
-        }
-        if (employee.getAge() == null) {
-            trace.append("age ");
-        }
-        if (employee.getSalary() == null) {
-            trace.append("salary ");
-        }
-        if (getDefine(employee.getPosition()) == SENIOR) {
-            trace.append(requiredFieldsSenior(employee));
-        } else if (getDefine(employee.getPosition()) == MANAGER) {
-            trace.append(requiredFieldsManager(employee));
-        }
-        return trace.toString();
-    }
+        if (position != INDEFINITE) {
+            employeeMessageError.addIllegalArgumentMessage(
+                    employeeChecker.checkAge(position, employee.getAge()));
 
-    private String requiredFieldsSenior(Employee employee) {
-        StringBuilder trace = new StringBuilder();
-        if (employee.getGrade() == null) {
-            trace.append("grade ");
+            employeeMessageError.addIllegalArgumentMessage(
+                    employeeChecker.checkSalary(position, employee.getSalary()));
+            employeeMessageError.addIllegalArgumentMessage(
+                    employeeChecker.checkAdmissibleTaskCount(position, (long) employee.getTasks().size()));
+        } else {
+            employeeMessageError.addIllegalArgumentMessage(new HashMap<String, String>(){{
+                put(POSITION, INDEFINITE.getPosition());
+            }});
         }
-        if (employee.getDescription() == null) {
-            trace.append("description ");
+        if (employeeMessageError.hasErrors()) {
+            return employeeMessageError.getEmployeeErrorDto();
         }
-        return trace.toString();
-    }
-
-    private String requiredFieldsManager(Employee employee) {
-        StringBuilder trace = new StringBuilder();
-        if (employee.getGrade() == null) {
-            trace.append("grade ");
-        }
-        return trace.toString();
+        return null;
     }
 }

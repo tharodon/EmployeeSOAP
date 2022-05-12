@@ -1,54 +1,35 @@
 package com.example.employeesoap.service;
 
-import com.example.employeesoap.mapper.EmployeeMapper;
+import com.example.employeesoap.api.EmployeeMapper;
+import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.entity.Employee;
-import com.example.employeesoap.exceptions.InvalidPositionException;
-import io.spring.guides.gs_producing_web_service.EmployeeDto;
-import io.spring.guides.gs_producing_web_service.EmployeeResponse;
-import lombok.RequiredArgsConstructor;
+import com.example.employeesoap.entity.Task;
+import static com.example.employeesoap.type.Status.*;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Service
-@RequiredArgsConstructor
 public class EmployeeMapperImpl implements EmployeeMapper {
 
-    private final ValidatorFieldsService validatorService;
-
     @Override
-    public Employee fromEmployeeDto(EmployeeDto dto) throws InvalidPositionException {
-        Employee employee = new Employee().toBuilder()
-                .id(dto.getId())
-                .name(dto.getName())
-                .surname(dto.getSurname())
-                .position(dto.getPosition())
-                .grade(dto.getGrade())
-                .description(dto.getDescription())
-                .age(dto.getAge())
-                .salary(dto.getSalary())
-                .build();
-        validatorService.validCheck(employee);
-        return employee;
-    }
-
-    @Override
-    public EmployeeResponse getResponseFromEmployee(Employee employee) {
-        EmployeeResponse response = new EmployeeResponse();
-        response.setEmployeeDto(convertToDto(employee));
-        return response;
-    }
-
-    private EmployeeDto convertToDto(Employee employee) {
-        return new EmployeeDto()
-                .toBuilder()
-                .id(employee.getId())
+    public EmployeeDto employeeToEmployeeDto(Employee employee) {
+        return EmployeeDto.builder()
+                .id(employee.getId() == null ? null : employee.getId().toString())
                 .name(employee.getName())
                 .surname(employee.getSurname())
                 .position(employee.getPosition())
+                .salary(employee.getSalary().toString())
                 .grade(employee.getGrade())
+                .age(employee.getAge().toString())
                 .description(employee.getDescription())
-                .age(employee.getAge())
-                .salary(employee.getSalary())
+                .tasksUID(Arrays.toString(getTasksUIDs(employee.getTasks())))
+                .status(SUCCESS)
                 .build();
     }
 
+    private Long[] getTasksUIDs(List<Task> tasks){
+        return tasks.stream().map(Task::getUid).toArray(Long[]::new);
+    }
 }

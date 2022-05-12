@@ -3,6 +3,9 @@ package com.example.employeesoap.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Builder(toBuilder = true)
 @Getter
@@ -10,6 +13,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@EqualsAndHashCode(exclude = {"id", "tasks"})
+@ToString(exclude = {"id", "tasks"})
 @Table(name = "employee")
 public class Employee {
     @Id
@@ -31,4 +36,12 @@ public class Employee {
     private Long age;
     @Column
     private Long salary;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "distribute",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "task_id")
+    )
+    private List<Task> tasks = new ArrayList<>();
 }

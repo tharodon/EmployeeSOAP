@@ -1,11 +1,26 @@
-create table if not exists employee
+CREATE TABLE IF NOT EXISTS employee
 (
-    id serial primary key,
-    name varchar(50) not null ,
-    surname varchar(50) not null ,
-    position varchar(50) not null ,
-    salary int not null ,
-    grade varchar(50),
-    age int not null ,
-    description text
+    id          BIGSERIAL PRIMARY KEY,
+    name        VARCHAR(50) NOT NULL,
+    surname     VARCHAR(50) NOT NULL,
+    position    VARCHAR(50) NOT NULL,
+    salary      INT         NOT NULL,
+    grade       VARCHAR(50),
+    age         INT         NOT NULL,
+    description TEXT
+);
+
+CREATE TABLE IF NOT EXISTS task
+(
+    uid         BIGSERIAL NOT NULL PRIMARY KEY,
+    description TEXT      NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS distribute
+(
+    id          BIGSERIAL NOT NULL PRIMARY KEY,
+    task_id     BIGINT    NOT NULL,
+    employee_id BIGINT    NOT NULL,
+    FOREIGN KEY (task_id) REFERENCES task (uid),
+    FOREIGN KEY (employee_id) REFERENCES employee (id)
 );
