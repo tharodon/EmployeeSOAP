@@ -24,16 +24,12 @@ public class EmployeeService { //todo добавить интерфейс и и�
     private final ValidatorFieldsService validatorFieldsService;
     private final EmployeeMapper employeeMapper;
 
-    //todo не нравиться завязка на try-catch. переписать лучше
-    //todo попробуй сделать через стримом. Так можно сделать меньше кода + если это отдельная логика валидаци его можно ввынести в приватный метод
-    //done
     public List<EmployeeDto> addEmployees(List<Employee> employees) {
         List<EmployeeDto> response = employees
                 .stream()
                 .map(this::validation)
                 .collect(Collectors.toList());
-        employeeService.save(
-                employees
+        employeeService.save(employees
                         .stream()
                         .filter(employee -> checkEmployeeStatus(employees.indexOf(employee), response))
                         .collect(Collectors.toList()));

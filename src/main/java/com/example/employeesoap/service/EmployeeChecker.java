@@ -4,6 +4,7 @@ import com.example.employeesoap.entity.Employee;
 import com.example.employeesoap.type.Positions;
 import com.example.employeesoap.exceptions.InvalidPositionException;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,8 +12,6 @@ import java.util.Map;
 
 import static com.example.employeesoap.type.Positions.*;
 
-//todo почему bean ?. Можно же без него
-//done
 public class EmployeeChecker {
 
     public static final String NAME = "name";
@@ -28,10 +27,7 @@ public class EmployeeChecker {
         Map<String, String> response = new HashMap<>();
         if (salary != null &&
                 (salary < position.getSalaryMin() || salary > position.getSalaryMax())) {
-            //todo можно сократить используя MessageFormat.format
-            //done
-            response.put(SALARY, String.format
-                    ("Invalid %s. Expected: from %d to %d  received: %d",
+            response.put(SALARY, String.format("Invalid %s. Expected: from %d to %d  received: %d", //todo вынеси текст в отдельный файл. Почитай про ResourceBundle и используй)
                             SALARY, position.getSalaryMin(), position.getSalaryMax(), salary));
         }
         return response;
@@ -40,17 +36,13 @@ public class EmployeeChecker {
     public Map<String, String> checkAge(Positions position, Long age) {
         Map<String, String> response = new HashMap<>();
         if (age != null && age < position.getMinAge()) {
-            //todo можно сократить используя MessageFormat.format
-            //done
             response.put(AGE, String.format(
-                    "Invalid %s. Expected: from %d received: %d",
+                    "Invalid %s. Expected: from %d received: %d", //todo вынеси текст в отдельный файл. Почитай про ResourceBundle и используй)
                     AGE, position.getMinAge(), age));
         }
         return response;
     }
 
-    //todo волшебные значения. вынести в константу
-    //done
     public List<String> checkRequiredFields(Employee employee) throws InvalidPositionException {
         List<String> invalidFields = new ArrayList<>();
         if (employee.getName() == null) {
@@ -87,8 +79,6 @@ public class EmployeeChecker {
         return nullableFields;
     }
 
-    //todo волшебные значения. вынести в константу
-    //done
     private List<String> requiredFieldsManager(Employee employee) {
         List<String> nullableFields = new ArrayList<>();
         if (employee.getGrade() == null) {
@@ -100,10 +90,8 @@ public class EmployeeChecker {
     public Map<String, String> checkAdmissibleTaskCount(Positions position, Long countTasks) {
         Map<String, String> response = new HashMap<>();
         if (countTasks > position.getCountTasksMax()) {
-            //todo можно сократить используя MessageFormat.format
-            //done
             response.put(TASKS_UID, String.format(
-                    "Invalid count task. Max count for position %s: %d received: %d",
+                    "Invalid count task. Max count for position %s: %d received: %d", //todo вынеси текст в отдельный файл. Почитай про ResourceBundle и используй)
                     position.getPosition(), position.getCountTasksMax(), countTasks));
         }
         return response;

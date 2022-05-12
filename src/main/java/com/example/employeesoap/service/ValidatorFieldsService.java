@@ -22,18 +22,14 @@ public class ValidatorFieldsService {
 
         try {
             employeeMessageError.addFieldsEmpty(employeeChecker.checkRequiredFields(employee));
-
             employeeMessageError.addIllegalArgumentMessage(
                     employeeChecker.checkAge(getDefine(employee.getPosition()), employee.getAge()));
-
             employeeMessageError.addIllegalArgumentMessage(
                     employeeChecker.checkSalary(getDefine(employee.getPosition()), employee.getSalary()));
             employeeMessageError.addIllegalArgumentMessage(
                     employeeChecker.checkAdmissibleTaskCount(getDefine(employee.getPosition()), (long) employee.getTasks().size()));
         } catch (InvalidPositionException e) {
             employeeMessageError.addIllegalArgumentMessage(
-                    //todo волшебные значения. вынести в константу
-                    //done
                     new HashMap<String, String>() {{
                         put(POSITION, e.getMessage());
                     }});

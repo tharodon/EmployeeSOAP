@@ -29,6 +29,9 @@ public enum Positions {
         } else if (MANAGER.getPosition().equals(define)) {
             return MANAGER;
         }
+        //todo мне попробуй избавиться от Exception чтоб выше где использовалось не было try-catch - такие конструкции нагружают код.
+        // как вариант добавь еще один тип например INDEFINITE или еще как-нибудь и возвращай его и сделай проверку на него.
+        // Тип если он так определился то отправь ошибку пользователю, что он прислал не известную позицию. И так получиться, что ты избавишься от лишнего Exception
         throw new InvalidPositionException(define);
     }
 }
