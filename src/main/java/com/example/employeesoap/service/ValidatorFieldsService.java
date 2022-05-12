@@ -2,13 +2,13 @@ package com.example.employeesoap.service;
 
 import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.entity.Employee;
-import com.example.employeesoap.exceptions.InvalidPositionException;
+import com.example.employeesoap.type.Position;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 
-import static com.example.employeesoap.type.Positions.*;
+import static com.example.employeesoap.type.Position.*;
 
 @Service
 @RequiredArgsConstructor
@@ -20,19 +20,22 @@ public class ValidatorFieldsService {
         EmployeeChecker employeeChecker = new EmployeeChecker();
         EmployeeErrorDtoBuilder employeeMessageError = new EmployeeErrorDtoBuilder();
 
-        try {
             employeeMessageError.addFieldsEmpty(employeeChecker.checkRequiredFields(employee));
+
+            Position position = getDefine(employee.getPosition());
+
+        if (position != INDEFINITE) {
             employeeMessageError.addIllegalArgumentMessage(
-                    employeeChecker.checkAge(getDefine(employee.getPosition()), employee.getAge()));
+                    employeeChecker.checkAge(position, employee.getAge()));
+
             employeeMessageError.addIllegalArgumentMessage(
-                    employeeChecker.checkSalary(getDefine(employee.getPosition()), employee.getSalary()));
+                    employeeChecker.checkSalary(position, employee.getSalary()));
             employeeMessageError.addIllegalArgumentMessage(
-                    employeeChecker.checkAdmissibleTaskCount(getDefine(employee.getPosition()), (long) employee.getTasks().size()));
-        } catch (InvalidPositionException e) {
-            employeeMessageError.addIllegalArgumentMessage(
-                    new HashMap<String, String>() {{
-                        put(POSITION, e.getMessage());
-                    }});
+                    employeeChecker.checkAdmissibleTaskCount(position, (long) employee.getTasks().size()));
+        } else {
+            employeeMessageError.addIllegalArgumentMessage(new HashMap<String, String>(){{
+                put(POSITION, INDEFINITE.getPosition());
+            }});
         }
         if (employeeMessageError.hasErrors()) {
             return employeeMessageError.getEmployeeErrorDto();

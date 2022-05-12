@@ -1,17 +1,16 @@
 package com.example.employeesoap.service;
 
 import com.example.employeesoap.entity.Employee;
-import com.example.employeesoap.type.Positions;
-import com.example.employeesoap.exceptions.InvalidPositionException;
+import com.example.employeesoap.type.Position;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-import static com.example.employeesoap.type.Positions.*;
+import static com.example.employeesoap.type.Position.*;
 
+//todo вынеси текст в отдельный файл. Почитай про ResourceBundle и используй)
+//todo почему bean ?. Можно же без него
+// done
 public class EmployeeChecker {
 
     public static final String NAME = "name";
@@ -22,28 +21,42 @@ public class EmployeeChecker {
     public static final String GRADE = "grade";
     public static final String DESCRIPTION = "description";
     public static final String TASKS_UID = "tasksUID";
+    public static final String FILENAME = "messages_US";
+    public static final String AGE_BUNDLE_KEY = "invalid.age";
+    public static final String SALARY_BUNDLE_KEY = "invalid.salary";
+    public static final String TASKS_BUNDLE_KEY = "invalid.tasks";
 
-    public Map<String, String> checkSalary(Positions position, Long salary) {
+    private final ResourceBundle resourceBundle = ResourceBundle.getBundle(
+            FILENAME, new Locale("US", "US"));
+
+    public Map<String, String> checkSalary(Position position, Long salary) {
         Map<String, String> response = new HashMap<>();
         if (salary != null &&
                 (salary < position.getSalaryMin() || salary > position.getSalaryMax())) {
-            response.put(SALARY, String.format("Invalid %s. Expected: from %d to %d  received: %d", //todo вынеси текст в отдельный файл. Почитай про ResourceBundle и используй)
-                            SALARY, position.getSalaryMin(), position.getSalaryMax(), salary));
+            //todo можно сократить используя MessageFormat.format
+            // done
+            response.put(SALARY, MessageFormat.format(
+                    resourceBundle.getString(SALARY_BUNDLE_KEY),
+                    SALARY, position.getSalaryMin(), position.getSalaryMax(), salary));
         }
         return response;
     }
 
-    public Map<String, String> checkAge(Positions position, Long age) {
+    public Map<String, String> checkAge(Position position, Long age) {
         Map<String, String> response = new HashMap<>();
         if (age != null && age < position.getMinAge()) {
-            response.put(AGE, String.format(
-                    "Invalid %s. Expected: from %d received: %d", //todo вынеси текст в отдельный файл. Почитай про ResourceBundle и используй)
+            //todo можно сократить используя MessageFormat.format
+            // done
+            response.put(AGE, MessageFormat.format(
+                    resourceBundle.getString(AGE_BUNDLE_KEY),
                     AGE, position.getMinAge(), age));
         }
         return response;
     }
 
-    public List<String> checkRequiredFields(Employee employee) throws InvalidPositionException {
+    //todo волшебные значения. вынести в константу
+    // done
+    public List<String> checkRequiredFields(Employee employee) {
         List<String> invalidFields = new ArrayList<>();
         if (employee.getName() == null) {
             invalidFields.add(NAME);
@@ -79,6 +92,8 @@ public class EmployeeChecker {
         return nullableFields;
     }
 
+    //todo волшебные значения. вынести в константу
+    // done
     private List<String> requiredFieldsManager(Employee employee) {
         List<String> nullableFields = new ArrayList<>();
         if (employee.getGrade() == null) {
@@ -87,11 +102,13 @@ public class EmployeeChecker {
         return nullableFields;
     }
 
-    public Map<String, String> checkAdmissibleTaskCount(Positions position, Long countTasks) {
+    public Map<String, String> checkAdmissibleTaskCount(Position position, Long countTasks) {
         Map<String, String> response = new HashMap<>();
         if (countTasks > position.getCountTasksMax()) {
-            response.put(TASKS_UID, String.format(
-                    "Invalid count task. Max count for position %s: %d received: %d", //todo вынеси текст в отдельный файл. Почитай про ResourceBundle и используй)
+            //todo можно сократить используя MessageFormat.format
+            // done
+            response.put(TASKS_UID, MessageFormat.format(
+                    resourceBundle.getString(TASKS_BUNDLE_KEY),
                     position.getPosition(), position.getCountTasksMax(), countTasks));
         }
         return response;
