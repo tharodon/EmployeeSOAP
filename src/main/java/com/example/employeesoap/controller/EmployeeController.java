@@ -20,45 +20,33 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
 
-    //todo лучше написать более осмысленный путь
-    //done
+    //todo лучше написать более осмысленный путь. /employee/add
     @PostMapping("/employee-register")
     public ResponseEntity<?> addEmployee(@RequestBody List<Employee> employees) {
-        ///todo добавить логи. Что пришло
-        //done
         log.info("request: {}", employees);
         List<EmployeeDto> response = employeeService.addEmployees(employees);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    //todo лучше написать более осмысленный путь
-    //done
+    //todo лучше написать более осмысленный путь. /employee/update
     @PutMapping("/employee")
     public ResponseEntity<?> updateEmployee(@RequestBody Employee employee) {
         log.info("request: {}", employee);
-        ///todo добавить логи. Что пришло
-        //done
         EmployeeDto response = employeeService.updateEmployee(employee);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    //todo лучше написать более осмысленный путь
-    //done
+    //todo лучше написать более осмысленный путь /employee/get/{id}
     @GetMapping("/employee/{id}")
     public ResponseEntity<?> getEmployee(@PathVariable Long id) {
-        ///todo добавить логи. Что пришло
-        //done
         log.info("request: delete by id: {}", id);
         return new ResponseEntity<>(employeeService.getEmployeeById(id), HttpStatus.OK);
     }
 
-    //todo лучше написать более осмысленный путь
-    //done
+    //todo лучше написать более осмысленный путь /employee/delete/{id}
     @DeleteMapping("/employee/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteEmployee(@PathVariable Long id) {
-        ///todo добавить логи. Что пришло
-        //done
         log.info("request: delete by id: {}", id);
         employeeService.deleteEmployee(id);
     }

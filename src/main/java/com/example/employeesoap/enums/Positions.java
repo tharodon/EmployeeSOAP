@@ -1,5 +1,5 @@
 package com.example.employeesoap.enums;
-
+//todo название пакета во множественном числе. + назови лучше type
 import com.example.employeesoap.exceptions.InvalidPositionException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

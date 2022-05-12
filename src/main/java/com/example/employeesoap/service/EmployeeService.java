@@ -16,9 +16,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-//todo не очень название. EmployeeDao. + если это dao то вынести в отдельный пакет dao
-//done выяснилось, что не этот класс dao, а другой
-public class EmployeeService {
+public class EmployeeService { //todo добавить интерфейс и использовать через интерфейс
 
     private final EmployeeDao employeeService;
     private final ValidatorFieldsService validatorFieldsService;
@@ -28,7 +26,7 @@ public class EmployeeService {
     //done
     public List<EmployeeDto> addEmployees(List<Employee> employees) {
         List<EmployeeDto> response = new ArrayList<>();
-        for (int i = 0; i < employees.size(); i++) {
+        for (int i = 0; i < employees.size(); i++) { //todo попробуй сделать через стримом. Так можно сделать меньше кода + если это отдельная логика валидаци его можно ввынести в приватный метод
             EmployeeDto invalidEmployee = validatorFieldsService.validCheck(employees.get(i));
             if (invalidEmployee != null) {
                 response.add(invalidEmployee);

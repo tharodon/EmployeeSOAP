@@ -31,7 +31,7 @@ public class ValidatorFieldsService {
             employeeChecker.checkAdmissibleTaskCount(getDefine(employee.getPosition()), (long) employee.getTasks().size());
         } catch (InvalidPositionException e) {
             employeeMessageError.addIllegalArgumentMessage(
-                    new HashMap<String, String>(){{put("position", e.getMessage());}});
+                    new HashMap<String, String>(){{put("position", e.getMessage());}}); //todo волшебные значения. вынести в константу
         }
         if (employeeMessageError.hasErrors()) {
             return employeeMessageError.getEmployeeErrorDto();

@@ -13,8 +13,6 @@ import java.util.List;
 @Service
 public class EmployeeMapperImpl implements EmployeeMapper {
 
-    //todo название employeeToEmployeeDto
-    //done
     @Override
     public EmployeeDto employeeToEmployeeDto(Employee employee) {
         return EmployeeDto.builder()

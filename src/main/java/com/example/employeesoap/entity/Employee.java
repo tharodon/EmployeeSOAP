@@ -44,8 +44,4 @@ public class Employee {
             inverseJoinColumns = @JoinColumn(name = "task_id")
     )
     private List<Task> tasks = new ArrayList<>();
-
-
-    //todo используй lombok
-    //done
 }

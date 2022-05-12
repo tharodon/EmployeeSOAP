@@ -5,8 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;
 
-//todo коммент в коде
-//done
 @Configuration
 @RequiredArgsConstructor
 public class ScheduleConfig {

@@ -7,8 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
 
-//todo Repository должны лежать в отдельном пакете. То есть вынести из пакета api
-//done
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     @Transactional
     @Modifying(flushAutomatically = true)
