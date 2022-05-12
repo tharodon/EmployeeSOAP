@@ -1,4 +1,4 @@
-package com.example.employeesoap.enums;
+package com.example.employeesoap.type;
 
 public enum Status {
     SUCCESS, ERROR

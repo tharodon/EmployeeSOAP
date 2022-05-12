@@ -4,14 +4,16 @@ import com.example.employeesoap.api.EmployeeDao;
 import com.example.employeesoap.api.EmployeeMapper;
 import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.entity.Employee;
-import com.example.employeesoap.exceptions.InvalidPositionException;
+
+import static com.example.employeesoap.type.Status.*;
+
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -23,20 +25,18 @@ public class EmployeeService { //todo добавить интерфейс и и�
     private final EmployeeMapper employeeMapper;
 
     //todo не нравиться завязка на try-catch. переписать лучше
+    //todo попробуй сделать через стримом. Так можно сделать меньше кода + если это отдельная логика валидаци его можно ввынести в приватный метод
     //done
     public List<EmployeeDto> addEmployees(List<Employee> employees) {
-        List<EmployeeDto> response = new ArrayList<>();
-        for (int i = 0; i < employees.size(); i++) { //todo попробуй сделать через стримом. Так можно сделать меньше кода + если это отдельная логика валидаци его можно ввынести в приватный метод
-            EmployeeDto invalidEmployee = validatorFieldsService.validCheck(employees.get(i));
-            if (invalidEmployee != null) {
-                response.add(invalidEmployee);
-                employees.remove(i);
-                i--;
-            } else {
-                response.add(employeeMapper.employeeToEmployeeDto(employees.get(i)));
-            }
-        }
-        employeeService.save(employees);
+        List<EmployeeDto> response = employees
+                .stream()
+                .map(this::validation)
+                .collect(Collectors.toList());
+        employeeService.save(
+                employees
+                        .stream()
+                        .filter(employee -> checkEmployeeStatus(employees.indexOf(employee), response))
+                        .collect(Collectors.toList()));
         return response;
     }
 
@@ -56,6 +56,16 @@ public class EmployeeService { //todo добавить интерфейс и и�
     @SneakyThrows
     public EmployeeDto getEmployeeById(Long id) {
         return employeeMapper.employeeToEmployeeDto(employeeService.findEmployeeById(id));
+
+    }
+
+    private EmployeeDto validation(Employee employee) {
+        EmployeeDto result = validatorFieldsService.validCheck(employee);
+        return result == null ? employeeMapper.employeeToEmployeeDto(employee) : result;
+    }
+
+    private boolean checkEmployeeStatus(Integer index, List<EmployeeDto> invalidEmployees) {
+        return invalidEmployees.get(index).getStatus() == SUCCESS;
     }
 
 }

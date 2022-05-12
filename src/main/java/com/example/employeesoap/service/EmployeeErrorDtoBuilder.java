@@ -2,7 +2,7 @@ package com.example.employeesoap.service;
 
 import com.example.employeesoap.dto.EmployeeDto;
 
-import static com.example.employeesoap.enums.Status.*;
+import static com.example.employeesoap.type.Status.*;
 
 import lombok.Getter;
 
@@ -12,6 +12,14 @@ import java.util.Map;
 @Getter
 public class EmployeeErrorDtoBuilder {
     private static final String MESSAGE = "cannot be empty";
+    public static final String NAME = "name";
+    public static final String SURNAME = "surname";
+    public static final String POSITION = "position";
+    public static final String GRADE = "grade";
+    public static final String DESCRIPTION = "description";
+    public static final String AGE = "age";
+    public static final String SALARY = "salary";
+    public static final String TASKS_UID = "tasksUID";
     private final EmployeeDto employeeErrorDto;
 
     public EmployeeErrorDtoBuilder() {
@@ -20,36 +28,36 @@ public class EmployeeErrorDtoBuilder {
     }
 
     public void addFieldsEmpty(List<String> incorrectFields) {
-        if (!incorrectFields.isEmpty()){
+        if (!incorrectFields.isEmpty()) {
             employeeErrorDto.setStatus(ERROR);
         }
         for (String field : incorrectFields) {
             switch (field) {
-                case ("name"): {
+                case NAME: {
                     employeeErrorDto.setName(MESSAGE);
                     break;
                 }
-                case ("surname"): {
+                case SURNAME: {
                     employeeErrorDto.setSurname(MESSAGE);
                     break;
                 }
-                case ("position"): {
+                case POSITION: {
                     employeeErrorDto.setPosition(MESSAGE);
                     break;
                 }
-                case ("grade"): {
+                case GRADE: {
                     employeeErrorDto.setGrade(MESSAGE);
                     break;
                 }
-                case ("description"): {
+                case DESCRIPTION: {
                     employeeErrorDto.setDescription(MESSAGE);
                     break;
                 }
-                case ("age"): {
+                case AGE: {
                     employeeErrorDto.setAge(MESSAGE);
                     break;
                 }
-                case ("salary"): {
+                case SALARY: {
                     employeeErrorDto.setSalary(MESSAGE);
                     break;
                 }
@@ -60,37 +68,41 @@ public class EmployeeErrorDtoBuilder {
     }
 
     public void addIllegalArgumentMessage(Map<String, String> illegalArguments) {
-        if (!illegalArguments.isEmpty()){
+        if (!illegalArguments.isEmpty()) {
             employeeErrorDto.setStatus(ERROR);
         }
-        for (Map.Entry<String, String> entry : illegalArguments.entrySet()){
+        for (Map.Entry<String, String> entry : illegalArguments.entrySet()) {
             switch (entry.getKey()) {
-                case ("name"): {
+                case NAME: {
                     employeeErrorDto.setName(entry.getValue());
                     break;
                 }
-                case ("surname"): {
+                case SURNAME: {
                     employeeErrorDto.setSurname(entry.getValue());
                     break;
                 }
-                case ("position"): {
+                case POSITION: {
                     employeeErrorDto.setPosition(entry.getValue());
                     break;
                 }
-                case ("grade"): {
+                case GRADE: {
                     employeeErrorDto.setGrade(entry.getValue());
                     break;
                 }
-                case ("description"): {
+                case DESCRIPTION: {
                     employeeErrorDto.setDescription(entry.getValue());
                     break;
                 }
-                case ("age"): {
+                case AGE: {
                     employeeErrorDto.setAge(entry.getValue());
                     break;
                 }
-                case ("salary"): {
+                case SALARY: {
                     employeeErrorDto.setSalary(entry.getValue());
+                    break;
+                }
+                case TASKS_UID: {
+                    employeeErrorDto.setTasksUID(entry.getValue());
                     break;
                 }
                 default:
@@ -99,7 +111,7 @@ public class EmployeeErrorDtoBuilder {
         }
     }
 
-    public boolean hasErrors(){
+    public boolean hasErrors() {
         return employeeErrorDto.getStatus() == ERROR;
     }
 }

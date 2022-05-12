@@ -1,9 +1,7 @@
 package com.example.employeesoap.dto;
 
-import com.example.employeesoap.enums.Status;
+import com.example.employeesoap.type.Status;
 import lombok.*;
-
-import java.util.List;
 
 
 @Builder
