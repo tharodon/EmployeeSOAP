@@ -30,6 +30,7 @@ public class ValidatorFieldsService {
 
             employeeMessageError.addIllegalArgumentMessage(
                     employeeChecker.checkSalary(position, employee.getSalary()));
+
             employeeMessageError.addIllegalArgumentMessage(
                     employeeChecker.checkAdmissibleTaskCount(position, (long) employee.getTasks().size()));
         } else {

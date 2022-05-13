@@ -1,8 +1,8 @@
 package com.example.employeesoap.controller;
 
+import com.example.employeesoap.api.EmployeeService;
 import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.entity.Employee;
-import com.example.employeesoap.service.EmployeeServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EmployeeController {
 
-    private final EmployeeServiceImpl employeeService;
+    private final EmployeeService employeeService;
 
     @PostMapping("/employee-register")
     public ResponseEntity<?> addEmployee(@RequestBody List<Employee> employees) {

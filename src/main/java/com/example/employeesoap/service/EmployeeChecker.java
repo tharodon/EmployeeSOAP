@@ -8,6 +8,8 @@ import java.util.*;
 
 import static com.example.employeesoap.type.Position.*;
 
+//todo переносы
+// done
 public class EmployeeChecker {
 
     public static final String NAME = "name";
@@ -31,7 +33,10 @@ public class EmployeeChecker {
                 (salary < position.getSalaryMin() || salary > position.getSalaryMax())) {
             response.put(SALARY, MessageFormat.format(
                     resourceBundle.getString(SALARY_BUNDLE_KEY),
-                    SALARY, position.getSalaryMin(), position.getSalaryMax(), salary)); //todo переносы
+                    SALARY,
+                    position.getSalaryMin(),
+                    position.getSalaryMax(),
+                    salary));
         }
         return response;
     }
@@ -41,7 +46,9 @@ public class EmployeeChecker {
         if (age != null && age < position.getMinAge()) {
             response.put(AGE, MessageFormat.format(
                     resourceBundle.getString(AGE_BUNDLE_KEY),
-                    AGE, position.getMinAge(), age)); //todo переносы
+                    AGE,
+                    position.getMinAge(),
+                    age));
         }
         return response;
     }
@@ -95,7 +102,9 @@ public class EmployeeChecker {
         return response;
     }
 
-    private List<String> requiredFieldsManager(Employee employee) { //todo приватные методы должны быть снизу. я поправил. Это на будущее
+    //todo приватные методы должны быть снизу. я поправил. Это на будущее
+    // done принял
+    private List<String> requiredFieldsManager(Employee employee) {
         List<String> nullableFields = new ArrayList<>();
         if (employee.getGrade() == null) {
             nullableFields.add(GRADE);
