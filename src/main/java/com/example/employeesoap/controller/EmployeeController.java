@@ -19,8 +19,6 @@ public class EmployeeController {
 
     private final EmployeeServiceImpl employeeService;
 
-    //todo лучше написать более осмысленный путь. /employee/add
-    // done принято решение оставить
     @PostMapping("/employee-register")
     public ResponseEntity<?> addEmployee(@RequestBody List<Employee> employees) {
         log.info("request: {}", employees);
@@ -28,8 +26,6 @@ public class EmployeeController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    //todo лучше написать более осмысленный путь. /employee/update
-    // done принято решение оставить
     @PutMapping("/employee")
     public ResponseEntity<?> updateEmployee(@RequestBody Employee employee) {
         log.info("request: {}", employee);
@@ -37,16 +33,13 @@ public class EmployeeController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    //todo лучше написать более осмысленный путь /employee/get/{id}
-    // done принято решение оставить
     @GetMapping("/employee/{id}")
     public ResponseEntity<?> getEmployee(@PathVariable Long id) {
         log.info("request: get by id: {}", id);
         return new ResponseEntity<>(employeeService.getEmployeeById(id), HttpStatus.OK);
     }
 
-    //todo лучше написать более осмысленный путь /employee/delete/{id}
-    // done принято решение оставить
+
     @DeleteMapping("/employee/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteEmployee(@PathVariable Long id) {
