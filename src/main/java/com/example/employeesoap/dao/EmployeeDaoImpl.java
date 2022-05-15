@@ -19,9 +19,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
     private final EmployeeRepository employeeRepository;
 
     @Override
-    public Employee findEmployeeById(Long id) throws EmployeeNotFoundException {
+    public Employee findEmployeeById(String id) throws EmployeeNotFoundException {
         return employeeRepository.findById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
     }
+
     @Transactional
     @Override
     public void save(List<Employee> employees) {
@@ -37,7 +38,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Transactional
     @Override
-    public void delete(Long id) {
+    public void delete(String id) {
         employeeRepository.deleteById(id);
     }
 }

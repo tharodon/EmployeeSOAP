@@ -16,7 +16,7 @@ public class EmployeeMapperImpl implements EmployeeMapper {
     @Override
     public EmployeeDto employeeToEmployeeDto(Employee employee) {
         return EmployeeDto.builder()
-                .id(employee.getId() == null ? null : employee.getId().toString())
+                .id(employee.getId())
                 .name(employee.getName())
                 .surname(employee.getSurname())
                 .position(employee.getPosition())
@@ -26,6 +26,20 @@ public class EmployeeMapperImpl implements EmployeeMapper {
                 .description(employee.getDescription())
                 .tasksUID(Arrays.toString(getTasksUIDs(employee.getTasks())))
                 .status(SUCCESS)
+                .build();
+    }
+
+    @Override
+    public Employee employeeDtoToEmployee(EmployeeDto employeeDto) {
+        return Employee.builder()
+                .id(employeeDto.getId())
+                .name(employeeDto.getName())
+                .surname(employeeDto.getSurname())
+                .position(employeeDto.getPosition())
+                .salary(Long.valueOf(employeeDto.getSalary()))
+                .grade(employeeDto.getGrade())
+                .age(Long.valueOf(employeeDto.getAge()))
+                .description(employeeDto.getDescription())
                 .build();
     }
 

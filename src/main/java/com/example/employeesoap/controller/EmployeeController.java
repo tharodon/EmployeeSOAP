@@ -7,8 +7,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -34,7 +37,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/employee/{id}")
-    public ResponseEntity<?> getEmployee(@PathVariable Long id) {
+    public ResponseEntity<?> getEmployee(@PathVariable String id) {
         log.info("request: get by id: {}", id);
         return new ResponseEntity<>(employeeService.getEmployeeById(id), HttpStatus.OK);
     }
@@ -42,7 +45,7 @@ public class EmployeeController {
 
     @DeleteMapping("/employee/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteEmployee(@PathVariable Long id) {
+    public void deleteEmployee(@PathVariable String id) {
         log.info("request: delete by id: {}", id);
         employeeService.deleteEmployee(id);
     }

@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS employee
 (
-    id          BIGSERIAL PRIMARY KEY,
+    id          VARCHAR(50) UNIQUE PRIMARY KEY,
     name        VARCHAR(50) NOT NULL,
     surname     VARCHAR(50) NOT NULL,
     position    VARCHAR(50) NOT NULL,
@@ -18,9 +18,9 @@ CREATE TABLE IF NOT EXISTS task
 
 CREATE TABLE IF NOT EXISTS distribute
 (
-    id          BIGSERIAL NOT NULL PRIMARY KEY,
-    task_id     BIGINT    NOT NULL,
-    employee_id BIGINT    NOT NULL,
+    id          BIGSERIAL   NOT NULL PRIMARY KEY,
+    task_id     BIGINT      NOT NULL,
+    employee_id VARCHAR(50) NOT NULL,
     FOREIGN KEY (task_id) REFERENCES task (uid),
     FOREIGN KEY (employee_id) REFERENCES employee (id)
 );

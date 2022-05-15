@@ -6,11 +6,11 @@ import com.example.employeesoap.exceptions.EmployeeNotFoundException;
 import java.util.List;
 
 public interface EmployeeDao {
-    Employee findEmployeeById(Long id) throws EmployeeNotFoundException;
+    Employee findEmployeeById(String id) throws EmployeeNotFoundException;
 
     void save(List<Employee> employees);
 
     Employee update(Employee employee);
 
-    void delete(Long id);
+    void delete(String id);
 }

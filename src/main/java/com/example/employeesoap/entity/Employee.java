@@ -5,7 +5,6 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Builder(toBuilder = true)
 @Getter
@@ -13,14 +12,13 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@EqualsAndHashCode(exclude = {"id", "tasks"})
-@ToString(exclude = {"id", "tasks"})
+@EqualsAndHashCode(exclude = {"tasks"})
+@ToString(exclude = {"tasks"})
 @Table(name = "employee")
 public class Employee {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     @Column
     private String name;

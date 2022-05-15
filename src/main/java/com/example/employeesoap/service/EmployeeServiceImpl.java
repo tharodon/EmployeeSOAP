@@ -3,6 +3,7 @@ package com.example.employeesoap.service;
 import com.example.employeesoap.api.EmployeeService;
 import com.example.employeesoap.api.EmployeeDao;
 import com.example.employeesoap.api.EmployeeMapper;
+import com.example.employeesoap.api.UIDGenerator;
 import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.entity.Employee;
 
@@ -35,11 +36,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<EmployeeDto> addEmployees(List<Employee> employees) {
         List<EmployeeDto> response = employees.stream()
                 .map(this::validation)
+                .map(this::generateId)
                 .collect(Collectors.toList());
-        employeeService.save(
-                employees.stream()
-                        .filter(employee -> checkEmployeeStatus(employees.indexOf(employee), response))
-                        .collect(Collectors.toList()));
+        List<Employee> legalEmployees = response.stream()
+                .filter(employeeDto -> employeeDto.getStatus() == SUCCESS)
+                .map(employeeMapper::employeeDtoToEmployee)
+                .collect(Collectors.toList());
+        employeeService.save(legalEmployees);
 
         return response;
     }
@@ -55,24 +58,28 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void deleteEmployee(Long id) {
+    public void deleteEmployee(String id) {
         employeeService.delete(id);
     }
 
     @Override
     @SneakyThrows
-    public EmployeeDto getEmployeeById(Long id) {
+    public EmployeeDto getEmployeeById(String id) {
         return employeeMapper.employeeToEmployeeDto(employeeService.findEmployeeById(id));
 
+    }
+
+    private EmployeeDto generateId(EmployeeDto employeeDto) {
+        if (employeeDto.getStatus() == SUCCESS) {
+            UIDGenerator uidGenerator = new UIDGeneratorRandom();
+            employeeDto.setId(uidGenerator.generateUID());
+        }
+        return employeeDto;
     }
 
     private EmployeeDto validation(Employee employee) {
         EmployeeDto result = validatorFieldsService.validCheck(employee);
         return result == null ? employeeMapper.employeeToEmployeeDto(employee) : result;
-    }
-
-    private boolean checkEmployeeStatus(Integer index, List<EmployeeDto> invalidEmployees) {
-        return invalidEmployees.get(index).getStatus() == SUCCESS;
     }
 
 }
