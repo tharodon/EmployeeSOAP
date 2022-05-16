@@ -1,6 +1,7 @@
 package com.example.employeesoap.entity;
 
 import lombok.*;
+import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -18,8 +19,10 @@ import java.util.List;
 public class Employee {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column
     private String uid;
-
     @Column
     private String name;
     @Column

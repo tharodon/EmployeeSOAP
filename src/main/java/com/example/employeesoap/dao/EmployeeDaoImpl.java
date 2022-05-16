@@ -19,7 +19,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public Employee findEmployeeById(String id) throws EmployeeNotFoundException {
-        return employeeRepository.findById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
+        return employeeRepository.findByUid(id).orElseThrow(() -> new EmployeeNotFoundException(id));
     }
 
     @Transactional
@@ -38,6 +38,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Transactional
     @Override
     public void delete(String id) {
-        employeeRepository.deleteById(id);
+        employeeRepository.deleteByUid(id);
     }
 }

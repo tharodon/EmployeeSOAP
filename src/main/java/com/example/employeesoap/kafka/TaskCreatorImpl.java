@@ -2,6 +2,7 @@ package com.example.employeesoap.kafka;
 
 import com.example.employeesoap.api.TaskCreator;
 import com.example.employeesoap.entity.Employee;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,7 +24,7 @@ public class TaskCreatorImpl implements TaskCreator {
     //todo где логи ?
     // done
     @Override
-    public void createTask(Employee employee) {
+    public void createTask(@NonNull Employee employee) {
         log.debug("request task: {}", employee);
         ListenableFuture<SendResult<String, Employee>> send = kafkaTemplate.send(topicSaveName, employee.getUid(), employee);
         send.addCallback(new ListenableFutureCallback<SendResult<String, Employee>>() {

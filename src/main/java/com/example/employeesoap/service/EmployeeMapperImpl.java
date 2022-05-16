@@ -16,7 +16,7 @@ public class EmployeeMapperImpl implements EmployeeMapper {
     @Override
     public EmployeeDto employeeToEmployeeDto(Employee employee) {
         return EmployeeDto.builder()
-                .id(employee.getUid())
+                .uid(employee.getUid())
                 .name(employee.getName())
                 .surname(employee.getSurname())
                 .position(employee.getPosition())
@@ -32,7 +32,7 @@ public class EmployeeMapperImpl implements EmployeeMapper {
     @Override
     public Employee employeeDtoToEmployee(EmployeeDto employeeDto) {
         return Employee.builder()
-                .uid(employeeDto.getId())
+                .uid(employeeDto.getUid())
                 .name(employeeDto.getName())
                 .surname(employeeDto.getSurname())
                 .position(employeeDto.getPosition())
