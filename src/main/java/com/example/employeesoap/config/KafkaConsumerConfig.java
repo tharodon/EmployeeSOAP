@@ -4,7 +4,7 @@ import com.example.employeesoap.entity.Employee;
 
 import static org.apache.kafka.clients.consumer.ConsumerConfig.*;
 
-import org.apache.kafka.common.serialization.LongDeserializer;
+import com.example.employeesoap.serializer.EmployeeDeserializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -36,7 +36,7 @@ public class KafkaConsumerConfig {
         Map<String, Object> props = new HashMap<>();
         props.put(BOOTSTRAP_SERVERS_CONFIG, kafkaServer);
         props.put(KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(VALUE_DESERIALIZER_CLASS_CONFIG, EmployeeDeserializer.class);
         props.put(GROUP_ID_CONFIG, kafkaGroupId);
         return props;
     }

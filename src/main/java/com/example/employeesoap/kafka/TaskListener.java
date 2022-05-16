@@ -23,16 +23,10 @@ public class TaskListener {
     //todo где логи ?
     // done
     @KafkaListener(topics = "${topic.save}")
-    public void executeTask(ConsumerRecord<String, String> task) {
+    public void executeTask(ConsumerRecord<String, Employee> task) {
         log.debug("TaskListener. Request: key - {}, value - {}", task.key(), task.value());
-        try {
-            Employee employee = new ObjectMapper().readValue(task.value(), Employee.class);
-            employeeDao.save(employee);
-        } catch (JsonProcessingException e) {
-            //todo ммм, по больше бы инфы + не оч нравиться, что это чистый runtime, а не свое исключение
-            // done
-            log.debug("Failure parsing: {} Message: {}", task.value(), e.getMessage());
-            throw new JsonParsingException(task.value(), e.getMessage());
-        }
+        employeeDao.save(task.value());
+        //todo ммм, по больше бы инфы + не оч нравиться, что это чистый runtime, а не свое исключение
+        // done добавлен десериализатор для сущности
     }
 }
