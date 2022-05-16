@@ -9,8 +9,10 @@ import lombok.Getter;
 import java.util.List;
 import java.util.Map;
 
+//todo ожидаю билдер по содержанию это не похоже на билдер
+// done
 @Getter
-public class EmployeeErrorDtoBuilder { //todo ожидаю билдер по содержанию это не похоже на билдер
+public class EmployeeErrorDtoInitializer {
     private static final String MESSAGE = "cannot be empty";
     public static final String NAME = "name";
     public static final String SURNAME = "surname";
@@ -22,7 +24,7 @@ public class EmployeeErrorDtoBuilder { //todo ожидаю билдер по с�
     public static final String TASKS_UID = "tasksUID";
     private final EmployeeDto employeeErrorDto;
 
-    public EmployeeErrorDtoBuilder() {
+    public EmployeeErrorDtoInitializer() {
         this.employeeErrorDto = new EmployeeDto();
         employeeErrorDto.setStatus(SUCCESS);
     }

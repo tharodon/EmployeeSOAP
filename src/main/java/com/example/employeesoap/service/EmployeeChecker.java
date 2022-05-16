@@ -6,24 +6,13 @@ import com.example.employeesoap.type.Position;
 import java.text.MessageFormat;
 import java.util.*;
 
+import static com.example.employeesoap.support.ConstantsSupport.*;
 import static com.example.employeesoap.type.Position.*;
 
 public class EmployeeChecker {
 
-    public static final String NAME = "name";
-    public static final String SURNAME = "surname";
-    public static final String POSITION = "position";
-    public static final String AGE = "age";
-    public static final String SALARY = "salary";
-    public static final String GRADE = "grade";
-    public static final String DESCRIPTION = "description";
-    public static final String TASKS_UID = "tasksUID";
-    public static final String FILENAME = "messages_US";
-    public static final String AGE_BUNDLE_KEY = "invalid.age";
-    public static final String SALARY_BUNDLE_KEY = "invalid.salary";
-    public static final String TASKS_BUNDLE_KEY = "invalid.tasks";
-
-    private final ResourceBundle resourceBundle = ResourceBundle.getBundle(FILENAME, new Locale("US", "US"));
+    private final ResourceBundle resourceBundle = ResourceBundle.getBundle(
+            FILENAME, new Locale("US", "US"));
 
     public Map<String, String> checkSalary(Position position, Long salary) {
         Map<String, String> response = new HashMap<>();

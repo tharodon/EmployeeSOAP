@@ -1,15 +1,11 @@
 package com.example.employeesoap.service;
 
-import com.example.employeesoap.api.EmployeeService;
-import com.example.employeesoap.api.EmployeeDao;
-import com.example.employeesoap.api.EmployeeMapper;
-import com.example.employeesoap.api.UIDGenerator;
+import com.example.employeesoap.api.*;
 import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.entity.Employee;
 
 import static com.example.employeesoap.type.Status.*;
 
-import com.example.employeesoap.kafka.TaskCreator;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -70,7 +66,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private EmployeeDto generateId(EmployeeDto employeeDto) {
         if (employeeDto.getStatus() == SUCCESS) {
-            UIDGenerator uidGenerator = new UIDGeneratorRandom();
+            UidGenerator uidGenerator = new UIDGeneratorRandom();
             employeeDto.setId(uidGenerator.generateUID()); //todo хм, а id сохраняется в БД ? если да, то это не очень), нужно сделать отдельные поле uid
         }
         return employeeDto;

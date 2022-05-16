@@ -1,7 +1,9 @@
 package com.example.employeesoap.config;
 
 import com.example.employeesoap.entity.Employee;
-import org.apache.kafka.clients.producer.ProducerConfig;
+
+import static org.apache.kafka.clients.producer.ProducerConfig.*;
+
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -20,16 +22,16 @@ public class KafkaProducerConfig {
     @Value("${spring.kafka.bootstrap-servers}")
     private String kafkaServer;
 
+    //todo можно сделать импорт констант и убрать ProducerConfig
+    // done
     @Bean
     public Map<String, Object> producerConfigs() {
         Map<String, Object> props = new HashMap<>();
         //todo сделать переносы, как в KafkaConsumerConfig
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, //todo можно сделать импорт констант и убрать ProducerConfig
-                kafkaServer);
-        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
-                StringSerializer.class);
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
-                JsonSerializer.class);
+        // done
+        props.put(BOOTSTRAP_SERVERS_CONFIG, kafkaServer);
+        props.put(KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        props.put(VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
         return props;
     }
 
