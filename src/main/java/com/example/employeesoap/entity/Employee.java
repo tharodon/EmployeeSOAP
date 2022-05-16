@@ -18,7 +18,7 @@ import java.util.List;
 public class Employee {
     @Id
     @Column(name = "id")
-    private String id;
+    private String uid;
 
     @Column
     private String name;

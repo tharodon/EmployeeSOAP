@@ -33,7 +33,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .collect(Collectors.toList());
         employees.stream()
                 .filter(employee -> checkSuccessStatus(employees.indexOf(employee), response))
-                .peek(employee -> employee.setId(response.get(employees.indexOf(employee)).getId()))
+                .peek(employee -> employee.setUid(response.get(employees.indexOf(employee)).getId()))
                 .forEach(taskCreator::createTask);
         return response;
     }
@@ -66,7 +66,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private EmployeeDto generateId(EmployeeDto employeeDto) {
         if (employeeDto.getStatus() == SUCCESS) {
-            UidGenerator uidGenerator = new UIDGeneratorRandom();
+            UidGenerator uidGenerator = new UidGeneratorRandom();
             employeeDto.setId(uidGenerator.generateUID()); //todo хм, а id сохраняется в БД ? если да, то это не очень), нужно сделать отдельные поле uid
         }
         return employeeDto;

@@ -2,14 +2,13 @@ package com.example.employeesoap.dao;
 
 import com.example.employeesoap.api.EmployeeDao;
 import com.example.employeesoap.entity.Employee;
-import com.example.employeesoap.exceptions.EmployeeNotFoundException;
+import com.example.employeesoap.exception.EmployeeNotFoundException;
 import com.example.employeesoap.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Slf4j
 @Service
