@@ -31,6 +31,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Transactional
     @Override
     public Employee update(Employee employee) {
+        employee.setId(employeeRepository.findByUid(employee.getUid()).orElse(employee).getId());
         employeeRepository.save(employee);
         return employee;
     }
