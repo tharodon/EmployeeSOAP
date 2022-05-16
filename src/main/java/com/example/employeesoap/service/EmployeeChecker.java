@@ -8,8 +8,6 @@ import java.util.*;
 
 import static com.example.employeesoap.type.Position.*;
 
-//todo переносы
-// done
 public class EmployeeChecker {
 
     public static final String NAME = "name";
@@ -44,11 +42,13 @@ public class EmployeeChecker {
     public Map<String, String> checkAge(Position position, Long age) {
         Map<String, String> response = new HashMap<>();
         if (age != null && age < position.getMinAge()) {
-            response.put(AGE, MessageFormat.format(
-                    resourceBundle.getString(AGE_BUNDLE_KEY),
+            response.put(
                     AGE,
-                    position.getMinAge(),
-                    age));
+                    MessageFormat.format(
+                            resourceBundle.getString(AGE_BUNDLE_KEY),
+                            AGE,
+                            position.getMinAge(),
+                            age));
         }
         return response;
     }
@@ -102,8 +102,6 @@ public class EmployeeChecker {
         return response;
     }
 
-    //todo приватные методы должны быть снизу. я поправил. Это на будущее
-    // done принял
     private List<String> requiredFieldsManager(Employee employee) {
         List<String> nullableFields = new ArrayList<>();
         if (employee.getGrade() == null) {

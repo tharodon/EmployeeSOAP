@@ -23,7 +23,8 @@ public class KafkaProducerConfig {
     @Bean
     public Map<String, Object> producerConfigs() {
         Map<String, Object> props = new HashMap<>();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
+        //todo сделать переносы, как в KafkaConsumerConfig
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, //todo можно сделать импорт констант и убрать ProducerConfig
                 kafkaServer);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
                 StringSerializer.class);

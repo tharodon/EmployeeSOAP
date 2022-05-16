@@ -71,7 +71,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeDto generateId(EmployeeDto employeeDto) {
         if (employeeDto.getStatus() == SUCCESS) {
             UIDGenerator uidGenerator = new UIDGeneratorRandom();
-            employeeDto.setId(uidGenerator.generateUID());
+            employeeDto.setId(uidGenerator.generateUID()); //todo хм, а id сохраняется в БД ? если да, то это не очень), нужно сделать отдельные поле uid
         }
         return employeeDto;
     }

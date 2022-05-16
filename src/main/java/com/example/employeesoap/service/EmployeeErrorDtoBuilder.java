@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @Getter
-public class EmployeeErrorDtoBuilder {
+public class EmployeeErrorDtoBuilder { //todo ожидаю билдер по содержанию это не похоже на билдер
     private static final String MESSAGE = "cannot be empty";
     public static final String NAME = "name";
     public static final String SURNAME = "surname";

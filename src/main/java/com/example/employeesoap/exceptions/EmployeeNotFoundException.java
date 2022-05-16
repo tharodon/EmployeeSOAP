@@ -1,5 +1,5 @@
 package com.example.employeesoap.exceptions;
-
+//todo название пакета во множественном числе эт неправильно, нужно в единственном
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 

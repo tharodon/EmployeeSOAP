@@ -12,8 +12,10 @@ import static com.example.employeesoap.type.Position.*;
 
 @Service
 @RequiredArgsConstructor
-public class ValidatorFieldsService {
+public class ValidatorFieldsService { //todo создать интерфейс и обращаться через него
 
+    //todo константы повторяются(увидел повторения в EmployeeErrorDtoBuilder), можно вынести в отдельный утилитный класс с константами.
+    // пакет support название <какое то название>ConstantSupport
     public static final String POSITION = "position";
 
     public EmployeeDto validCheck(Employee employee) {

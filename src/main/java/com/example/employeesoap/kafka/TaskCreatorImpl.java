@@ -15,7 +15,7 @@ public class TaskCreatorImpl implements TaskCreator {
     private final KafkaTemplate<String, Employee> kafkaTemplate;
 
     @Override
-    public void createTask(Employee employee) {
+    public void createTask(Employee employee) { //todo где логи ?
         kafkaTemplate.send(topicSaveName, employee.getId(), employee);
         kafkaTemplate.flush();
     }
