@@ -9,6 +9,7 @@ import com.example.employeesoap.entity.Employee;
 
 import static com.example.employeesoap.type.Status.*;
 
+import com.example.employeesoap.kafka.TaskCreator;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -17,8 +18,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//todo добавить интерфейс и использовать через интерфейс
-// done
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -28,9 +27,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final ValidatorFieldsService validatorFieldsService;
     private final EmployeeMapper employeeMapper;
 
-    //todo не нравиться завязка на try-catch. переписать лучше
-    //todo попробуй сделать через стримом. Так можно сделать меньше кода + если это отдельная логика валидаци его можно ввынести в приватный метод
-    // done
+    private final TaskCreator taskCreator;
 
     @Override
     public List<EmployeeDto> addEmployees(List<Employee> employees) {
@@ -38,13 +35,15 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .map(this::validation)
                 .map(this::generateId)
                 .collect(Collectors.toList());
-        List<Employee> legalEmployees = response.stream()
-                .filter(employeeDto -> employeeDto.getStatus() == SUCCESS)
-                .map(employeeMapper::employeeDtoToEmployee)
-                .collect(Collectors.toList());
-        employeeService.save(legalEmployees);
-
+        employees.stream()
+                .filter(employee -> checkSuccessStatus(employees.indexOf(employee), response))
+                .peek(employee -> employee.setId(response.get(employees.indexOf(employee)).getId()))
+                .forEach(taskCreator::createTask);
         return response;
+    }
+
+    private boolean checkSuccessStatus(Integer index, List<EmployeeDto> allEmployees) {
+        return allEmployees.get(index).getStatus() == SUCCESS;
     }
 
     @Override

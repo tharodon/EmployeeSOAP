@@ -8,7 +8,7 @@ import java.util.List;
 public interface EmployeeDao {
     Employee findEmployeeById(String id) throws EmployeeNotFoundException;
 
-    void save(List<Employee> employees);
+    void save(Employee employee);
 
     Employee update(Employee employee);
 

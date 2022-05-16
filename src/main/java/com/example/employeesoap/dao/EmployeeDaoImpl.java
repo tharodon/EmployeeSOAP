@@ -25,8 +25,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Transactional
     @Override
-    public void save(List<Employee> employees) {
-        employeeRepository.saveAll(employees);
+    public void save(Employee employee) {
+        employeeRepository.save(employee);
     }
 
     @Transactional

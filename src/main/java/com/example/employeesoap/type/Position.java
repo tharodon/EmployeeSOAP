@@ -1,6 +1,4 @@
 package com.example.employeesoap.type;
-//todo название пакета во множественном числе. + назови лучше type
-// done
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -20,10 +18,6 @@ public enum Position {
     private final Long salaryMin;
     private final Long salaryMax;
 
-    //todo мне попробуй избавиться от Exception чтоб выше где использовалось не было try-catch - такие конструкции нагружают код.
-    // как вариант добавь еще один тип например INDEFINITE или еще как-нибудь и возвращай его и сделай проверку на него.
-    // Тип если он так определился то отправь ошибку пользователю, что он прислал не известную позицию. И так получиться, что ты избавишься от лишнего Exception
-    // done
     public static Position getDefine(String define){
         if (JUNIOR.getPosition().equals(define)) {
             return JUNIOR;
