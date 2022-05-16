@@ -24,21 +24,21 @@ public class EmployeeController {
 
     @PostMapping("/employee-register")
     public ResponseEntity<?> addEmployee(@RequestBody List<Employee> employees) {
-        log.info("request: {}", employees);
+        log.info("EmployeeController: request: {}", employees);
         List<EmployeeDto> response = employeeService.addEmployees(employees);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PutMapping("/employee")
     public ResponseEntity<?> updateEmployee(@RequestBody Employee employee) {
-        log.info("request: {}", employee);
+        log.info("EmployeeController: request: {}", employee);
         EmployeeDto response = employeeService.updateEmployee(employee);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/employee/{id}")
     public ResponseEntity<?> getEmployee(@PathVariable String id) {
-        log.info("request: get by id: {}", id);
+        log.info("EmployeeController: request: get by id: {}", id);
         return new ResponseEntity<>(employeeService.getEmployeeById(id), HttpStatus.OK);
     }
 
@@ -46,7 +46,7 @@ public class EmployeeController {
     @DeleteMapping("/employee/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteEmployee(@PathVariable String id) {
-        log.info("request: delete by id: {}", id);
+        log.info("EmployeeController: request: delete by id: {}", id);
         employeeService.deleteEmployee(id);
     }
 }
