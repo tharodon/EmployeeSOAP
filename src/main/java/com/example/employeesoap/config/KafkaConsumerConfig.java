@@ -4,7 +4,7 @@ import com.example.employeesoap.entity.Employee;
 
 import static org.apache.kafka.clients.consumer.ConsumerConfig.*;
 
-import com.example.employeesoap.serializer.EmployeeDeserializer;
+import com.example.employeesoap.support.EmployeeDeserializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

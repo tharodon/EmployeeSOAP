@@ -66,7 +66,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private EmployeeDto generateId(EmployeeDto employeeDto) {
         if (employeeDto.getStatus() == SUCCESS) {
-            UidGenerator uidGenerator = new UidGeneratorRandom();
+            UidGeneratorRandom uidGenerator = new UidGeneratorRandom();
             employeeDto.setUid(uidGenerator.generateUID());
         }
         return employeeDto;
