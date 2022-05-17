@@ -5,12 +5,8 @@ import org.springframework.util.DigestUtils;
 
 import java.nio.charset.StandardCharsets;
 
-//todo название см туду в интерфейсе
-// done
-public class UidGeneratorRandom implements UidGenerator {
+public class UidGeneratorRandom implements UidGenerator { //todo ммм, сути тут интерфейс не нужен. Удали интерфейс
 
-    //todo вынести в скобках переменную
-    // done
     @Override
     public String generateUID() {
         byte[] bytes = String.valueOf((Math.random() * Long.MAX_VALUE)).getBytes(StandardCharsets.UTF_8);

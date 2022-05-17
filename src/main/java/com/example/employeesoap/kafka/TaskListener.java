@@ -11,8 +11,6 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
-//todo почему эта аннотация. Судя по содержанию это скорее Service
-// done
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -20,13 +18,9 @@ public class TaskListener {
 
     private final EmployeeDao employeeDao;
 
-    //todo где логи ?
-    // done
     @KafkaListener(topics = "${topic.save}")
     public void executeTask(ConsumerRecord<String, Employee> task) {
         log.debug("TaskListener. Request: key - {}, value - {}", task.key(), task.value());
         employeeDao.save(task.value());
-        //todo ммм, по больше бы инфы + не оч нравиться, что это чистый runtime, а не свое исключение
-        // done добавлен десериализатор для сущности
     }
 }

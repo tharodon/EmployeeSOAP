@@ -12,15 +12,9 @@ import java.util.HashMap;
 import static com.example.employeesoap.support.ConstantsSupport.*;
 import static com.example.employeesoap.type.Position.*;
 
-//todo создать интерфейс и обращаться через него
-// done
 @Service
 @RequiredArgsConstructor
 public class ValidatorFieldsServiceImpl implements ValidatorFieldsService {
-
-    //todo константы повторяются(увидел повторения в EmployeeErrorDtoBuilder), можно вынести в отдельный утилитный класс с константами.
-    // пакет support название <какое то название>ConstantSupport
-    // done
 
     @Override
     public EmployeeDto validCheck(Employee employee) {

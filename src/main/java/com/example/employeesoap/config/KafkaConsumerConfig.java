@@ -18,8 +18,6 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
-//todo думаю эта аннотация должна быть в другом месте
-// done
 @EnableKafka
 @Configuration
 public class KafkaConsumerConfig {
@@ -29,8 +27,6 @@ public class KafkaConsumerConfig {
     @Value("${spring.kafka.consumer.group-id}")
     private String kafkaGroupId;
 
-    //todo можно сделать импорт констант и убрать ConsumerConfig
-    // done
     @Bean
     public Map<String, Object> consumerConfigs() {
         Map<String, Object> props = new HashMap<>();

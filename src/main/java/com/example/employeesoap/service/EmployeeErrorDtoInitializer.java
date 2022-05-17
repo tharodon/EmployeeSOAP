@@ -9,10 +9,9 @@ import lombok.Getter;
 import java.util.List;
 import java.util.Map;
 
-//todo ожидаю билдер по содержанию это не похоже на билдер
-// done
 @Getter
 public class EmployeeErrorDtoInitializer {
+    //todo у тебя есть класс c константами используй константы, что в нем(только общие)
     private static final String MESSAGE = "cannot be empty";
     public static final String NAME = "name";
     public static final String SURNAME = "surname";

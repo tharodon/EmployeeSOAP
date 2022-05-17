@@ -21,8 +21,6 @@ public class TaskCreatorImpl implements TaskCreator {
     private String topicSaveName;
     private final KafkaTemplate<String, Employee> kafkaTemplate;
 
-    //todo где логи ?
-    // done
     @Override
     public void createTask(@NonNull Employee employee) {
         log.debug("request task: {}", employee);
