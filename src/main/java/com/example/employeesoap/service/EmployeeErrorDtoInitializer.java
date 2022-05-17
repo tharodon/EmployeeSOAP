@@ -12,8 +12,6 @@ import java.util.Map;
 
 @Getter
 public class EmployeeErrorDtoInitializer {
-    //todo у тебя есть класс c константами используй константы, что в нем(только общие)
-    // done
     private static final String MESSAGE = "cannot be empty";
     private final EmployeeDto employeeErrorDto;
 
