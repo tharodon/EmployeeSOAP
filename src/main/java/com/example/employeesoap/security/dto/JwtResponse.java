@@ -1,4 +1,4 @@
-package com.example.employeesoap.security.pojo;
+package com.example.employeesoap.security.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

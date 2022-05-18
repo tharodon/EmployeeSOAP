@@ -1,6 +1,6 @@
 package com.example.employeesoap.security.entity;
 
-import com.example.employeesoap.security.support.ERole;
+import com.example.employeesoap.security.type.ERole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

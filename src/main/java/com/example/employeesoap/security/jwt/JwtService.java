@@ -2,20 +2,22 @@ package com.example.employeesoap.security.jwt;
 
 import com.example.employeesoap.security.service.UserDetailsImpl;
 import io.jsonwebtoken.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+@Slf4j
 @Service
-public class JwtUtils {
+public class JwtService {
     @Value("${app.jwt.secret}")
     private String jwtSecret;
     @Value("${app.jwt.expiration}")
     private Integer expiration;
 
-    public String generateJwtToken(Authentication authentication){
+    public String generateJwtToken(Authentication authentication) {
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
         return Jwts.builder().
                 setSubject(userPrincipal.getUsername())
@@ -25,17 +27,18 @@ public class JwtUtils {
                 .compact();
     }
 
-    public boolean validateJwtToken(String jwt){
+    public boolean validateJwtToken(String jwt) {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(jwt);
+            log.debug("Validation success: {}", jwt);
             return true;
         } catch (Exception e) {
-            System.out.println(e.getMessage() + "DEBUG");
+            log.debug("Invalid token: {}", jwt);
         }
         return false;
     }
 
-    public String getUsernameFromJwtToken(String jwt){
+    public String getUsernameFromJwtToken(String jwt) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(jwt).getBody().getSubject();
     }
 }

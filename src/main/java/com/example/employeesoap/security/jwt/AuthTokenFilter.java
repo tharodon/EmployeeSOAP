@@ -2,6 +2,7 @@ package com.example.employeesoap.security.jwt;
 
 import com.example.employeesoap.security.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,11 +17,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AuthTokenFilter extends OncePerRequestFilter {
+    private static final String AUTHORIZATION_HEADER = "Authorization";
+    private static final String AUTHORIZATION_TYPE = "Bearer ";
+    private static final int START_INDEX_OF_TYPE = 7;
     private final UserDetailsServiceImpl userDetailsService;
-    private final JwtUtils jwtUtils;
+    private final JwtService jwtUtils;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -28,8 +33,9 @@ public class AuthTokenFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
         try {
             String jwt = parseJwt(request);
-            if (jwt != null && jwtUtils.validateJwtToken(jwt)){
+            if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
                 String username = jwtUtils.getUsernameFromJwtToken(jwt);
+
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken authenticationToken =
                         new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
@@ -37,16 +43,16 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
-        }catch (Exception e){
-            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            log.debug("Authorization failed: {}", e.getMessage());
         }
         filterChain.doFilter(request, response);
     }
 
-    private String parseJwt(HttpServletRequest request){
-        String headerAuth = request.getHeader("Authorization");
-        if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")){
-            return headerAuth.substring(7);
+    private String parseJwt(HttpServletRequest request) {
+        String headerAuth = request.getHeader(AUTHORIZATION_HEADER);
+        if (StringUtils.hasText(headerAuth) && headerAuth.startsWith(AUTHORIZATION_TYPE)) {
+            return headerAuth.substring(START_INDEX_OF_TYPE);
         }
         return null;
     }

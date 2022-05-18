@@ -15,16 +15,23 @@ import java.util.Map;
 
 @Component
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {
+
+    private static final String KEY_STATUS = "status";
+    private static final String UNAUTHORIZED_MESSAGE = "Unauthorized";
+    private static final String KEY_ERROR = "error";
+    private static final String KEY_MESSAGE = "message";
+    private static final String KEY_PATH = "path";
+
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
-                         AuthenticationException authException) throws IOException, ServletException {
+                         AuthenticationException authException) throws IOException {
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        final Map<String, Object> body = new HashMap<>();
-        body.put("status", HttpServletResponse.SC_UNAUTHORIZED);
-        body.put("error", "Unauthorized");
-        body.put("message", authException.getMessage());
-        body.put("path", request.getServletPath());
+        Map<String, Object> body = new HashMap<>();
+        body.put(KEY_STATUS, HttpServletResponse.SC_UNAUTHORIZED);
+        body.put(KEY_ERROR, UNAUTHORIZED_MESSAGE);
+        body.put(KEY_MESSAGE, authException.getMessage());
+        body.put(KEY_PATH, request.getServletPath());
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.writeValue(response.getOutputStream(), body);
     }

@@ -1,7 +1,7 @@
 package com.example.employeesoap.security.repository;
 
 import com.example.employeesoap.security.entity.Role;
-import com.example.employeesoap.security.support.ERole;
+import com.example.employeesoap.security.type.ERole;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
