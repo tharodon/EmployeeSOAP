@@ -1,4 +1,5 @@
 package com.example.employeesoap.security.dao;
+//todo не понимаю зачем еще один пакет dao
 
 import com.example.employeesoap.security.api.UserDao;
 import com.example.employeesoap.security.entity.User;

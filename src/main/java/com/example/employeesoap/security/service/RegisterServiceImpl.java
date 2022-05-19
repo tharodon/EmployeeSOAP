@@ -21,7 +21,7 @@ public class RegisterServiceImpl implements RegisterService {
         SignupDto signupDto = userValidator.validate(request);
         if (signupDto.getStatus() == AuthStatus.OK) {
             User user = userMapper.signupDtoToUser(signupDto,
-                    roleMapper.stringToRole(signupDto.getRoles()));
+                    roleMapper.stringToRole(signupDto.getRoles())); //todo лучше вывести в переменную, так как там внутри маппится и не сразу это можно увидеть
             userDao.save(user);
         }
         return signupDto;

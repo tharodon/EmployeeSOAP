@@ -1,4 +1,5 @@
 package com.example.employeesoap.security.service;
+//todo не понимаю зачем еще один пакет service
 
 import com.example.employeesoap.security.api.AuthenticationService;
 import com.example.employeesoap.security.jwt.JwtService;
@@ -33,7 +34,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         List<String> roles = new ArrayList<>();
         if (userDetails.getAuthorities() != null) {
             roles = userDetails.getAuthorities().stream()
-                    .map(GrantedAuthority::getAuthority).collect(Collectors.toList());
+                    .map(GrantedAuthority::getAuthority).collect(Collectors.toList()); //todo каждый вызов стрима должен быть с новой строки .collect
         }
         return new JwtResponse(jwt,
                 userDetails.getId(),
@@ -43,11 +44,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     private Authentication getAuthentication(LoginRequest loginRequest) {
-        return authenticationManager
-                .authenticate(
-                        new UsernamePasswordAuthenticationToken(
-                                loginRequest.getLogin(),
-                                loginRequest.getPassword())
-                );
+        return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                loginRequest.getLogin(),
+                loginRequest.getPassword()));
     }
 }

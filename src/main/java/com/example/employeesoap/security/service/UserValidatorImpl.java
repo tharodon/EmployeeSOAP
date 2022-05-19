@@ -31,10 +31,11 @@ public class UserValidatorImpl implements UserValidator {
     public SignupDto validate(SignupDto request) {
         SignupDto signupDto = new SignupDto();
         signupDto.setStatus(OK);
+        //todo можно ли вынести все конструкции if в отдельные приватные методы ?
         if (userRepository.existsByUsername(request.getUsername())) {
             signupDto.setUsername(resourceBundle.getString(AUTH_REGISTER_USERNAME));
             signupDto.setStatus(ERROR);
-        }else {
+        }else { //todo делать почаще reformat code, я про общие отступы
             signupDto.setUsername(request.getUsername());
         }
         if (userRepository.existsByEmail(request.getEmail())) {

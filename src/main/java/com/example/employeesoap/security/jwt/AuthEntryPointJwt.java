@@ -23,7 +23,7 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
     private static final String KEY_PATH = "path";
 
     @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response,
+    public void commence(HttpServletRequest request, HttpServletResponse response, //todo переносы параметров
                          AuthenticationException authException) throws IOException {
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

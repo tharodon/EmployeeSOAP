@@ -19,8 +19,8 @@ public class RoleMapperImpl implements RoleMapper {
     public Set<Role> stringToRole(Set<String> roles) {
         return roles.stream()
                 .map(role -> roleRepository.findRoleByName(
-                                ERole.getERole(role))
-                        .orElseThrow(RuntimeException::new))
+                                ERole.getERole(role))//todo зачем перенос ?
+                        .orElseThrow(RuntimeException::new))//todo можно сделать без выкидывания исключения ?
                 .collect(Collectors.toSet());
     }
 }

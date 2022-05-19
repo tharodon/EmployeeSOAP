@@ -12,7 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-public class SignupDto {
+public class SignupDto { //todo не очень название глаголDto
     private String username;
     private String email;
     private Set<String> roles;
