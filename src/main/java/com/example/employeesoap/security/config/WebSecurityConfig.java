@@ -1,5 +1,5 @@
 package com.example.employeesoap.security.config;
-
+//todo по сути этот конфиг можно перенести в общий пакет config и получиться, что пакет security можно удалить а jwt поднять на уровень выше
 import com.example.employeesoap.security.jwt.AuthEntryPointJwt;
 import com.example.employeesoap.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;

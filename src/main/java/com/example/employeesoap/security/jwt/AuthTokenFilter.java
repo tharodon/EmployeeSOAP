@@ -44,8 +44,6 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
-            //todo общий Exception.
-            // done
         } catch (UsernameNotFoundException e) {
             log.debug("Authorization failed: {}", e.getMessage());
         }

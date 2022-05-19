@@ -22,8 +22,6 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
     private static final String KEY_MESSAGE = "message";
     private static final String KEY_PATH = "path";
 
-    //todo переносы параметров
-    // done
     @Override
     public void commence(HttpServletRequest request,
                          HttpServletResponse response,
