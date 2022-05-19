@@ -1,6 +1,4 @@
 package com.example.employeesoap.repository;
-//todo не понимаю зачем еще один пакет repository
-// done
 
 import com.example.employeesoap.entity.Role;
 import com.example.employeesoap.type.RoleName;

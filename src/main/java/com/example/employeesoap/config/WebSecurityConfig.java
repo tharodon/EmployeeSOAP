@@ -1,6 +1,7 @@
-package com.example.employeesoap.security.config;
+package com.example.employeesoap.config;
 //todo по сути этот конфиг можно перенести в общий пакет config и получиться, что пакет security можно удалить а jwt поднять на уровень выше
-import com.example.employeesoap.security.jwt.AuthEntryPointJwt;
+// done
+import com.example.employeesoap.jwt.AuthEntryPointJwt;
 import com.example.employeesoap.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

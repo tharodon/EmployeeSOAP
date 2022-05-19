@@ -12,8 +12,6 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-//todo не очень название глаголDto
-// done
 public class UserDto {
     private String username;
     private String email;

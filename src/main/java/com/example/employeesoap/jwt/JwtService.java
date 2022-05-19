@@ -1,4 +1,4 @@
-package com.example.employeesoap.security.jwt;
+package com.example.employeesoap.jwt;
 
 import com.example.employeesoap.service.UserDetailsImpl;
 import io.jsonwebtoken.*;

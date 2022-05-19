@@ -31,10 +31,6 @@ public class UserValidatorImpl implements UserValidator {
     public UserDto validate(UserDto request) {
         UserDto userDto = new UserDto();
         userDto.setStatus(OK);
-        //todo можно ли вынести все конструкции if в отдельные приватные методы ?
-        // done
-        //todo делать почаще reformat code, я про общие отступы
-        // done
         usernameValidate(request, userDto);
 
         emailValidate(request, userDto);

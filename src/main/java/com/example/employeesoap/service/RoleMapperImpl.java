@@ -17,8 +17,6 @@ public class RoleMapperImpl implements RoleMapper {
 
     @Override
     public Set<Role> toRole(Set<String> roles) {
-        //todo зачем перенос  + можно сделать без выкидывания исключения
-        // done
         return roles.stream()
                 .map(role -> roleRepository.findRoleByName(RoleName.getRoleName(role)).get())
                 .collect(Collectors.toSet());

@@ -3,8 +3,6 @@ package com.example.employeesoap.type;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-//todo название
-// done
 @AllArgsConstructor
 @Getter
 public enum RoleName {
@@ -12,8 +10,6 @@ public enum RoleName {
 
     private final String title;
 
-    //todo добавь в поле title enum и используй
-    // done
     public static RoleName getRoleName(String role) {
         if (role.equals(ROLE_USER.title)) {
             return ROLE_USER;

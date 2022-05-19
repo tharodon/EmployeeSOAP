@@ -20,8 +20,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException(MessageFormat.format("{0} not found", username)));
-        //todo можно вынести в приватный метод создание обьекта
-        // done
         return getUserDetails(user);
     }
 

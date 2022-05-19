@@ -1,6 +1,4 @@
 package com.example.employeesoap.controller;
-//todo не понимаю зачем еще один пакет controller
-// done
 
 import com.example.employeesoap.api.AuthenticationService;
 import com.example.employeesoap.api.RegisterService;

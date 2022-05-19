@@ -1,9 +1,7 @@
 package com.example.employeesoap.service;
-//todo не понимаю зачем еще один пакет service
-// done
 
 import com.example.employeesoap.api.AuthenticationService;
-import com.example.employeesoap.security.jwt.JwtService;
+import com.example.employeesoap.jwt.JwtService;
 import com.example.employeesoap.entity.JwtResponse;
 import com.example.employeesoap.entity.LoginRequest;
 import lombok.RequiredArgsConstructor;
@@ -33,8 +31,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = new ArrayList<>();
-        //todo каждый вызов стрима должен быть с новой строки .collect
-        // done
         if (userDetails.getAuthorities() != null) {
             roles = userDetails.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)

@@ -18,8 +18,6 @@ import java.util.stream.Collectors;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-//todo наименование константы  + не используется
-// done
 public class UserDetailsImpl implements UserDetails {
 
     private Long id;

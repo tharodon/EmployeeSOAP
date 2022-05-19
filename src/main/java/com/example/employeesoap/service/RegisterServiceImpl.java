@@ -23,8 +23,6 @@ public class RegisterServiceImpl implements RegisterService {
     public UserDto register(UserDto request) {
         UserDto userDto = userValidator.validate(request);
         if (userDto.getStatus() == AuthStatus.OK) {
-            //todo лучше вывести в переменную, так как там внутри маппится и не сразу это можно увидеть
-            // done
             Set<Role> roles = roleMapper.toRole(userDto.getRoles());
             User user = userMapper.UserDtoToUser(userDto,
                     roles);
