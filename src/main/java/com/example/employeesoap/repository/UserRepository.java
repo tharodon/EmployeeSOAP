@@ -1,7 +1,8 @@
-package com.example.employeesoap.security.repository;
+package com.example.employeesoap.repository;
 //todo не понимаю зачем еще один пакет repository
+// done
 
-import com.example.employeesoap.security.entity.User;
+import com.example.employeesoap.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

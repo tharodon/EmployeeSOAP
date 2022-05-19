@@ -1,4 +1,4 @@
-package com.example.employeesoap.security.entity;
+package com.example.employeesoap.entity;
 
 import lombok.*;
 

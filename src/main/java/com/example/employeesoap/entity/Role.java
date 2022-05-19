@@ -1,6 +1,6 @@
-package com.example.employeesoap.security.entity;
+package com.example.employeesoap.entity;
 
-import com.example.employeesoap.security.type.ERole;
+import com.example.employeesoap.type.RoleName;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +22,7 @@ public class Role {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private ERole name;
+    private RoleName name;
 
 
 }

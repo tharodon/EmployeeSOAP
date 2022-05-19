@@ -1,6 +1,6 @@
 package com.example.employeesoap.security.jwt;
 
-import com.example.employeesoap.security.service.UserDetailsImpl;
+import com.example.employeesoap.service.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

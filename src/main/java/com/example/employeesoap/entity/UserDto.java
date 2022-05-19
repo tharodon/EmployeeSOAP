@@ -1,6 +1,6 @@
-package com.example.employeesoap.security.dto;
+package com.example.employeesoap.entity;
 
-import com.example.employeesoap.security.type.AuthStatus;
+import com.example.employeesoap.type.AuthStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +12,9 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-public class SignupDto { //todo не очень название глаголDto
+//todo не очень название глаголDto
+// done
+public class UserDto {
     private String username;
     private String email;
     private Set<String> roles;

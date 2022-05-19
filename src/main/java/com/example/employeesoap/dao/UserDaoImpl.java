@@ -1,9 +1,10 @@
-package com.example.employeesoap.security.dao;
+package com.example.employeesoap.dao;
 //todo не понимаю зачем еще один пакет dao
+// done
 
-import com.example.employeesoap.security.api.UserDao;
-import com.example.employeesoap.security.entity.User;
-import com.example.employeesoap.security.repository.UserRepository;
+import com.example.employeesoap.api.UserDao;
+import com.example.employeesoap.entity.User;
+import com.example.employeesoap.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

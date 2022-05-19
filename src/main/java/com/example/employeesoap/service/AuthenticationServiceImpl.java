@@ -1,10 +1,11 @@
-package com.example.employeesoap.security.service;
+package com.example.employeesoap.service;
 //todo не понимаю зачем еще один пакет service
+// done
 
-import com.example.employeesoap.security.api.AuthenticationService;
+import com.example.employeesoap.api.AuthenticationService;
 import com.example.employeesoap.security.jwt.JwtService;
-import com.example.employeesoap.security.dto.JwtResponse;
-import com.example.employeesoap.security.dto.LoginRequest;
+import com.example.employeesoap.entity.JwtResponse;
+import com.example.employeesoap.entity.LoginRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -32,9 +33,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = new ArrayList<>();
+        //todo каждый вызов стрима должен быть с новой строки .collect
+        // done
         if (userDetails.getAuthorities() != null) {
             roles = userDetails.getAuthorities().stream()
-                    .map(GrantedAuthority::getAuthority).collect(Collectors.toList()); //todo каждый вызов стрима должен быть с новой строки .collect
+                    .map(GrantedAuthority::getAuthority)
+                    .collect(Collectors.toList());
         }
         return new JwtResponse(jwt,
                 userDetails.getId(),

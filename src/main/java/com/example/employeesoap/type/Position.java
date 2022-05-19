@@ -1,4 +1,5 @@
 package com.example.employeesoap.type;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -10,7 +11,7 @@ public enum Position {
     SENIOR("Senior", 28L, 15L, 210_000L, 450_000L),
     MANAGER("Manager", 21L, 15L, 70_000L, 150_000L),
 
-    INDEFINITE("Illegal position",null,null,null,null);
+    INDEFINITE("Illegal position", null, null, null, null);
 
     private final String position;
     private final Long minAge;
@@ -18,7 +19,7 @@ public enum Position {
     private final Long salaryMin;
     private final Long salaryMax;
 
-    public static Position getDefine(String define){
+    public static Position getDefine(String define) {
         if (JUNIOR.getPosition().equals(define)) {
             return JUNIOR;
         } else if (MIDDLE.getPosition().equals(define)) {

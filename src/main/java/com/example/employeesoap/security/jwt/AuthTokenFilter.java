@@ -1,11 +1,12 @@
 package com.example.employeesoap.security.jwt;
 
-import com.example.employeesoap.security.service.UserDetailsServiceImpl;
+import com.example.employeesoap.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -43,7 +44,9 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
-        } catch (Exception e) { //todo общий Exception.
+            //todo общий Exception.
+            // done
+        } catch (UsernameNotFoundException e) {
             log.debug("Authorization failed: {}", e.getMessage());
         }
         filterChain.doFilter(request, response);

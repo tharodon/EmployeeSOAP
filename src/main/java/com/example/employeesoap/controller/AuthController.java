@@ -1,9 +1,11 @@
-package com.example.employeesoap.security.controller;
+package com.example.employeesoap.controller;
 //todo не понимаю зачем еще один пакет controller
-import com.example.employeesoap.security.api.AuthenticationService;
-import com.example.employeesoap.security.api.RegisterService;
-import com.example.employeesoap.security.dto.LoginRequest;
-import com.example.employeesoap.security.dto.SignupDto;
+// done
+
+import com.example.employeesoap.api.AuthenticationService;
+import com.example.employeesoap.api.RegisterService;
+import com.example.employeesoap.entity.LoginRequest;
+import com.example.employeesoap.entity.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +25,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody SignupDto request) {
+    public ResponseEntity<?> registerUser(@RequestBody UserDto request) {
         return ResponseEntity.ok(registerService.register(request));
     }
 }

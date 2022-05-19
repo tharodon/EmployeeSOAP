@@ -1,6 +1,6 @@
-package com.example.employeesoap.security.service;
+package com.example.employeesoap.service;
 
-import com.example.employeesoap.security.entity.User;
+import com.example.employeesoap.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,9 +18,10 @@ import java.util.stream.Collectors;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+//todo наименование константы  + не используется
+// done
 public class UserDetailsImpl implements UserDetails {
 
-    private static final long serialVersionUID = 1L; //todo наименование константы  + не используется
     private Long id;
     private String username;
     private String email;

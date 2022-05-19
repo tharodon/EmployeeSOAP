@@ -4,7 +4,9 @@ import com.example.employeesoap.api.EmployeeMapper;
 import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.entity.Employee;
 import com.example.employeesoap.entity.Task;
+
 import static com.example.employeesoap.type.Status.*;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -43,7 +45,7 @@ public class EmployeeMapperImpl implements EmployeeMapper {
                 .build();
     }
 
-    private Long[] getTasksUIDs(List<Task> tasks){
+    private Long[] getTasksUIDs(List<Task> tasks) {
         return tasks.stream().map(Task::getUid).toArray(Long[]::new);
     }
 }

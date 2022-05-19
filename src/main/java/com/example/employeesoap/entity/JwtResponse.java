@@ -1,4 +1,4 @@
-package com.example.employeesoap.security.dto;
+package com.example.employeesoap.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

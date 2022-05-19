@@ -1,6 +1,8 @@
-package com.example.employeesoap.security.api;
+package com.example.employeesoap.api;
 //todo перенеси в другой пакет api
-import com.example.employeesoap.security.entity.User;
+// done
+
+import com.example.employeesoap.entity.User;
 
 public interface UserDao {
     void save(User user);

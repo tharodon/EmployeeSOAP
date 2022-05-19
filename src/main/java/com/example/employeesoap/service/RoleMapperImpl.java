@@ -1,0 +1,26 @@
+package com.example.employeesoap.service;
+
+import com.example.employeesoap.api.RoleMapper;
+import com.example.employeesoap.entity.Role;
+import com.example.employeesoap.repository.RoleRepository;
+import com.example.employeesoap.type.RoleName;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.Set;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+public class RoleMapperImpl implements RoleMapper {
+    private final RoleRepository roleRepository;
+
+    @Override
+    public Set<Role> toRole(Set<String> roles) {
+        //todo зачем перенос  + можно сделать без выкидывания исключения
+        // done
+        return roles.stream()
+                .map(role -> roleRepository.findRoleByName(RoleName.getRoleName(role)).get())
+                .collect(Collectors.toSet());
+    }
+}
