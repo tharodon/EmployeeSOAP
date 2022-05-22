@@ -5,9 +5,11 @@
             <onMatch>ACCEPT</onMatch>
             <onMismatch>DENY</onMismatch>
         </filter>
-        <encoder>
-            <pattern>%d{dd.MM.yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{20} - %msg%n</pattern>
-            <charset>UTF-8</charset>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="com.example.employeesoap.config.MaskingPatternLayout">
+                <patternsProperty>(salary=|password=|grade=|email=|token=)</patternsProperty>
+                <pattern>%d [%thread] %-5level %logger{35} - %msg%n</pattern>
+            </layout>
         </encoder>
     </appender>
 

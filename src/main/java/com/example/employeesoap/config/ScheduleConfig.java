@@ -13,6 +13,5 @@ public class ScheduleConfig {
 
     @Scheduled(cron = "${cron.period}")
     public void cron() {
-        employeeRepository.deleteOldestEntry();
     }
 }

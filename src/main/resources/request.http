@@ -1,4 +1,9 @@
-POST http://localhost:8081/server/employee/
+GET http://localhost:8081/server/employees/employee/91b346eb267ec8888a2db6b0941f7ed5c/
+Accept: application/json
+
+###
+
+POST http://localhost:8081/server/employees/employee-register
 Content-Type: application/json
 
 [
@@ -40,7 +45,12 @@ Content-Type: application/json
     "grade": 123,
     "age": 30,
     "salary": 350000,
-    "description": "text..."
+    "description": "text...",
+    "tasks": [
+      {
+        "description": "tasktasktasktask"
+      }
+    ]
   },
   {
     "name": "3",
@@ -53,3 +63,5 @@ Content-Type: application/json
 ]
 
 ###
+DELETE http://localhost:8081/server/employees/employee/5d85af8e5c82acb1acd944ff1a76aa06/
+Accept: application/json

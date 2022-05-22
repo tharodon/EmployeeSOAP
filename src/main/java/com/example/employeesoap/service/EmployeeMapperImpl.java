@@ -4,7 +4,9 @@ import com.example.employeesoap.api.EmployeeMapper;
 import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.entity.Employee;
 import com.example.employeesoap.entity.Task;
+
 import static com.example.employeesoap.type.Status.*;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -16,7 +18,7 @@ public class EmployeeMapperImpl implements EmployeeMapper {
     @Override
     public EmployeeDto employeeToEmployeeDto(Employee employee) {
         return EmployeeDto.builder()
-                .id(employee.getId() == null ? null : employee.getId().toString())
+                .uid(employee.getUid())
                 .name(employee.getName())
                 .surname(employee.getSurname())
                 .position(employee.getPosition())
@@ -29,7 +31,21 @@ public class EmployeeMapperImpl implements EmployeeMapper {
                 .build();
     }
 
-    private Long[] getTasksUIDs(List<Task> tasks){
+    @Override
+    public Employee employeeDtoToEmployee(EmployeeDto employeeDto) {
+        return Employee.builder()
+                .uid(employeeDto.getUid())
+                .name(employeeDto.getName())
+                .surname(employeeDto.getSurname())
+                .position(employeeDto.getPosition())
+                .salary(Long.valueOf(employeeDto.getSalary()))
+                .grade(employeeDto.getGrade())
+                .age(Long.valueOf(employeeDto.getAge()))
+                .description(employeeDto.getDescription())
+                .build();
+    }
+
+    private Long[] getTasksUIDs(List<Task> tasks) {
         return tasks.stream().map(Task::getUid).toArray(Long[]::new);
     }
 }

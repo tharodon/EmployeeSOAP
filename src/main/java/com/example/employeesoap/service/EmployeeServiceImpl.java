@@ -1,8 +1,6 @@
 package com.example.employeesoap.service;
 
-import com.example.employeesoap.api.EmployeeService;
-import com.example.employeesoap.api.EmployeeDao;
-import com.example.employeesoap.api.EmployeeMapper;
+import com.example.employeesoap.api.*;
 import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.entity.Employee;
 
@@ -16,8 +14,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//todo добавить интерфейс и использовать через интерфейс
-// done
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -27,21 +23,23 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final ValidatorFieldsService validatorFieldsService;
     private final EmployeeMapper employeeMapper;
 
-    //todo не нравиться завязка на try-catch. переписать лучше
-    //todo попробуй сделать через стримом. Так можно сделать меньше кода + если это отдельная логика валидаци его можно ввынести в приватный метод
-    // done
+    private final TaskCreator taskCreator;
 
     @Override
     public List<EmployeeDto> addEmployees(List<Employee> employees) {
         List<EmployeeDto> response = employees.stream()
                 .map(this::validation)
+                .map(this::generateId)
                 .collect(Collectors.toList());
-        employeeService.save(
-                employees.stream()
-                        .filter(employee -> checkEmployeeStatus(employees.indexOf(employee), response))
-                        .collect(Collectors.toList()));
-
+        employees.stream()
+                .filter(employee -> checkSuccessStatus(employees.indexOf(employee), response))
+                .peek(employee -> employee.setUid(response.get(employees.indexOf(employee)).getUid()))
+                .forEach(taskCreator::createTask);
         return response;
+    }
+
+    private boolean checkSuccessStatus(Integer index, List<EmployeeDto> allEmployees) {
+        return allEmployees.get(index).getStatus() == SUCCESS;
     }
 
     @Override
@@ -55,24 +53,28 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void deleteEmployee(Long id) {
+    public void deleteEmployee(String id) {
         employeeService.delete(id);
     }
 
     @Override
     @SneakyThrows
-    public EmployeeDto getEmployeeById(Long id) {
+    public EmployeeDto getEmployeeById(String id) {
         return employeeMapper.employeeToEmployeeDto(employeeService.findEmployeeById(id));
 
+    }
+
+    private EmployeeDto generateId(EmployeeDto employeeDto) {
+        if (employeeDto.getStatus() == SUCCESS) {
+            UidGeneratorRandom uidGenerator = new UidGeneratorRandom();
+            employeeDto.setUid(uidGenerator.generateUID());
+        }
+        return employeeDto;
     }
 
     private EmployeeDto validation(Employee employee) {
         EmployeeDto result = validatorFieldsService.validCheck(employee);
         return result == null ? employeeMapper.employeeToEmployeeDto(employee) : result;
-    }
-
-    private boolean checkEmployeeStatus(Integer index, List<EmployeeDto> invalidEmployees) {
-        return invalidEmployees.get(index).getStatus() == SUCCESS;
     }
 
 }

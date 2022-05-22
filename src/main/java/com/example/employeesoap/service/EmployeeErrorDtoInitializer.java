@@ -2,6 +2,7 @@ package com.example.employeesoap.service;
 
 import com.example.employeesoap.dto.EmployeeDto;
 
+import static com.example.employeesoap.support.ConstantsSupport.*;
 import static com.example.employeesoap.type.Status.*;
 
 import lombok.Getter;
@@ -10,19 +11,11 @@ import java.util.List;
 import java.util.Map;
 
 @Getter
-public class EmployeeErrorDtoBuilder {
+public class EmployeeErrorDtoInitializer {
     private static final String MESSAGE = "cannot be empty";
-    public static final String NAME = "name";
-    public static final String SURNAME = "surname";
-    public static final String POSITION = "position";
-    public static final String GRADE = "grade";
-    public static final String DESCRIPTION = "description";
-    public static final String AGE = "age";
-    public static final String SALARY = "salary";
-    public static final String TASKS_UID = "tasksUID";
     private final EmployeeDto employeeErrorDto;
 
-    public EmployeeErrorDtoBuilder() {
+    public EmployeeErrorDtoInitializer() {
         this.employeeErrorDto = new EmployeeDto();
         employeeErrorDto.setStatus(SUCCESS);
     }

@@ -1,16 +1,14 @@
 package com.example.employeesoap.api;
 
 import com.example.employeesoap.entity.Employee;
-import com.example.employeesoap.exceptions.EmployeeNotFoundException;
-
-import java.util.List;
+import com.example.employeesoap.exception.EmployeeNotFoundException;
 
 public interface EmployeeDao {
-    Employee findEmployeeById(Long id) throws EmployeeNotFoundException;
+    Employee findEmployeeById(String id) throws EmployeeNotFoundException;
 
-    void save(List<Employee> employees);
+    void save(Employee employee);
 
     Employee update(Employee employee);
 
-    void delete(Long id);
+    void delete(String id);
 }

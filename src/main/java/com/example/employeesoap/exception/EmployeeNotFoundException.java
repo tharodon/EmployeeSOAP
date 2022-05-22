@@ -1,4 +1,4 @@
-package com.example.employeesoap.exceptions;
+package com.example.employeesoap.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 public class EmployeeNotFoundException extends Exception {
 
-    public EmployeeNotFoundException(Long id) {
+    public EmployeeNotFoundException(String id) {
         super("Employee with id: " + id + " not found");
     }
 }

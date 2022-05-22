@@ -6,10 +6,11 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+    Optional<Employee> findByUid(String uid);
+
     @Transactional
-    @Modifying(flushAutomatically = true)
-    @Query(value = "delete from Employee e where e.id = (select min(Employee.id) from Employee)", nativeQuery = true)
-    void deleteOldestEntry();
+    void deleteByUid(String uid);
 }
