@@ -1,5 +1,5 @@
 package com.example.employeesoap.config;
-
+//todo нужно использовать другой пакет. Например,  masking
 import ch.qos.logback.classic.PatternLayout;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import lombok.NoArgsConstructor;
@@ -17,7 +17,7 @@ public class MaskingPatternLayout extends PatternLayout {
     private static final Character VALUE = '*';
     private Pattern pattern;
 
-    public void setPatternsProperty(String patternsProperty) {
+    public void setPatternsProperty(String patternsProperty) { //todo не используется
         if (patternsProperty != null && !patternsProperty.isEmpty()) {
             this.pattern = Pattern.compile(patternsProperty, Pattern.MULTILINE);
         }
@@ -28,8 +28,7 @@ public class MaskingPatternLayout extends PatternLayout {
         StringBuilder message = new StringBuilder(super.doLayout(event));
         Matcher matcher = pattern.matcher(message);
         while (matcher.find()) {
-
-            for (int group = 1; group <= matcher.groupCount(); group++) {
+            for (int group = 1; group <= matcher.groupCount(); group++) { //todo можно сделать проще ?
                 if (matcher.group(group) != null) {
                     int valueLength = getValueLength(matcher.end(group), message);
                     for (int i = matcher.end(group); i < valueLength; i++) {
