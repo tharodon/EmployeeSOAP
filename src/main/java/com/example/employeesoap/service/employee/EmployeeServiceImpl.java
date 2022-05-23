@@ -1,4 +1,4 @@
-package com.example.employeesoap.service;
+package com.example.employeesoap.service.employee;
 
 import com.example.employeesoap.api.*;
 import com.example.employeesoap.dto.EmployeeDto;
@@ -6,6 +6,7 @@ import com.example.employeesoap.entity.Employee;
 
 import static com.example.employeesoap.type.Status.*;
 
+import com.example.employeesoap.service.utils.UidGeneratorRandom;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;

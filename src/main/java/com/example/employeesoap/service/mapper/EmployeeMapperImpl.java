@@ -1,4 +1,4 @@
-package com.example.employeesoap.service;
+package com.example.employeesoap.service.mapper;
 
 import com.example.employeesoap.api.EmployeeMapper;
 import com.example.employeesoap.dto.EmployeeDto;

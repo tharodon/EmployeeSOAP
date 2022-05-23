@@ -1,4 +1,4 @@
-package com.example.employeesoap.service;
+package com.example.employeesoap.service.register;
 
 import com.example.employeesoap.api.*;
 import com.example.employeesoap.entity.Role;

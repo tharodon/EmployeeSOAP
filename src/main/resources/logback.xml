@@ -6,7 +6,7 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-            <layout class="com.example.employeesoap.config.MaskingPatternLayout">
+            <layout class="com.example.employeesoap.masking.MaskingPatternLayout">
                 <patternsProperty>(salary=|password=|grade=|email=|token=)</patternsProperty>
                 <pattern>%d [%thread] %-5level %logger{35} - %msg%n</pattern>
             </layout>

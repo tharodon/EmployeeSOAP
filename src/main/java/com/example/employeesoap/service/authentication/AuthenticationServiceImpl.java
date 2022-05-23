@@ -1,9 +1,10 @@
-package com.example.employeesoap.service;
+package com.example.employeesoap.service.authentication;
 
 import com.example.employeesoap.api.AuthenticationService;
 import com.example.employeesoap.jwt.JwtService;
 import com.example.employeesoap.dto.JwtResponse;
 import com.example.employeesoap.dto.LoginRequest;
+import com.example.employeesoap.service.user.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;

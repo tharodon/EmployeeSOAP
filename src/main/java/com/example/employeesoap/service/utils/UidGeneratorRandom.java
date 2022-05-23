@@ -1,4 +1,4 @@
-package com.example.employeesoap.service;
+package com.example.employeesoap.service.utils;
 
 import org.springframework.util.DigestUtils;
 

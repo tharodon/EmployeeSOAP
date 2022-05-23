@@ -1,4 +1,4 @@
-package com.example.employeesoap.service;
+package com.example.employeesoap.service.validation;
 
 import com.example.employeesoap.api.UserValidator;
 import com.example.employeesoap.dto.UserDto;

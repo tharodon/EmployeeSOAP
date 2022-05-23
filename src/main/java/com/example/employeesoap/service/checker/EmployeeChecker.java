@@ -1,4 +1,4 @@
-package com.example.employeesoap.service;
+package com.example.employeesoap.service.checker;
 
 import com.example.employeesoap.entity.Employee;
 import com.example.employeesoap.type.Position;

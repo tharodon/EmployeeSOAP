@@ -1,4 +1,4 @@
-package com.example.employeesoap.service;
+package com.example.employeesoap.service.employee;
 
 import com.example.employeesoap.dto.EmployeeDto;
 
