@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
 import javax.servlet.http.HttpServletResponse;
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -28,7 +27,7 @@ public class PDFGeneratorService {
     private static final String DEFAULT_VALUE = "Undefined";
     private static final int FONT_TITLE_SIZE = 18;
     private static final String TITLE_TEXT = "Employee";
-    private static final String FILENAME = "images.jpg";
+    private static final String FILENAME = "templates/image.jpg";
     private static final String DATE_FORMAT_PATTERN = "HH:mm:ss dd.MM.yyyy";
     private static final String UID = "Uid: ";
     private static final String NAME = "Name: ";
