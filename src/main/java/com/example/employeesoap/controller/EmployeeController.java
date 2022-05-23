@@ -3,6 +3,7 @@ package com.example.employeesoap.controller;
 import com.example.employeesoap.api.EmployeeService;
 import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.entity.Employee;
+import com.example.employeesoap.service.pdf.PDFGeneratorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -11,8 +12,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -23,7 +28,13 @@ import java.util.List;
 public class EmployeeController {
 
     private final EmployeeService employeeService;
+    private final PDFGeneratorService pdfGeneratorService;
 
+    @GetMapping("/employee/{id}/pdf")
+    public void getPdfFile(@PathVariable String id, HttpServletResponse response){
+        log.info("EmployeeController: request: get pdf by id: {}", id);
+        pdfGeneratorService.export(response, employeeService.getEmployeeById(id));
+    }
     @PostMapping("/employee-register")
     public ResponseEntity<?> addEmployee(@RequestBody List<Employee> employees) {
         log.info("EmployeeController: request: {}", employees);

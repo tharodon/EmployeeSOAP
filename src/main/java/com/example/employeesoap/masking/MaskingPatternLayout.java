@@ -28,6 +28,7 @@ public class MaskingPatternLayout extends PatternLayout {
     }
 
     //todo можно сделать проще ?
+    // сделать через стрим
     @Override
     public String doLayout(ILoggingEvent event) {
         StringBuilder message = new StringBuilder(super.doLayout(event));
