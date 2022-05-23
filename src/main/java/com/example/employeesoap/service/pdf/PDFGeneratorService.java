@@ -3,12 +3,15 @@ package com.example.employeesoap.service.pdf;
 import com.example.employeesoap.dto.EmployeeDto;
 import com.lowagie.text.*;
 import com.lowagie.text.Font;
+import com.lowagie.text.Image;
+import com.lowagie.text.List;
 import com.lowagie.text.pdf.PdfWriter;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
 import javax.servlet.http.HttpServletResponse;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -42,6 +45,7 @@ public class PDFGeneratorService {
     private static final String HEADER_VALUE = "attachment; filename=pdf_";
     private static final int WIDTH = 100;
     private static final int HEIGHT = 100;
+    public static final int FONT_DATE_OF_DOWNLOAD_SIZE = 11;
 
     @SneakyThrows
     public void export(HttpServletResponse response, EmployeeDto employeeDto) {
@@ -73,15 +77,16 @@ public class PDFGeneratorService {
         return image;
     }
 
-    private Paragraph getDateOfDownload(){
+    private Paragraph getDateOfDownload() {
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
-        font.setSize(11);
+        font.setSize(FONT_DATE_OF_DOWNLOAD_SIZE);
 
         Paragraph paragraph = new Paragraph(LocalDateTime.now()
                 .format(DateTimeFormatter.ofPattern(DATE_FORMAT_PATTERN)), font);
         paragraph.setAlignment(Paragraph.ALIGN_LEFT);
         return paragraph;
     }
+
     private Paragraph getParagraph() {
         Font fontTitle = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
         fontTitle.setSize(FONT_TITLE_SIZE);
@@ -91,7 +96,7 @@ public class PDFGeneratorService {
         return paragraph;
     }
 
-    private List listGenerate(EmployeeDto employeeDto){
+    private List listGenerate(EmployeeDto employeeDto) {
         List list = new List();
         list.setListSymbol(new Chunk(" "));
         list.add(" ");
@@ -116,7 +121,7 @@ public class PDFGeneratorService {
         return list;
     }
 
-    private String getContent(String content){
+    private String getContent(String content) {
         return content == null || content.isEmpty() ? DEFAULT_VALUE : content;
     }
 }

@@ -7,8 +7,10 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @Setter
@@ -28,22 +30,23 @@ public class MaskingPatternLayout extends PatternLayout {
     }
 
     //todo можно сделать проще ?
-    // сделать через стрим
+    // done
     @Override
     public String doLayout(ILoggingEvent event) {
-        StringBuilder message = new StringBuilder(super.doLayout(event));
-        Matcher matcher = pattern.matcher(message);
-        while (matcher.find()) {
-            for (int group = 1; group <= matcher.groupCount(); group++) {
-                if (matcher.group(group) != null) {
-                    int valueLength = getValueLength(matcher.end(group), message);
-                    for (int i = matcher.end(group); i < valueLength; i++) {
-                        message.setCharAt(i, VALUE);
-                    }
-                }
+        String message = super.doLayout(event);
+        return Arrays.stream(message.split(" "))
+                .map(StringBuilder::new)
+                .peek(this::maskingMatches).collect(Collectors.joining(" "));
+    }
+
+    private void maskingMatches(StringBuilder m) {
+        Matcher matcher = pattern.matcher(m);
+        if (matcher.find()) {
+            int valueLength = getValueLength(matcher.end(), m);
+            for (int i = matcher.end(); i < valueLength; i++) {
+                m.setCharAt(i, VALUE);
             }
         }
-        return message.toString();
     }
 
     private int getValueLength(int pos, StringBuilder message) {
