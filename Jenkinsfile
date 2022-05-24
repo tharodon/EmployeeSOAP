@@ -10,5 +10,13 @@ pipeline {
                 }
             }
         }
+        stage('Run') {
+                    steps {
+                        sh 'docker-compose up --build'
+                        }
+                        }
+                    }
+                }
+                }
 }
 
