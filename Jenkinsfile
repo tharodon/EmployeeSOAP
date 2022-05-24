@@ -1,9 +1,10 @@
 pipeline {
 	agent any
 	stages {
-		stage("stage1-build") {
+		stage('Run') {
+		agent{docker 'openjdk:8'}
 			steps {
-				mvn clean install; java -jar target/*.jar;
+				sh 'java -jar target/EmployeeSOAP-0.0.1-SNAPSHOT.jar'
 			}
 		}
 	}
