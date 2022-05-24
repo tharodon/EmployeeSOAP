@@ -17,7 +17,7 @@ public class EmployeeChecker {
     public Map<String, String> checkSalary(Position position, Long salary) {
         Map<String, String> response = new HashMap<>();
         if (salary != null &&
-                (salary < position.getSalaryMin() || salary > position.getSalaryMax())) {
+                (salary < position.getSalaryMin() || salary > position.getSalaryMax())) { //todo сделать условие более читабельнее
             response.put(SALARY, MessageFormat.format(
                     resourceBundle.getString(SALARY_BUNDLE_KEY),
                     SALARY,
@@ -37,7 +37,7 @@ public class EmployeeChecker {
                             resourceBundle.getString(AGE_BUNDLE_KEY),
                             AGE,
                             position.getMinAge(),
-                            age));
+                            age)); //todo  MessageFormat.format в переменную. будет лучше)
         }
         return response;
     }
@@ -60,6 +60,7 @@ public class EmployeeChecker {
             invalidFields.add(SALARY);
         }
 
+        //todo getDefine(employee.getPosition()) вынести в переменную
         if (getDefine(employee.getPosition()) == SENIOR) {
             invalidFields.addAll(requiredFieldsSenior(employee));
         } else if (getDefine(employee.getPosition()) == MANAGER) {
@@ -86,7 +87,7 @@ public class EmployeeChecker {
                     resourceBundle.getString(TASKS_BUNDLE_KEY),
                     position.getPosition(),
                     position.getCountTasksMax(),
-                    countTasks));
+                    countTasks)); //todo  MessageFormat.format в переменную. будет лучше)
         }
         return response;
     }

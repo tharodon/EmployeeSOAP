@@ -44,7 +44,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
-        } catch (UsernameNotFoundException e) {
+        } catch (UsernameNotFoundException e) { //todo можно ли обойтись без try-catch ?
             log.info("Authorization failed: {}", e.getMessage());
         }
         filterChain.doFilter(request, response);

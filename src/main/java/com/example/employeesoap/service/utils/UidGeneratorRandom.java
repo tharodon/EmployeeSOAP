@@ -1,5 +1,5 @@
 package com.example.employeesoap.service.utils;
-
+//todo пакет во множественном числе. просто util
 import org.springframework.util.DigestUtils;
 
 import java.nio.charset.StandardCharsets;

@@ -27,7 +27,7 @@ public class RegisterServiceImpl implements RegisterService {
         if (userDto.getStatus() == AuthStatus.OK) {
             Set<Role> roles = roleMapper.toRole(userDto.getRoles());
             User user = userMapper.UserDtoToUser(userDto,
-                    roles);
+                    roles); //todo перенос
             userDao.save(user);
         }
         log.info("Register response: {}", userDto);

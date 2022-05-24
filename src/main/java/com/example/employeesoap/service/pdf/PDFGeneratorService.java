@@ -63,7 +63,7 @@ public class PDFGeneratorService {
         response.setContentType(CONTENT_TYPE);
         DateFormat dateFormatter = new SimpleDateFormat(DATE_FORMAT);
         String currentDateTime = dateFormatter.format(new Date());
-        String headerValue = HEADER_VALUE + currentDateTime + ".pdf";
+        String headerValue = HEADER_VALUE + currentDateTime + ".pdf"; //todo в константу)
         response.setHeader(CONTENT_DISPOSITION, headerValue);
     }
 
@@ -81,7 +81,7 @@ public class PDFGeneratorService {
         font.setSize(FONT_DATE_OF_DOWNLOAD_SIZE);
 
         Paragraph paragraph = new Paragraph(LocalDateTime.now()
-                .format(DateTimeFormatter.ofPattern(DATE_FORMAT_PATTERN)), font);
+                .format(DateTimeFormatter.ofPattern(DATE_FORMAT_PATTERN)), font); //todo DateTimeFormatter.ofPattern в переменную и можно убрать этот перенос
         paragraph.setAlignment(Paragraph.ALIGN_LEFT);
         return paragraph;
     }
