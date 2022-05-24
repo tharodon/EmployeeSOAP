@@ -16,16 +16,22 @@ public class EmployeeChecker {
 
     public Map<String, String> checkSalary(Position position, Long salary) {
         Map<String, String> response = new HashMap<>();
-        if (salary != null &&
-                (salary < position.getSalaryMin() || salary > position.getSalaryMax())) { //todo сделать условие более читабельнее
+        //todo сделать условие более читабельнее
+        // done
+        if (salary != null && !isLegalSalary(position, salary)) {
+            String message = resourceBundle.getString(SALARY_BUNDLE_KEY);
             response.put(SALARY, MessageFormat.format(
-                    resourceBundle.getString(SALARY_BUNDLE_KEY),
+                    message,
                     SALARY,
                     position.getSalaryMin(),
                     position.getSalaryMax(),
                     salary));
         }
         return response;
+    }
+
+    private boolean isLegalSalary(Position position, Long salary) {
+        return salary >= position.getSalaryMin() && salary <= position.getSalaryMax();
     }
 
     public Map<String, String> checkAge(Position position, Long age) {
@@ -59,11 +65,12 @@ public class EmployeeChecker {
         if (employee.getSalary() == null) {
             invalidFields.add(SALARY);
         }
-
         //todo getDefine(employee.getPosition()) вынести в переменную
-        if (getDefine(employee.getPosition()) == SENIOR) {
+        // done
+        Position position = getDefine(employee.getPosition());
+        if (position == SENIOR) {
             invalidFields.addAll(requiredFieldsSenior(employee));
-        } else if (getDefine(employee.getPosition()) == MANAGER) {
+        } else if (position == MANAGER) {
             invalidFields.addAll(requiredFieldsManager(employee));
         }
         return invalidFields;
@@ -80,14 +87,17 @@ public class EmployeeChecker {
         return nullableFields;
     }
 
+    //todo  MessageFormat.format в переменную. будет лучше)
+    // done
     public Map<String, String> checkAdmissibleTaskCount(Position position, Long countTasks) {
         Map<String, String> response = new HashMap<>();
         if (countTasks > position.getCountTasksMax()) {
-            response.put(TASKS_UID, MessageFormat.format(
+            String message = MessageFormat.format(
                     resourceBundle.getString(TASKS_BUNDLE_KEY),
                     position.getPosition(),
                     position.getCountTasksMax(),
-                    countTasks)); //todo  MessageFormat.format в переменную. будет лучше)
+                    countTasks);
+            response.put(TASKS_UID, message);
         }
         return response;
     }

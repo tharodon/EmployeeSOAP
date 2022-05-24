@@ -34,12 +34,14 @@ public class MaskingPatternLayout extends PatternLayout {
                 .collect(Collectors.joining(" "));
     }
 
-    private void maskingMatches(StringBuilder m) { //todo плохое название параметра
-        Matcher matcher = pattern.matcher(m);
+    //todo плохое название параметра
+    // done
+    private void maskingMatches(StringBuilder logMessage) {
+        Matcher matcher = pattern.matcher(logMessage);
         if (matcher.find()) {
-            int valueLength = getValueLength(matcher.end(), m);
+            int valueLength = getValueLength(matcher.end(), logMessage);
             for (int i = matcher.end(); i < valueLength; i++) {
-                m.setCharAt(i, VALUE);
+                logMessage.setCharAt(i, VALUE);
             }
         }
     }

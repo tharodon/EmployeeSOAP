@@ -42,10 +42,10 @@ public class PDFGeneratorService {
     private static final String DATE_FORMAT = "yyyy-MM-dd:hh:mm:ss";
     private static final String CONTENT_DISPOSITION = "Content-Disposition";
     private static final String HEADER_VALUE = "attachment; filename=pdf_";
+    private static final String FILE_EXTENSION = ".pdf";
     private static final int WIDTH = 100;
     private static final int HEIGHT = 100;
-    public static final int FONT_DATE_OF_DOWNLOAD_SIZE = 11;
-
+    private static final int FONT_DATE_OF_DOWNLOAD_SIZE = 11;
     @SneakyThrows
     public void export(HttpServletResponse response, EmployeeDto employeeDto) {
         responseInit(response);
@@ -63,7 +63,9 @@ public class PDFGeneratorService {
         response.setContentType(CONTENT_TYPE);
         DateFormat dateFormatter = new SimpleDateFormat(DATE_FORMAT);
         String currentDateTime = dateFormatter.format(new Date());
-        String headerValue = HEADER_VALUE + currentDateTime + ".pdf"; //todo в константу)
+        //todo в константу)
+        // done
+        String headerValue = HEADER_VALUE + currentDateTime + FILE_EXTENSION;
         response.setHeader(CONTENT_DISPOSITION, headerValue);
     }
 
@@ -80,8 +82,10 @@ public class PDFGeneratorService {
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
         font.setSize(FONT_DATE_OF_DOWNLOAD_SIZE);
 
-        Paragraph paragraph = new Paragraph(LocalDateTime.now()
-                .format(DateTimeFormatter.ofPattern(DATE_FORMAT_PATTERN)), font); //todo DateTimeFormatter.ofPattern в переменную и можно убрать этот перенос
+        //todo DateTimeFormatter.ofPattern в переменную и можно убрать этот перенос
+        // done
+        String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_FORMAT_PATTERN));
+        Paragraph paragraph = new Paragraph(date, font);
         paragraph.setAlignment(Paragraph.ALIGN_LEFT);
         return paragraph;
     }

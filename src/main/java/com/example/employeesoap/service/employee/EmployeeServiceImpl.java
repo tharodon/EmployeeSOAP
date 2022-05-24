@@ -6,7 +6,7 @@ import com.example.employeesoap.entity.Employee;
 
 import static com.example.employeesoap.type.Status.*;
 
-import com.example.employeesoap.service.utils.UidGeneratorRandom;
+import com.example.employeesoap.service.util.UidGeneratorRandom;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
