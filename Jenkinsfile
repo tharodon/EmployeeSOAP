@@ -11,12 +11,13 @@ pipeline {
             }
         }
         stage('Run') {
-                    steps {
-                        sh 'docker-compose up --build'
-                        }
-                        }
-                    }
-                }
-                }
+        agent
+        steps {
+                sh 'docker-compose up --build'
+         }
+     }
+   }
+}
+}
 }
 
