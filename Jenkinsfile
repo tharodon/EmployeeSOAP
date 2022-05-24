@@ -1,11 +1,19 @@
 pipeline {
-	agent any
-	stages {
-		stage('Run') {
-		agent{docker 'openjdk:8'}
-			steps {
-				sh 'java -jar target/EmployeeSOAP-0.0.1-SNAPSHOT.jar'
-			}
-		}
-	}
+    agent none
+    stages {
+        stage('Build') {
+            agent { docker 'maven:3.6.3-jdk-8' }
+            steps {
+                echo 'Hello, Maven'
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
+        stage('Run') {
+            agent { docker 'openjdk:8' }
+            steps {
+                echo 'Hello, JDK'
+                sh 'java -jar target/EmployeeSOAP-0.0.1-SNAPSHOT.jar'
+            }
+        }
+    }
 }
