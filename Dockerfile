@@ -19,5 +19,7 @@
 
 FROM openjdk:8
 
-COPY .. ./
+WORKDIR "~/application/"
+
+COPY . .
 CMD ["java", "-jar", "target/EmployeeSOAP-0.0.1-SNAPSHOT.jar"]

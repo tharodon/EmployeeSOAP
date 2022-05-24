@@ -64,4 +64,4 @@ services:
     environment:
       POSTGRES: "postgres"
       KAFKA: "kafka"
-      KAFKA_LISTEN: 29092
+      KAFKA_LISTEN: "9092"

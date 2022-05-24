@@ -7,6 +7,7 @@ import com.lowagie.text.Image;
 import com.lowagie.text.List;
 import com.lowagie.text.pdf.PdfWriter;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
@@ -21,6 +22,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+import static org.springframework.util.ResourceUtils.CLASSPATH_URL_PREFIX;
+
+@Slf4j
 @Service
 public class PDFGeneratorService {
 
@@ -70,7 +74,7 @@ public class PDFGeneratorService {
     }
 
     private Jpeg getImage() throws IOException {
-        File file = ResourceUtils.getFile(ResourceUtils.CLASSPATH_URL_PREFIX + FILENAME);
+        File file = ResourceUtils.getFile(CLASSPATH_URL_PREFIX + FILENAME);
         byte[] bytes = Files.readAllBytes(Paths.get(file.getPath()));
         Jpeg image = new Jpeg(bytes, WIDTH, HEIGHT);
         image.setAlignment(Image.ALIGN_RIGHT);
