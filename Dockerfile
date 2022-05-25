@@ -19,6 +19,10 @@
 
 FROM openjdk:8
 
+ENV   POSTGRES="postgres" KAFKA="kafka" KAFKA_LISTEN="9092"
+
+EXPOSE 8081:8081
+
 WORKDIR "~/application/"
 
 COPY . .

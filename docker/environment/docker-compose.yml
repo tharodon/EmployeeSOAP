@@ -5,17 +5,6 @@ volumes:
     driver: local
 
 services:
-#  jenkins:
-#    image: jenkins/jenkins:lts
-#    privileged: true
-#    user: root
-#    ports:
-#      - "8080:8080"
-#      - "50000:50000"
-#    container_name: jenkins
-#    volumes:
-#      - /home/Anton/jenkins_compose/jenkins_configuration:/var/jenkins_home
-#      - /var/run/docker.sock:/var/run/docker.sock
   postgres:
     image: postgres:13.0
     container_name: postgres
@@ -52,16 +41,3 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
       KAFKA_CREATE_TOPICS: order-topic:3:1
-
-  app:
-    depends_on:
-      - kafka
-      - postgres
-    build: ./
-    container_name: "employee-app"
-    ports:
-      - "8081:8081"
-    environment:
-      POSTGRES: "postgres"
-      KAFKA: "kafka"
-      KAFKA_LISTEN: "9092"
