@@ -9,7 +9,6 @@ pipeline {
                 sh 'docker-compose up --build'
                 }
             }
-        }
         stage('Run') {
         agent any
         steps {
@@ -17,4 +16,4 @@ pipeline {
          }
      }
    }
-
+}
