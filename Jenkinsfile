@@ -1,10 +1,11 @@
 pipeline {
-    agent {docker}
+    agent none
     stages {
         stage('Build') {
+            agent { docker 'maven:3.6.3-jdk-8' }
             steps {
                 echo 'Hello, Maven'
-                'docker-compose up --build'
+                sh 'mvn -B -DskipTests clean package'
             }
         }
     }
