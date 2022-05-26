@@ -33,16 +33,17 @@ public class EmployeeChecker {
         return salary >= position.getSalaryMin() && salary <= position.getSalaryMax();
     }
 
+    //todo  MessageFormat.format в переменную. будет лучше)
+    // done
     public Map<String, String> checkAge(Position position, Long age) {
         Map<String, String> response = new HashMap<>();
         if (age != null && age < position.getMinAge()) {
-            response.put(
+            String message = MessageFormat.format(
+                    resourceBundle.getString(AGE_BUNDLE_KEY),
                     AGE,
-                    MessageFormat.format(
-                            resourceBundle.getString(AGE_BUNDLE_KEY),
-                            AGE,
-                            position.getMinAge(),
-                            age)); //todo  MessageFormat.format в переменную. будет лучше)
+                    position.getMinAge(),
+                    age);
+            response.put(AGE, message);
         }
         return response;
     }
