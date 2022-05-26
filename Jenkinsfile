@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     stages {
+        agent {docker}
         stage('Build') {
             steps {
                 echo 'Building..'
