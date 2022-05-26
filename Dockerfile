@@ -10,11 +10,11 @@ RUN mvn clean package
 # the second stage of our build will use open jdk 11 on alpine 3.9
 FROM openjdk:8
 
-# copy only the artifacts we need from the first stage and discard the rest
-COPY --from=MAVEN_BUILD target/EmployeeSOAP-0.0.1-SNAPSHOT.jar /demo.jar
+ENV   POSTGRES="postgres" KAFKA="kafka" KAFKA_LISTEN="9092"
 
-# set the startup command to execute the jar
-CMD ["java", "-jar", "/demo.jar"]
+EXPOSE 8081:8081
 
-#docker build .
-#docker run -it [IMAGE]
+WORKDIR "~/application/"
+
+COPY --from=MAVEN_BUILD . .
+CMD ["java", "-jar", "target/EmployeeSOAP-0.0.1-SNAPSHOT.jar"]

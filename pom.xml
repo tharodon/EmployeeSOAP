@@ -83,7 +83,7 @@
 				<configuration>
 					<user>postgres</user>
 					<password>postgres</password>
-					<url>jdbc:postgresql://localhost:5433/postgres</url>
+					<url>jdbc:postgresql://localhost:5432/postgres</url>
 				</configuration>
 			</plugin>
 			<plugin>
