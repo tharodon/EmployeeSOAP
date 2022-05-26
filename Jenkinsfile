@@ -1,16 +1,10 @@
 pipeline {
-    agent any
+    agent {docker {image 'maven:3.6.3-jdk-8'}}
     stages {
         stage('Build') {
-        agent{docker 'maven:3.6.3-jdk-8'}
             steps {
                 echo 'Building..'
-                sh 'mvn clean package'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
+                sh 'mvn -version'
             }
         }
         stage('Deploy') {
