@@ -16,16 +16,15 @@ public class EmployeeChecker {
 
     public Map<String, String> checkSalary(Position position, Long salary) {
         Map<String, String> response = new HashMap<>();
-        //todo сделать условие более читабельнее
-        // done
+
         if (salary != null && !isLegalSalary(position, salary)) {
-            String message = resourceBundle.getString(SALARY_BUNDLE_KEY);
-            response.put(SALARY, MessageFormat.format(
-                    message,
+            String message = MessageFormat.format(
+                    resourceBundle.getString(SALARY_BUNDLE_KEY),
                     SALARY,
                     position.getSalaryMin(),
                     position.getSalaryMax(),
-                    salary));
+                    salary);
+            response.put(SALARY, message);
         }
         return response;
     }
@@ -65,8 +64,7 @@ public class EmployeeChecker {
         if (employee.getSalary() == null) {
             invalidFields.add(SALARY);
         }
-        //todo getDefine(employee.getPosition()) вынести в переменную
-        // done
+
         Position position = getDefine(employee.getPosition());
         if (position == SENIOR) {
             invalidFields.addAll(requiredFieldsSenior(employee));
@@ -87,8 +85,6 @@ public class EmployeeChecker {
         return nullableFields;
     }
 
-    //todo  MessageFormat.format в переменную. будет лучше)
-    // done
     public Map<String, String> checkAdmissibleTaskCount(Position position, Long countTasks) {
         Map<String, String> response = new HashMap<>();
         if (countTasks > position.getCountTasksMax()) {

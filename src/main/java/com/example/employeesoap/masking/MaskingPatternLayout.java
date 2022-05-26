@@ -34,8 +34,6 @@ public class MaskingPatternLayout extends PatternLayout {
                 .collect(Collectors.joining(" "));
     }
 
-    //todo плохое название параметра
-    // done
     private void maskingMatches(StringBuilder logMessage) {
         Matcher matcher = pattern.matcher(logMessage);
         if (matcher.find()) {

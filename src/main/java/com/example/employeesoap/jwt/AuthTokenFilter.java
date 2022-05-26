@@ -29,8 +29,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     private final UserDetailsServiceImpl userDetailsService;
     private final JwtService jwtUtils;
 
-    //todo переделать без try/catch
-    // done
+
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
