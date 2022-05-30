@@ -25,7 +25,7 @@ pipeline {
         stage('Deploy') {
                     steps {
                   sshagent(['ubuntu-key']) {
-                    sh 'ssh -o StrictHostKeyChecking=no tharodon@192.168.1.7 bash pull_run_image.sh'
+                    sh 'ssh -o StrictHostKeyChecking=no tharodon@192.168.1.7 docker pull tharodon/employee:0.1 docker run --rm --network kafka-test -d -e POSTGRES=pg-net -e KAFKA=kafka-net -e KAFKA_LISTEN=9092 -p 8081:8081 docker images |  awk 'NR == 2 {print $3}';'
                   }
               }
                 }
