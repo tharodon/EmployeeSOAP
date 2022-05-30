@@ -22,5 +22,12 @@ pipeline {
                 }
             }
         }
+        stage('Deploy') {
+                    steps {
+                  sshagent(['ubuntu-key']) {
+                    sh 'ssh -o StrictHostKeyChecking=no tharodon@192.168.1.7 bash pull_run_mage.sh'
+                  }
+              }
+                }
     }
 }
