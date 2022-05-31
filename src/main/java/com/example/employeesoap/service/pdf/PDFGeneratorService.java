@@ -9,13 +9,10 @@ import com.lowagie.text.pdf.PdfWriter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
+import sun.misc.IOUtils;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -72,12 +69,19 @@ public class PDFGeneratorService {
     }
 
     private Jpeg getImage() throws IOException {
-        File file = ResourceUtils.getFile(CLASSPATH_URL_PREFIX + FILENAME);
-        byte[] bytes = Files.readAllBytes(Paths.get(file.getPath()));
+        byte[] bytes = resourceImageToBytes();
         Jpeg image = new Jpeg(bytes, WIDTH, HEIGHT);
         image.setAlignment(Image.ALIGN_RIGHT);
         image.normalize();
         return image;
+    }
+
+    private byte[] resourceImageToBytes() throws IOException {
+        byte[] bytes;
+        try (InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream(FILENAME)) {
+            bytes = IOUtils.readAllBytes(resourceAsStream);
+        }
+        return bytes;
     }
 
     private Paragraph getDateOfDownload() {
