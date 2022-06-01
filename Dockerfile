@@ -18,6 +18,5 @@ EXPOSE 8081:8081
 WORKDIR /app
 
 COPY --from=MAVEN_BUILD /home/app/target/EmployeeSOAP-0.0.1-SNAPSHOT.jar /app/app.jar
-COPY --from=MAVEN_BUILD /home/app/src/main/resources /app/resources/
 
 CMD ["java", "-jar", "app.jar"]

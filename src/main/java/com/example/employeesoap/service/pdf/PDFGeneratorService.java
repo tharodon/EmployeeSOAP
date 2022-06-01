@@ -19,8 +19,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-import static org.springframework.util.ResourceUtils.CLASSPATH_URL_PREFIX;
-
 @Slf4j
 @Service
 public class PDFGeneratorService {
