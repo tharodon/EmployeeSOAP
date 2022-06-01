@@ -11,9 +11,7 @@ RUN mvn clean package
 # the second stage of our build will use open jdk 11 on alpine 3.9
 FROM openjdk:8
 
-ENV   POSTGRES="pg-net" KAFKA="kafka-net" KAFKA_LISTEN="9092"
-
-EXPOSE 8081:8081
+ENV   POSTGRES="pg-net" KAFKA="kafka-net" KAFKA_LISTEN="9092" EUREKA="eur-net"
 
 WORKDIR /app
 
