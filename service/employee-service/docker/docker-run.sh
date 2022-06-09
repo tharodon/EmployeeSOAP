@@ -12,4 +12,4 @@ docker run --name employee2 --network kafka-test --memory="600m" -it -e TOPIC=to
 
 docker run --name gateway-app --network kafka-test --memory="2g" -d -p 8765:8765 f618db488fdb;
 
-curl -s -x POST https://api.telegram.org/bot5562491817:AAF-keU0csfRVFpdpVU1_kxp8bFNX9fBMTE/sendMessage -d chat_id=-1001573982949 -d parse_mode=markdown -d text=success
+curl https://api.telegram.org/bot5562491817:AAF-keU0csfRVFpdpVU1_kxp8bFNX9fBMTE/sendMessage -d chat_id=-1001573982949 -d parse_mode=markdown -d text=success
