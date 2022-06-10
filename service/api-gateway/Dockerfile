@@ -15,6 +15,6 @@ ENV   EUREKA="eur-net"
 
 WORKDIR /app
 
-COPY --from=MAVEN_BUILD /home/app/target/EmployeeSOAP-0.0.1-SNAPSHOT.jar /app/api-gateway.jar
+COPY --from=MAVEN_BUILD /home/app/target/api-gateway-0.0.1-SNAPSHOT.jar /app/api-gateway.jar
 
 CMD ["java", "-jar", "api-gateway.jar"]
