@@ -11,10 +11,10 @@ RUN mvn clean package
 # the second stage of our build will use open jdk 11 on alpine 3.9
 FROM openjdk:8
 
-EXPOSE 8761:8761
+ENV  EUREKA="eur-net"
 
 WORKDIR /app
 
-COPY --from=MAVEN_BUILD /home/app/target/eureka-server-0.0.1-SNAPSHOT.jar /app/app.jar
+COPY --from=MAVEN_BUILD /home/app/target/eureka-server-0.0.1-SNAPSHOT.jar /app/eureka-server.jar
 
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "eureka-server.jar"]

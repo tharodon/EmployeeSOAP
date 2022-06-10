@@ -11,12 +11,10 @@ RUN mvn clean package
 # the second stage of our build will use open jdk 11 on alpine 3.9
 FROM openjdk:8
 
-ENV EUREKA="eur-net"
-
-EXPOSE 8765:8765
+ENV   EUREKA="eur-net"
 
 WORKDIR /app
 
-COPY --from=MAVEN_BUILD /home/app/target/api-gateway-0.0.1-SNAPSHOT.jar /app/app.jar
+COPY --from=MAVEN_BUILD /home/app/target/EmployeeSOAP-0.0.1-SNAPSHOT.jar /app/api-gateway.jar
 
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "api-gateway.jar"]

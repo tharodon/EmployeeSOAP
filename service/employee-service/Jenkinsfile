@@ -8,9 +8,11 @@ pipeline {
                     url: 'https://github.com/tharodon/EmployeeSOAP.git'
                 }
         }
-        stage('Build docker image') {
+        stage('Build docker images') {
             steps{
-                    sh 'docker build -t tharodon/employee:0.1 .'
+                    sh 'docker build -t tharodon/employee-eureka-server:0.1 service/eureka-server/'
+                    sh 'docker build -t tharodon/employee-api-gateway:0.1 service/api-gateway/'
+                    sh 'docker build -t tharodon/employee:0.1 service/employee-service/'
             }
         }
         stage('Push docker image to DockerHub') {
@@ -25,7 +27,7 @@ pipeline {
         stage('Deploy') {
                     steps {
                   sshagent(['ubuntu-key']) {
-                    sh 'ssh -o StrictHostKeyChecking=no tharodon@192.168.1.7 bash pull_run_image.sh'
+                    sh 'ssh -o StrictHostKeyChecking=no tharodon@192.168.47.128 bash pull_run_image.sh'
                   }
               }
                 }
