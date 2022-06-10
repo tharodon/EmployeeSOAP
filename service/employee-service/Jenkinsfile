@@ -32,6 +32,19 @@ pipeline {
                     sh 'ssh -o StrictHostKeyChecking=no tharodon@192.168.47.128 bash run-services.sh'
                   }
               }
-                }
+        }
+
+        post {
+            success {
+              sh 'curl https://api.telegram.org/bot5562491817:AAF-keU0csfRVFpdpVU1_kxp8bFNX9fBMTE/sendMessage -d chat_id=-1001573982949 -d parse_mode=markdown -d text="Сборка завершена удачно\n❤️"'
+              }
+            failure{
+                sh 'curl https://api.telegram.org/bot5562491817:AAF-keU0csfRVFpdpVU1_kxp8bFNX9fBMTE/sendMessage -d chat_id=-1001573982949 -d parse_mode=markdown -d text="Сборка завершена неудачно\n❤️"'
+            }
+            aborted{
+                sh 'curl https://api.telegram.org/bot5562491817:AAF-keU0csfRVFpdpVU1_kxp8bFNX9fBMTE/sendMessage -d chat_id=-1001573982949 -d parse_mode=markdown -d text="Сборка прервана\n❤️"'
+            }
+        }
+
     }
 }
