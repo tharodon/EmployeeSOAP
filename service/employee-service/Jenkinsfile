@@ -29,7 +29,7 @@ pipeline {
         stage('Deploy') {
                     steps {
                   sshagent(['ubuntu-key']) {
-                    sh 'ssh -o StrictHostKeyChecking=no tharodon@192.168.47.128 bash pull_run_image.sh'
+                    sh 'ssh -o StrictHostKeyChecking=no tharodon@192.168.47.128 bash run-services.sh'
                   }
               }
                 }
