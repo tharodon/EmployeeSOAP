@@ -19,6 +19,8 @@ pipeline {
             steps{
                 withDockerRegistry(credentialsId: 'docker-hub', url: 'https://index.docker.io/v1/') {
                     sh '''
+                        docker push tharodon/employee-eureka-server:0.1
+                        docker push tharodon/employee-api-gateway:0.1
                         docker push tharodon/employee:0.1
                     '''
                 }
