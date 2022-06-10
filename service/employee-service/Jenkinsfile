@@ -33,7 +33,7 @@ pipeline {
     post {
                 success {
                   sh """
-                  curl https://api.telegram.org/bot5562491817:AAF-keU0csfRVFpdpVU1_kxp8bFNX9fBMTE/sendMessage -d chat_id=-1001573982949 -d parse_mode=markdown -d text="Сборка завершена удачно❤️"
+                  curl https://api.telegram.org/bot5562491817:AAF-keU0csfRVFpdpVU1_kxp8bFNX9fBMTE/sendMessage -d chat_id=-1001573982949 -d parse_mode=markdown -d text='Сборка завершена удачно❤️\nИмя собрки: ${JOB_NAME}\nТег сборки: ${BUILD_TAG}\n Ссылка на сборку: ${BUILD_URL}'
                   """
                   }
                 failure{
