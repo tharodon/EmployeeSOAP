@@ -10,8 +10,6 @@ pipeline {
         }
         stage('Build docker images') {
             steps{
-                    sh 'docker build -t tharodon/employee-eureka-server:0.1 service/eureka-server/'
-                    sh 'docker build -t tharodon/employee-api-gateway:0.1 service/api-gateway/'
                     sh 'docker build -t tharodon/employee:0.1 service/employee-service/'
             }
         }
@@ -19,8 +17,6 @@ pipeline {
             steps{
                 withDockerRegistry(credentialsId: 'docker-hub', url: 'https://index.docker.io/v1/') {
                     sh '''
-                        docker push tharodon/employee-eureka-server:0.1
-                        docker push tharodon/employee-api-gateway:0.1
                         docker push tharodon/employee:0.1
                     '''
                 }
@@ -36,13 +32,19 @@ pipeline {
     }
     post {
                 success {
-                  sh 'curl https://api.telegram.org/bot5562491817:AAF-keU0csfRVFpdpVU1_kxp8bFNX9fBMTE/sendMessage -d chat_id=-1001573982949 -d parse_mode=markdown -d text="Сборка завершена удачно❤️"'
+                  sh """
+                  curl https://api.telegram.org/bot5562491817:AAF-keU0csfRVFpdpVU1_kxp8bFNX9fBMTE/sendMessage -d chat_id=-1001573982949 -d parse_mode=markdown -d text="Сборка завершена удачно❤️"
+                  """
                   }
                 failure{
-                    sh 'curl https://api.telegram.org/bot5562491817:AAF-keU0csfRVFpdpVU1_kxp8bFNX9fBMTE/sendMessage -d chat_id=-1001573982949 -d parse_mode=markdown -d text="Сборка завершена неудачно😕️"'
+                    sh """
+                    curl https://api.telegram.org/bot5562491817:AAF-keU0csfRVFpdpVU1_kxp8bFNX9fBMTE/sendMessage -d chat_id=-1001573982949 -d parse_mode=markdown -d text="Сборка завершена неудачно😕️"
+                    """
                 }
                 aborted{
-                    sh 'curl https://api.telegram.org/bot5562491817:AAF-keU0csfRVFpdpVU1_kxp8bFNX9fBMTE/sendMessage -d chat_id=-1001573982949 -d parse_mode=markdown -d text="Сборка прервана❤️"'
+                    sh """
+                    curl https://api.telegram.org/bot5562491817:AAF-keU0csfRVFpdpVU1_kxp8bFNX9fBMTE/sendMessage -d chat_id=-1001573982949 -d parse_mode=markdown -d text="Сборка прервана❤️"
+                    """
                 }
             }
 }
