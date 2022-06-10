@@ -10,9 +10,9 @@ pipeline {
         }
         stage('Build docker images') {
             steps{
-                    sh 'docker build -t tharodon/employee-eureka-server:0.1 eureka-server/'
-                    sh 'docker build -t tharodon/employee-api-gateway:0.1 api-gateway/'
-                    sh 'docker build -t tharodon/employee:0.1 employee-service/'
+                    sh 'docker build -t tharodon/employee-eureka-server:0.1 service/eureka-server/'
+                    sh 'docker build -t tharodon/employee-api-gateway:0.1 service/api-gateway/'
+                    sh 'docker build -t tharodon/employee:0.1 service/employee-service/'
             }
         }
         stage('Push docker image to DockerHub') {
