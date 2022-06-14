@@ -38,12 +38,12 @@ pipeline {
                   }
                 failure{
                     sh """
-                    curl https://api.telegram.org/bot5562491817:AAF-keU0csfRVFpdpVU1_kxp8bFNX9fBMTE/sendMessage -d chat_id=-1001573982949 -d parse_mode=markdown -d text="Сборка завершена неудачно😕️"
+                    curl https://api.telegram.org/bot5562491817:AAF-keU0csfRVFpdpVU1_kxp8bFNX9fBMTE/sendMessage -d chat_id=-1001573982949 -d parse_mode=markdown -d text="Сборка завершена неудачно😕️\nИмя собрки: ${JOB_NAME}\nТег сборки: ${BUILD_TAG}\n Ссылка на сборку: ${BUILD_URL}"
                     """
                 }
                 aborted{
                     sh """
-                    curl https://api.telegram.org/bot5562491817:AAF-keU0csfRVFpdpVU1_kxp8bFNX9fBMTE/sendMessage -d chat_id=-1001573982949 -d parse_mode=markdown -d text="Сборка прервана❤️"
+                    curl https://api.telegram.org/bot5562491817:AAF-keU0csfRVFpdpVU1_kxp8bFNX9fBMTE/sendMessage -d chat_id=-1001573982949 -d parse_mode=markdown -d text="Сборка прервана⛔️\nИмя собрки: ${JOB_NAME}\nТег сборки: ${BUILD_TAG}\n Ссылка на сборку: ${BUILD_URL}"
                     """
                 }
             }
