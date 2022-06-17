@@ -1,0 +1,50 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps{
+                git branch: 'EmployeeBalanceLoad',
+                    url: 'https://github.com/tharodon/EmployeeSOAP.git'
+                }
+        }
+        stage('Build docker images') {
+            steps{
+                    sh 'docker build -t tharodon/employee:0.1 service/employee-service/'
+            }
+        }
+        stage('Push docker image to DockerHub') {
+            steps{
+                withDockerRegistry(credentialsId: 'docker-hub', url: 'https://index.docker.io/v1/') {
+                    sh '''
+                        docker push tharodon/employee:0.1
+                    '''
+                }
+            }
+        }
+        stage('Deploy') {
+                    steps {
+                  sshagent(['ubuntu-key']) {
+                    sh 'ssh -o StrictHostKeyChecking=no tharodon@192.168.47.128 bash run-services.sh'
+                  }
+              }
+        }
+    }
+    post {
+                success {
+                  sh """
+                  curl https://api.telegram.org/bot5562491817:AAF-keU0csfRVFpdpVU1_kxp8bFNX9fBMTE/sendMessage -d chat_id=-1001573982949 -d parse_mode=markdown -d text='Сборка завершена удачно❤️\nИмя собрки: ${JOB_NAME}\nТег сборки: ${BUILD_TAG}\n Ссылка на сборку: ${BUILD_URL}'
+                  """
+                  }
+                failure{
+                    sh """
+                    curl https://api.telegram.org/bot5562491817:AAF-keU0csfRVFpdpVU1_kxp8bFNX9fBMTE/sendMessage -d chat_id=-1001573982949 -d parse_mode=markdown -d text="Сборка завершена неудачно😕️\nИмя собрки: ${JOB_NAME}\nТег сборки: ${BUILD_TAG}\n Ссылка на сборку: ${BUILD_URL}"
+                    """
+                }
+                aborted{
+                    sh """
+                    curl https://api.telegram.org/bot5562491817:AAF-keU0csfRVFpdpVU1_kxp8bFNX9fBMTE/sendMessage -d chat_id=-1001573982949 -d parse_mode=markdown -d text="Сборка прервана⛔️\nИмя собрки: ${JOB_NAME}\nТег сборки: ${BUILD_TAG}\n Ссылка на сборку: ${BUILD_URL}"
+                    """
+                }
+            }
+}

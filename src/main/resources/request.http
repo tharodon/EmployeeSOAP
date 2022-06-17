@@ -1,0 +1,67 @@
+GET http://localhost:8081/server/employees/employee/91b346eb267ec8888a2db6b0941f7ed5c/
+Accept: application/json
+
+###
+
+POST http://localhost:8081/server/employees/employee-register
+Content-Type: application/json
+
+[
+  {
+    "name": "1",
+    "surname": "bbbd",
+    "position": "Junior",
+    "grade": 123,
+    "age": 18,
+    "salary": 550001,
+    "tasks": [
+      {
+        "description": "task1"
+      },
+      {
+        "description": "task2"
+      },
+      {
+        "description": "task3"
+      },
+      {
+        "description": "task4"
+      },
+      {
+        "description": "task5"
+      },
+      {
+        "description": "task6"
+      },
+      {
+        "description": "task7"
+      }
+    ]
+  },
+  {
+    "name": "2",
+    "surname": "bbbd",
+    "position": "Senior",
+    "grade": 123,
+    "age": 30,
+    "salary": 350000,
+    "description": "text...",
+    "tasks": [
+      {
+        "description": "tasktasktasktask"
+      }
+    ]
+  },
+  {
+    "name": "3",
+    "surname": "bbbd",
+    "position": "Junior",
+    "grade": 123,
+    "age": 18,
+    "salary": 55000
+  }
+]
+
+###
+DELETE http://localhost:8081/server/employees/employee/5d85af8e5c82acb1acd944ff1a76aa06/
+Accept: application/json
