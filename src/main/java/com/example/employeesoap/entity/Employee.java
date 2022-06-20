@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@EqualsAndHashCode(exclude = {"tasks"})
+@EqualsAndHashCode(exclude = {"tasks", "id"})
 @ToString(exclude = {"tasks"})
 @Table(name = "employee")
 @Schema(description = "Сущность работника")

@@ -22,7 +22,9 @@ public class UserValidatorImpl implements UserValidator {
     private final ResourceBundle resourceBundle =
             ResourceBundle.getBundle(FILENAME, new Locale("US", "US"));
     private static final String AUTH_REGISTER_USERNAME = "auth.register.username";
+    private static final String AUTH_REGISTER_USERNAME_EMPTY = "auth.register.username.empty";
     private static final String AUTH_REGISTER_EMAIL = "auth.register.email";
+    private static final String AUTH_REGISTER_EMAIL_EMPTY = "auth.register.email.empty";
     private static final String AUTH_REGISTER_PASSWORD = "auth.register.password";
     private static final String FILENAME = "messages_US";
     private final UserRepository userRepository;
@@ -54,7 +56,7 @@ public class UserValidatorImpl implements UserValidator {
     }
 
     private void passwordValidate(UserDto request, UserDto userDto) {
-        if (request.getPassword().isEmpty()) {
+        if (request.getPassword() == null || request.getPassword().isEmpty()) {
             userDto.setPassword(resourceBundle.getString(AUTH_REGISTER_PASSWORD));
             userDto.setStatus(ERROR);
         } else {
@@ -63,7 +65,10 @@ public class UserValidatorImpl implements UserValidator {
     }
 
     private void emailValidate(UserDto request, UserDto userDto) {
-        if (userRepository.existsByEmail(request.getEmail())) {
+        if (request.getEmail() == null || request.getEmail().isEmpty()){
+            userDto.setEmail(resourceBundle.getString(AUTH_REGISTER_EMAIL_EMPTY));
+            userDto.setStatus(ERROR);
+        }else if (userRepository.existsByEmail(request.getEmail())) {
             userDto.setEmail(resourceBundle.getString(AUTH_REGISTER_EMAIL));
             userDto.setStatus(ERROR);
         } else {
@@ -72,7 +77,10 @@ public class UserValidatorImpl implements UserValidator {
     }
 
     private void usernameValidate(UserDto request, UserDto userDto) {
-        if (userRepository.existsByUsername(request.getUsername())) {
+        if (request.getUsername() == null || request.getUsername().isEmpty()){
+            userDto.setUsername(resourceBundle.getString(AUTH_REGISTER_USERNAME_EMPTY));
+            userDto.setStatus(ERROR);
+        }else if (userRepository.existsByUsername(request.getUsername())) {
             userDto.setUsername(resourceBundle.getString(AUTH_REGISTER_USERNAME));
             userDto.setStatus(ERROR);
         } else {

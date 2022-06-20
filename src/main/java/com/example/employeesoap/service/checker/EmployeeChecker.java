@@ -29,10 +29,6 @@ public class EmployeeChecker {
         return response;
     }
 
-    private boolean isLegalSalary(Position position, Long salary) {
-        return salary >= position.getSalaryMin() && salary <= position.getSalaryMax();
-    }
-
     public Map<String, String> checkAge(Position position, Long age) {
         Map<String, String> response = new HashMap<>();
         if (age != null && age < position.getMinAge()) {
@@ -71,6 +67,10 @@ public class EmployeeChecker {
             invalidFields.addAll(requiredFieldsManager(employee));
         }
         return invalidFields;
+    }
+
+    private boolean isLegalSalary(Position position, Long salary) {
+        return salary >= position.getSalaryMin() && salary <= position.getSalaryMax();
     }
 
     private List<String> requiredFieldsSenior(Employee employee) {

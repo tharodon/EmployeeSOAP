@@ -7,5 +7,5 @@ import com.example.employeesoap.entity.User;
 import java.util.Set;
 
 public interface UserMapper {
-    User UserDtoToUser(UserDto userDto, Set<Role> roles);
+    User userDtoToUser(UserDto userDto, Set<Role> roles);
 }

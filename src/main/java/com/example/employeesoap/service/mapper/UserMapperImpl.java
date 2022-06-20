@@ -17,7 +17,7 @@ public class UserMapperImpl implements UserMapper {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public User UserDtoToUser(UserDto userDto, Set<Role> roles) {
+    public User userDtoToUser(UserDto userDto, Set<Role> roles) {
         return User.builder()
                 .username(userDto.getUsername())
                 .email(userDto.getEmail())

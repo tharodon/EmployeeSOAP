@@ -9,6 +9,8 @@ import java.util.Set;
 @Getter
 @Setter
 @Builder
+@EqualsAndHashCode(exclude = {"id", "roles", "password"})
+@ToString(exclude = {"id", "roles"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity

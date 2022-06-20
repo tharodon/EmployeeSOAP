@@ -9,9 +9,11 @@ import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 @Getter
 @Setter
 @ToString
+@Builder
 @Schema(description = "Сущность пользователя")
 public class UserDto {
     @Schema(description = "Имя пользователя", required = true)

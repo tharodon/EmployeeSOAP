@@ -35,7 +35,8 @@ public class ValidatorFieldsServiceImpl implements ValidatorFieldsService {
                     employeeChecker.checkSalary(position, employee.getSalary()));
 
             employeeMessageError.addIllegalArgumentMessage(
-                    employeeChecker.checkAdmissibleTaskCount(position, (long) employee.getTasks().size()));
+                    employeeChecker.checkAdmissibleTaskCount(
+                            position, employee.getTasks() == null ? 0L : (long) employee.getTasks().size()));
         } else {
             employeeMessageError.addIllegalArgumentMessage(new HashMap<String, String>() {{
                 put(POSITION, INDEFINITE.getPosition());
