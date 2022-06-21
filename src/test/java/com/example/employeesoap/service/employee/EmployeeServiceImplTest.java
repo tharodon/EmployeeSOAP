@@ -14,7 +14,6 @@ import java.util.Arrays;
 import static com.example.employeesoap.type.Status.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
 class EmployeeServiceImplTest extends IntegrationTest {
 
     private final EmployeeService employeeService;

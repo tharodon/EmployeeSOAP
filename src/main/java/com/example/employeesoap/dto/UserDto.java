@@ -1,7 +1,6 @@
 package com.example.employeesoap.dto;
 
 import com.example.employeesoap.type.AuthStatus;
-import com.sun.xml.internal.ws.developer.SchemaValidation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
