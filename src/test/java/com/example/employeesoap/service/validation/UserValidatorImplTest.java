@@ -21,7 +21,9 @@ class UserValidatorImplTest extends IntegrationTest {
             .username(USERNAME)
             .email(EMAIL)
             .password(PASSWORD)
-            .roles(new HashSet<String>(){{add("user");}})
+            .roles(new HashSet<String>() {{
+                add("user");
+            }})
             .status(OK)
             .build();
 

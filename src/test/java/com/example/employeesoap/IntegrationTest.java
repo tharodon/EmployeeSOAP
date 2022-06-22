@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 public abstract class IntegrationTest {
 
     @BeforeAll
-    static void init(){
+    static void init() {
         Containers.Initializer.start();
     }
 }

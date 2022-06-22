@@ -17,8 +17,7 @@ import static com.example.employeesoap.Constants.*;
 import static com.example.employeesoap.type.AuthStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-class AuthControllerTest extends IntegrationTest
-{
+class AuthControllerTest extends IntegrationTest {
 
     private final AuthController authController;
 
@@ -172,7 +171,9 @@ class AuthControllerTest extends IntegrationTest
     void authValidUserWithRoleAdminTest() {
         UserDto userDto = UserDto.builder()
                 .username(USERNAME)
-                .roles(new HashSet<String>(){{add("admin");}})
+                .roles(new HashSet<String>() {{
+                    add("admin");
+                }})
                 .email(EMAIL)
                 .password(PASSWORD)
                 .build();

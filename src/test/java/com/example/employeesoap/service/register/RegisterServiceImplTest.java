@@ -32,14 +32,18 @@ class RegisterServiceImplTest extends IntegrationTest {
             .username(USERNAME)
             .email(EMAIL)
             .password(PASSWORD)
-            .roles(new HashSet<Role>(){{add(new Role(null, ROLE_USER));}})
+            .roles(new HashSet<Role>() {{
+                add(new Role(null, ROLE_USER));
+            }})
             .build();
 
     private final UserDto userDto = UserDto.builder()
             .username(USERNAME)
             .email(EMAIL)
             .password(PASSWORD)
-            .roles(new HashSet<String>(){{add("user");}})
+            .roles(new HashSet<String>() {{
+                add("user");
+            }})
             .status(OK)
             .build();
 

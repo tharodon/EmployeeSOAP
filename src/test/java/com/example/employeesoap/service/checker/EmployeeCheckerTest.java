@@ -32,7 +32,7 @@ class EmployeeCheckerTest {
 
         assertTrue(employeeChecker.checkSalary(MANAGER, 70_000L).isEmpty());
         assertTrue(employeeChecker.checkSalary(MANAGER, 150_000L).isEmpty());
-        assertTrue(employeeChecker.checkSalary(MANAGER,  120_000L).isEmpty());
+        assertTrue(employeeChecker.checkSalary(MANAGER, 120_000L).isEmpty());
         assertFalse(employeeChecker.checkSalary(MANAGER, 69_000L).isEmpty());
         assertFalse(employeeChecker.checkSalary(MANAGER, 151_000L).isEmpty());
     }

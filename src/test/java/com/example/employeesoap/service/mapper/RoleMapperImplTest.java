@@ -16,7 +16,7 @@ class RoleMapperImplTest extends IntegrationTest {
 
     private final RoleMapper roleMapper;
 
-    private final Set<Role> roles = new HashSet<Role>(){{
+    private final Set<Role> roles = new HashSet<Role>() {{
         add(new Role(null, ROLE_USER));
         add(new Role(null, ROLE_ADMIN));
     }};
@@ -28,7 +28,7 @@ class RoleMapperImplTest extends IntegrationTest {
 
     @Test
     void toRole() {
-        Set<String> rolesStr = new HashSet<String>(){{
+        Set<String> rolesStr = new HashSet<String>() {{
             add("user");
             add("admin");
         }};
