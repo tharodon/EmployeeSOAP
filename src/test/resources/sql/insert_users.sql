@@ -1,1 +1,2 @@
-INSERT INTO users (username, email, password) VALUES ('mamba', '1@mail.ru', '$2a$10$1rKJ4F4DGfaYHjbtvo/65.kUFk41UkARtml1aPYhvaovC0iOL.gYq');
+INSERT INTO users (username, email, password)
+VALUES ('mamba', '1@mail.ru', '$2a$10$HlnnH9NRY3L5f.gAL5tA.ODuJOQs50zSzWpxPl6KXwWCe8RZDKBwK');

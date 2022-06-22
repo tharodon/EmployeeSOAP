@@ -47,7 +47,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private JwtResponse getJwtResponse(String jwt, UserDetailsImpl userDetails, List<String> roles) {
         return new JwtResponse(jwt,
                 userDetails.getId(),
-                userDetails.getPassword(),
+                userDetails.getUsername(),
                 userDetails.getEmail(),
                 roles);
     }
