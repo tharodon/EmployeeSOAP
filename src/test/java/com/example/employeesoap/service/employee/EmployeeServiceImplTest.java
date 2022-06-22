@@ -7,7 +7,6 @@ import com.example.employeesoap.entity.Employee;
 import com.example.employeesoap.repository.EmployeeRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
 
@@ -29,7 +28,6 @@ class EmployeeServiceImplTest extends IntegrationTest {
     @Test
     void addEmployees() {
         Employee employee1 = Employee.builder()
-                .uid("5")
                 .position("Junior")
                 .age(19L)
                 .name("Matis")
@@ -37,11 +35,10 @@ class EmployeeServiceImplTest extends IntegrationTest {
                 .salary(65_000L)
                 .build();
         Employee employee2 = Employee.builder()
-                .uid("5")
-                .position("Junior")
+                .position("Manager")
                 .age(17L)
-                .name("Matis")
-                .surname("Matronus")
+                .name("Ivan")
+                .surname("Pupkin")
                 .salary(65_000L)
                 .build();
         assertEquals(SUCCESS, employeeService.addEmployees(Arrays.asList(employee1, employee2)).get(0).getStatus());
