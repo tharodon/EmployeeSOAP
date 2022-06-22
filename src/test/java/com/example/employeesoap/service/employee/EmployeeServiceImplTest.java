@@ -26,7 +26,28 @@ class EmployeeServiceImplTest extends IntegrationTest {
     }
 
     @Test
-    void addEmployees() {
+    void addValidEmployees() {
+        Employee employee1 = Employee.builder()
+                .position("Junior")
+                .age(19L)
+                .name("Matis")
+                .surname("Matronus")
+                .salary(65_000L)
+                .build();
+        Employee employee2 = Employee.builder()
+                .position("Manager")
+                .age(24L)
+                .name("Ivan")
+                .surname("Pupkin")
+                .grade("first")
+                .salary(70_000L)
+                .build();
+        assertEquals(SUCCESS, employeeService.addEmployees(Arrays.asList(employee1, employee2)).get(0).getStatus());
+        assertEquals(SUCCESS, employeeService.addEmployees(Arrays.asList(employee1, employee2)).get(1).getStatus());
+    }
+
+    @Test
+    void addEmployeesShouldBeErrorIllegalEmployee() {
         Employee employee1 = Employee.builder()
                 .position("Junior")
                 .age(19L)
