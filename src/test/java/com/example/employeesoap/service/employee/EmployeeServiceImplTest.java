@@ -82,13 +82,13 @@ class EmployeeServiceImplTest extends IntegrationTest {
     }
 
     @Test
-    void deleteEmployee() {
+    void deleteEmployeeShouldDeleteInDataBase() {
         employeeService.deleteEmployee("1");
         assertFalse(employeeRepository.findByUid("1").isPresent());
     }
 
     @Test
-    void getEmployeeById() {
+    void getExistEmployeeById() {
         EmployeeDto employee = EmployeeDto.builder()
                 .uid("4")
                 .position("Manager")

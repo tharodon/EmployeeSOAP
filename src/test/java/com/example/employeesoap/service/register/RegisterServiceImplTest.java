@@ -54,26 +54,26 @@ class RegisterServiceImplTest extends IntegrationTest {
     }
 
     @Test
-    void registerSaveTest() {
+    void registerSaveShouldSaveUserTest() {
         registerService.register(userDto);
         assertEquals(user, userRepository.findByUsername(USERNAME).get());
     }
 
     @Test
-    void registerReturnTest() {
+    void registerShouldReturnValidUserDtoTest() {
         UserDto register = registerService.register(userDto);
         assertEquals(userDto, register);
     }
 
     @Test
-    void registerStatusWithDuplicateUsernameTest() {
+    void registerStatusWithDuplicateUsernameShouldErrorTest() {
         userDto.setUsername(USERNAME_DUPLICATE);
         UserDto register = registerService.register(userDto);
         assertEquals(ERROR, register.getStatus());
     }
 
     @Test
-    void registerStatusWithDuplicateEmailTest() {
+    void registerStatusWithDuplicateEmailShouldErrorTest() {
         userDto.setEmail(EMAIL_DUPLICATE);
         UserDto register = registerService.register(userDto);
         assertEquals(ERROR, register.getStatus());

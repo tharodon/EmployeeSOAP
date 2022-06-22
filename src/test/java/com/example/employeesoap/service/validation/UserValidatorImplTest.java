@@ -33,54 +33,54 @@ class UserValidatorImplTest extends IntegrationTest {
     }
 
     @Test
-    void validateCorrectTest() {
+    void validateCorrectUserTest() {
         assertEquals(userDtoTemplate, userValidator.validate(userDtoTemplate));
     }
 
     @Test
-    void validateEmptyUsernameTest() {
+    void validateEmptyUsernameShouldErrorTest() {
         userDtoTemplate.setUsername("");
         assertEquals(ERROR, userValidator.validate(userDtoTemplate).getStatus());
     }
 
     @Test
-    void validateNullUsernameTest() {
+    void validateNullUsernameShouldErrorTest() {
         userDtoTemplate.setUsername(null);
         assertEquals(ERROR, userValidator.validate(userDtoTemplate).getStatus());
     }
 
     @Test
-    void validateExistUsernameTest() {
+    void validateExistUsernameShouldErrorTest() {
         userDtoTemplate.setUsername(USERNAME_DUPLICATE);
         assertEquals(ERROR, userValidator.validate(userDtoTemplate).getStatus());
     }
 
     @Test
-    void validateEmptyEmailTest() {
+    void validateEmptyEmailShouldErrorTest() {
         userDtoTemplate.setEmail("");
         assertEquals(ERROR, userValidator.validate(userDtoTemplate).getStatus());
     }
 
     @Test
-    void validateNullEmailTest() {
+    void validateNullEmailShouldErrorTest() {
         userDtoTemplate.setEmail(null);
         assertEquals(ERROR, userValidator.validate(userDtoTemplate).getStatus());
     }
 
     @Test
-    void validateEmptyPasswordTest() {
+    void validateEmptyPasswordShouldErrorTest() {
         userDtoTemplate.setPassword("");
         assertEquals(ERROR, userValidator.validate(userDtoTemplate).getStatus());
     }
 
     @Test
-    void validateNullPasswordTest() {
+    void validateNullPasswordShouldErrorTest() {
         userDtoTemplate.setPassword(null);
         assertEquals(ERROR, userValidator.validate(userDtoTemplate).getStatus());
     }
 
     @Test
-    void validateIncorrectRoleTest() {
+    void validateIncorrectRoleShouldErrorTest() {
         userDtoTemplate.getRoles().add("incorrect_role");
         assertEquals(ERROR, userValidator.validate(userDtoTemplate).getStatus());
     }
