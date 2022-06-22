@@ -24,7 +24,15 @@ class EmployeeDaoImplTest extends IntegrationTest {
     }
 
     @Test
-    void findEmployeeByIdTest() throws EmployeeNotFoundException {
+    void findEmployeeByExistIdTest() {
+        assertThrows(EmployeeNotFoundException.class, () -> employeeDao.findEmployeeById("not exist 1"));
+        assertThrows(EmployeeNotFoundException.class, () -> employeeDao.findEmployeeById("not exist 2"));
+        assertThrows(EmployeeNotFoundException.class, () -> employeeDao.findEmployeeById("not exist 3"));
+        assertThrows(EmployeeNotFoundException.class, () -> employeeDao.findEmployeeById("not exist 4"));
+    }
+
+    @Test
+    void shouldThrowEmployeeNotFoundExceptionTest() throws EmployeeNotFoundException {
         assertEquals(employeeRepository.findByUid("1").get(), employeeDao.findEmployeeById("1"));
         assertEquals(employeeRepository.findByUid("2").get(), employeeDao.findEmployeeById("2"));
         assertEquals(employeeRepository.findByUid("3").get(), employeeDao.findEmployeeById("3"));
@@ -32,7 +40,7 @@ class EmployeeDaoImplTest extends IntegrationTest {
     }
 
     @Test
-    void saveTest() throws EmployeeNotFoundException {
+    void shouldSaveEmployeeTest() throws EmployeeNotFoundException {
         Employee employee = Employee.builder()
                 .uid("5")
                 .position("Junior")
@@ -46,7 +54,7 @@ class EmployeeDaoImplTest extends IntegrationTest {
     }
 
     @Test
-    void updateTest() {
+    void shouldUpdateEmployeeTest() {
         Employee employee = Employee.builder()
                 .uid("4")
                 .position("Manager")
@@ -60,7 +68,7 @@ class EmployeeDaoImplTest extends IntegrationTest {
     }
 
     @Test
-    void deleteTest() {
+    void shouldDeleteEmployeeTest() {
         employeeDao.delete("1");
         assertThrows(EmployeeNotFoundException.class, () -> employeeDao.findEmployeeById("1"));
         assertEquals(3, employeeRepository.findAll().size());
