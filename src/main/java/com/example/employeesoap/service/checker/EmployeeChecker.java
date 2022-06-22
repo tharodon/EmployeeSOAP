@@ -44,13 +44,13 @@ public class EmployeeChecker {
 
     public List<String> checkRequiredFields(Employee employee) {
         List<String> invalidFields = new ArrayList<>();
-        if (employee.getName() == null) {
+        if (employee.getName() == null || employee.getName().isEmpty()) {
             invalidFields.add(NAME);
         }
-        if (employee.getSurname() == null) {
+        if (employee.getSurname() == null || employee.getSurname().isEmpty()) {
             invalidFields.add(SURNAME);
         }
-        if (employee.getPosition() == null) {
+        if (employee.getPosition() == null || employee.getPosition().isEmpty()) {
             invalidFields.add(POSITION);
         }
         if (employee.getAge() == null) {
