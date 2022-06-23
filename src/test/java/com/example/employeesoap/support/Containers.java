@@ -1,4 +1,4 @@
-package com.example.employeesoap.initializer;
+package com.example.employeesoap.support;
 
 import lombok.experimental.UtilityClass;
 import org.jetbrains.annotations.NotNull;

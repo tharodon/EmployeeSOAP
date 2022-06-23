@@ -1,14 +1,12 @@
 package com.example.employeesoap.dao;
 
-import com.example.employeesoap.IntegrationTest;
+import com.example.employeesoap.support.IntegrationTest;
 import com.example.employeesoap.api.EmployeeDao;
 import com.example.employeesoap.entity.Employee;
 import com.example.employeesoap.exception.EmployeeNotFoundException;
 import com.example.employeesoap.repository.EmployeeRepository;
-import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,6 +1,6 @@
-package com.example.employeesoap;
+package com.example.employeesoap.support;
 
-import com.example.employeesoap.initializer.Containers;
+import com.example.employeesoap.support.Containers;
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;

@@ -6,7 +6,7 @@ import com.example.employeesoap.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import static com.example.employeesoap.Constants.*;
+import static com.example.employeesoap.support.testdata.Constants.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserMapperImplTest {

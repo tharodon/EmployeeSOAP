@@ -1,6 +1,6 @@
 package com.example.employeesoap.service.register;
 
-import com.example.employeesoap.IntegrationTest;
+import com.example.employeesoap.support.IntegrationTest;
 import com.example.employeesoap.api.RegisterService;
 import com.example.employeesoap.api.UserMapper;
 import com.example.employeesoap.dto.UserDto;
@@ -8,7 +8,6 @@ import com.example.employeesoap.entity.Role;
 import com.example.employeesoap.entity.User;
 import com.example.employeesoap.repository.UserRepository;
 import com.example.employeesoap.service.mapper.UserMapperImpl;
-import com.example.employeesoap.type.AuthStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,7 +17,7 @@ import java.util.HashSet;
 import static com.example.employeesoap.type.AuthStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static com.example.employeesoap.type.RoleName.*;
-import static com.example.employeesoap.Constants.*;
+import static com.example.employeesoap.support.testdata.Constants.*;
 
 class RegisterServiceImplTest extends IntegrationTest {
 

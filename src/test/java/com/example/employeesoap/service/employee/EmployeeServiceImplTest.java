@@ -1,6 +1,6 @@
 package com.example.employeesoap.service.employee;
 
-import com.example.employeesoap.IntegrationTest;
+import com.example.employeesoap.support.IntegrationTest;
 import com.example.employeesoap.api.EmployeeService;
 import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.entity.Employee;

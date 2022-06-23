@@ -1,6 +1,6 @@
 package com.example.employeesoap.service.mapper;
 
-import com.example.employeesoap.IntegrationTest;
+import com.example.employeesoap.support.IntegrationTest;
 import com.example.employeesoap.api.RoleMapper;
 import com.example.employeesoap.entity.Role;
 import org.junit.jupiter.api.Test;

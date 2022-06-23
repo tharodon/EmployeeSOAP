@@ -1,19 +1,17 @@
 package com.example.employeesoap.controller;
 
-import com.example.employeesoap.IntegrationTest;
+import com.example.employeesoap.support.IntegrationTest;
 import com.example.employeesoap.dto.JwtResponse;
 import com.example.employeesoap.dto.LoginRequest;
 import com.example.employeesoap.dto.UserDto;
-import com.example.employeesoap.entity.Role;
 import com.example.employeesoap.repository.UserRepository;
-import com.example.employeesoap.type.RoleName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
 import java.util.HashSet;
 
-import static com.example.employeesoap.Constants.*;
+import static com.example.employeesoap.support.testdata.Constants.*;
 import static com.example.employeesoap.type.AuthStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 

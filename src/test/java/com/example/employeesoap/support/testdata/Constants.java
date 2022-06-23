@@ -1,4 +1,4 @@
-package com.example.employeesoap;
+package com.example.employeesoap.support.testdata;
 
 public class Constants {
 
