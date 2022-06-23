@@ -6,11 +6,11 @@ import com.lowagie.text.pdf.PdfWriter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import sun.misc.IOUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -75,7 +75,8 @@ public class PDFGeneratorService {
     private byte[] resourceImageToBytes() throws IOException {
         byte[] bytes;
         try (InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream(FILENAME)) {
-            bytes = IOUtils.readAllBytes(resourceAsStream);
+//            bytes = IOUtils.readAllBytes(resourceAsStream);
+            bytes = "hello, Anrdey".getBytes(StandardCharsets.UTF_8);// todo fix this bug
         }
         return bytes;
     }

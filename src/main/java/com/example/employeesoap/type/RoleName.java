@@ -2,9 +2,10 @@ package com.example.employeesoap.type;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-@AllArgsConstructor
 @Getter
+@AllArgsConstructor
 public enum RoleName {
     ROLE_USER("user"), ROLE_ADMIN("admin");
 
