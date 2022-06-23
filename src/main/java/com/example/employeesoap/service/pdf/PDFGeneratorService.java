@@ -2,9 +2,6 @@ package com.example.employeesoap.service.pdf;
 
 import com.example.employeesoap.dto.EmployeeDto;
 import com.lowagie.text.*;
-import com.lowagie.text.Font;
-import com.lowagie.text.Image;
-import com.lowagie.text.List;
 import com.lowagie.text.pdf.PdfWriter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +9,8 @@ import org.springframework.stereotype.Service;
 import sun.misc.IOUtils;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;

@@ -46,6 +46,6 @@ public class EmployeeMapperImpl implements EmployeeMapper {
     }
 
     private Long[] getTasksUIDs(List<Task> tasks) {
-        return tasks != null ? tasks.stream().map(Task::getUid).toArray(Long[]::new) : null;
+        return tasks != null ? tasks.stream().map(Task::getUid).toArray(Long[]::new) : null; //todo лучше будет сделать классический if
     }
 }

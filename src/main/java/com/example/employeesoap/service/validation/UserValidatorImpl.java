@@ -68,7 +68,7 @@ public class UserValidatorImpl implements UserValidator {
         if (request.getEmail() == null || request.getEmail().isEmpty()){
             userDto.setEmail(resourceBundle.getString(AUTH_REGISTER_EMAIL_EMPTY));
             userDto.setStatus(ERROR);
-        }else if (userRepository.existsByEmail(request.getEmail())) {
+        }else if (userRepository.existsByEmail(request.getEmail())) { //todo замечание формата
             userDto.setEmail(resourceBundle.getString(AUTH_REGISTER_EMAIL));
             userDto.setStatus(ERROR);
         } else {
@@ -80,7 +80,7 @@ public class UserValidatorImpl implements UserValidator {
         if (request.getUsername() == null || request.getUsername().isEmpty()){
             userDto.setUsername(resourceBundle.getString(AUTH_REGISTER_USERNAME_EMPTY));
             userDto.setStatus(ERROR);
-        }else if (userRepository.existsByUsername(request.getUsername())) {
+        }else if (userRepository.existsByUsername(request.getUsername())) { //todo замечание формата
             userDto.setUsername(resourceBundle.getString(AUTH_REGISTER_USERNAME));
             userDto.setStatus(ERROR);
         } else {
