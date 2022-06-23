@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 import static com.example.employeesoap.support.ConstantsSupport.*;
 import static com.example.employeesoap.type.Position.*;
@@ -35,8 +36,7 @@ public class ValidatorFieldsServiceImpl implements ValidatorFieldsService {
                     employeeChecker.checkSalary(position, employee.getSalary()));
 
             employeeMessageError.addIllegalArgumentMessage(
-                    employeeChecker.checkAdmissibleTaskCount(
-                            position, employee.getTasks() == null ? 0L : (long) employee.getTasks().size())); //todo внутренняя логика при вызове - это плохо. Вынести в приватный метод
+                    employeeChecker.checkAdmissibleTaskCount(position, getCountTasks(employee)));
         } else {
             employeeMessageError.addIllegalArgumentMessage(new HashMap<String, String>() {{
                 put(POSITION, INDEFINITE.getPosition());
@@ -46,5 +46,12 @@ public class ValidatorFieldsServiceImpl implements ValidatorFieldsService {
             return employeeMessageError.getEmployeeErrorDto();
         }
         return null;
+    }
+
+    private long getCountTasks(Employee employee) {
+        if (Objects.isNull(employee.getTasks())) {
+            return 0L;
+        }
+        return employee.getTasks().size();
     }
 }

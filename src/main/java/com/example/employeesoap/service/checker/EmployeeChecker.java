@@ -69,6 +69,19 @@ public class EmployeeChecker {
         return invalidFields;
     }
 
+    public Map<String, String> checkAdmissibleTaskCount(Position position, Long countTasks) {
+        Map<String, String> response = new HashMap<>();
+        if (countTasks > position.getCountTasksMax()) {
+            String message = MessageFormat.format(
+                    resourceBundle.getString(TASKS_BUNDLE_KEY),
+                    position.getPosition(),
+                    position.getCountTasksMax(),
+                    countTasks);
+            response.put(TASKS_UID, message);
+        }
+        return response;
+    }
+
     private boolean isLegalSalary(Position position, Long salary) {
         return salary >= position.getSalaryMin() && salary <= position.getSalaryMax();
     }
@@ -82,19 +95,6 @@ public class EmployeeChecker {
             nullableFields.add(DESCRIPTION);
         }
         return nullableFields;
-    }
-
-    public Map<String, String> checkAdmissibleTaskCount(Position position, Long countTasks) { //todo переместить метод выше. над првиатными методами
-        Map<String, String> response = new HashMap<>();
-        if (countTasks > position.getCountTasksMax()) {
-            String message = MessageFormat.format(
-                    resourceBundle.getString(TASKS_BUNDLE_KEY),
-                    position.getPosition(),
-                    position.getCountTasksMax(),
-                    countTasks);
-            response.put(TASKS_UID, message);
-        }
-        return response;
     }
 
     private List<String> requiredFieldsManager(Employee employee) {

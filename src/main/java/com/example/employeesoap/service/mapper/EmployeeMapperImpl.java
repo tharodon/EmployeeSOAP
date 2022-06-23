@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class EmployeeMapperImpl implements EmployeeMapper {
@@ -46,6 +47,9 @@ public class EmployeeMapperImpl implements EmployeeMapper {
     }
 
     private Long[] getTasksUIDs(List<Task> tasks) {
-        return tasks != null ? tasks.stream().map(Task::getUid).toArray(Long[]::new) : null; //todo лучше будет сделать классический if
+        if (Objects.nonNull(tasks)){
+            return tasks.stream().map(Task::getUid).toArray(Long[]::new);
+        }
+        return null;
     }
 }

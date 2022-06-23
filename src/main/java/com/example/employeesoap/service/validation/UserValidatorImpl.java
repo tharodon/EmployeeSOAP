@@ -65,10 +65,10 @@ public class UserValidatorImpl implements UserValidator {
     }
 
     private void emailValidate(UserDto request, UserDto userDto) {
-        if (request.getEmail() == null || request.getEmail().isEmpty()){
+        if (request.getEmail() == null || request.getEmail().isEmpty()) {
             userDto.setEmail(resourceBundle.getString(AUTH_REGISTER_EMAIL_EMPTY));
             userDto.setStatus(ERROR);
-        }else if (userRepository.existsByEmail(request.getEmail())) { //todo замечание формата
+        } else if (userRepository.existsByEmail(request.getEmail())) {
             userDto.setEmail(resourceBundle.getString(AUTH_REGISTER_EMAIL));
             userDto.setStatus(ERROR);
         } else {
@@ -77,10 +77,10 @@ public class UserValidatorImpl implements UserValidator {
     }
 
     private void usernameValidate(UserDto request, UserDto userDto) {
-        if (request.getUsername() == null || request.getUsername().isEmpty()){
+        if (request.getUsername() == null || request.getUsername().isEmpty()) {
             userDto.setUsername(resourceBundle.getString(AUTH_REGISTER_USERNAME_EMPTY));
             userDto.setStatus(ERROR);
-        }else if (userRepository.existsByUsername(request.getUsername())) { //todo замечание формата
+        } else if (userRepository.existsByUsername(request.getUsername())) {
             userDto.setUsername(resourceBundle.getString(AUTH_REGISTER_USERNAME));
             userDto.setStatus(ERROR);
         } else {
