@@ -1,13 +1,13 @@
-/* (C)2022 */
 package com.example.employeesoap.service.checker;
-
-import static com.example.employeesoap.support.ConstantsSupport.*;
-import static com.example.employeesoap.type.Position.*;
 
 import com.example.employeesoap.entity.Employee;
 import com.example.employeesoap.type.Position;
+
 import java.text.MessageFormat;
 import java.util.*;
+
+import static com.example.employeesoap.support.ConstantsSupport.*;
+import static com.example.employeesoap.type.Position.*;
 
 public class EmployeeChecker {
 

@@ -1,4 +1,3 @@
-/* (C)2022 */
 package com.example.employeesoap.dto;
 
 import com.example.employeesoap.type.Position;

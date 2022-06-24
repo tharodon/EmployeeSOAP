@@ -1,8 +1,4 @@
-/* (C)2022 */
 package com.example.employeesoap.service.validation;
-
-import static com.example.employeesoap.support.ConstantsSupport.*;
-import static com.example.employeesoap.type.Position.*;
 
 import com.example.employeesoap.api.ValidatorFieldsService;
 import com.example.employeesoap.dto.EmployeeDto;
@@ -10,10 +6,15 @@ import com.example.employeesoap.entity.Employee;
 import com.example.employeesoap.service.checker.EmployeeChecker;
 import com.example.employeesoap.service.employee.EmployeeErrorDtoInitializer;
 import com.example.employeesoap.type.Position;
-import java.util.HashMap;
-import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Objects;
+
+import static com.example.employeesoap.support.ConstantsSupport.POSITION;
+import static com.example.employeesoap.type.Position.INDEFINITE;
+import static com.example.employeesoap.type.Position.getDefine;
 
 @Service
 @RequiredArgsConstructor

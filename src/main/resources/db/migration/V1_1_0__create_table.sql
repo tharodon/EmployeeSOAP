@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS employee
     grade       VARCHAR(50),
     age         INT         NOT NULL,
     description TEXT
-    );
+);
 
 CREATE TABLE IF NOT EXISTS task
 (
@@ -22,6 +22,6 @@ CREATE TABLE IF NOT EXISTS distribute
     id          BIGSERIAL NOT NULL PRIMARY KEY,
     task_id     BIGINT    NOT NULL,
     employee_id BIGSERIAL NOT NULL,
-    FOREIGN KEY (task_id) REFERENCES task (uid) on delete cascade ,
+    FOREIGN KEY (task_id) REFERENCES task (uid) on delete cascade,
     FOREIGN KEY (employee_id) REFERENCES employee (id) on delete cascade
-    );
+);

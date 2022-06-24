@@ -1,12 +1,7 @@
-/* (C)2022 */
 package com.example.employeesoap.config;
-
-import static org.apache.kafka.clients.consumer.ConsumerConfig.*;
 
 import com.example.employeesoap.entity.Employee;
 import com.example.employeesoap.support.EmployeeDeserializer;
-import java.util.HashMap;
-import java.util.Map;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +11,11 @@ import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.config.KafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.apache.kafka.clients.consumer.ConsumerConfig.*;
 
 @EnableKafka
 @Configuration

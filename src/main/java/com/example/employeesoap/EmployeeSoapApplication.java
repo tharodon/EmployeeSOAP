@@ -1,4 +1,3 @@
-/* (C)2022 */
 package com.example.employeesoap;
 
 import org.springframework.boot.SpringApplication;

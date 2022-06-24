@@ -1,14 +1,14 @@
-/* (C)2022 */
 package com.example.employeesoap.masking;
 
 import ch.qos.logback.classic.PatternLayout;
 import ch.qos.logback.classic.spi.ILoggingEvent;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @NoArgsConstructor
 @Setter

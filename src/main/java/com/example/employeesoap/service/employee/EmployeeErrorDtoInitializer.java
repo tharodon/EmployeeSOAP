@@ -1,13 +1,14 @@
-/* (C)2022 */
 package com.example.employeesoap.service.employee;
 
-import static com.example.employeesoap.support.ConstantsSupport.*;
-import static com.example.employeesoap.type.Status.*;
-
 import com.example.employeesoap.dto.EmployeeDto;
+import lombok.Getter;
+
 import java.util.List;
 import java.util.Map;
-import lombok.Getter;
+
+import static com.example.employeesoap.support.ConstantsSupport.*;
+import static com.example.employeesoap.type.Status.ERROR;
+import static com.example.employeesoap.type.Status.SUCCESS;
 
 @Getter
 public class EmployeeErrorDtoInitializer {
@@ -25,41 +26,34 @@ public class EmployeeErrorDtoInitializer {
         }
         for (String field : incorrectFields) {
             switch (field) {
-                case NAME:
-                    {
-                        employeeErrorDto.setName(MESSAGE);
-                        break;
-                    }
-                case SURNAME:
-                    {
-                        employeeErrorDto.setSurname(MESSAGE);
-                        break;
-                    }
-                case POSITION:
-                    {
-                        employeeErrorDto.setPosition(MESSAGE);
-                        break;
-                    }
-                case GRADE:
-                    {
-                        employeeErrorDto.setGrade(MESSAGE);
-                        break;
-                    }
-                case DESCRIPTION:
-                    {
-                        employeeErrorDto.setDescription(MESSAGE);
-                        break;
-                    }
-                case AGE:
-                    {
-                        employeeErrorDto.setAge(MESSAGE);
-                        break;
-                    }
-                case SALARY:
-                    {
-                        employeeErrorDto.setSalary(MESSAGE);
-                        break;
-                    }
+                case NAME: {
+                    employeeErrorDto.setName(MESSAGE);
+                    break;
+                }
+                case SURNAME: {
+                    employeeErrorDto.setSurname(MESSAGE);
+                    break;
+                }
+                case POSITION: {
+                    employeeErrorDto.setPosition(MESSAGE);
+                    break;
+                }
+                case GRADE: {
+                    employeeErrorDto.setGrade(MESSAGE);
+                    break;
+                }
+                case DESCRIPTION: {
+                    employeeErrorDto.setDescription(MESSAGE);
+                    break;
+                }
+                case AGE: {
+                    employeeErrorDto.setAge(MESSAGE);
+                    break;
+                }
+                case SALARY: {
+                    employeeErrorDto.setSalary(MESSAGE);
+                    break;
+                }
                 default:
                     break;
             }
@@ -72,46 +66,38 @@ public class EmployeeErrorDtoInitializer {
         }
         for (Map.Entry<String, String> entry : illegalArguments.entrySet()) {
             switch (entry.getKey()) {
-                case NAME:
-                    {
-                        employeeErrorDto.setName(entry.getValue());
-                        break;
-                    }
-                case SURNAME:
-                    {
-                        employeeErrorDto.setSurname(entry.getValue());
-                        break;
-                    }
-                case POSITION:
-                    {
-                        employeeErrorDto.setPosition(entry.getValue());
-                        break;
-                    }
-                case GRADE:
-                    {
-                        employeeErrorDto.setGrade(entry.getValue());
-                        break;
-                    }
-                case DESCRIPTION:
-                    {
-                        employeeErrorDto.setDescription(entry.getValue());
-                        break;
-                    }
-                case AGE:
-                    {
-                        employeeErrorDto.setAge(entry.getValue());
-                        break;
-                    }
-                case SALARY:
-                    {
-                        employeeErrorDto.setSalary(entry.getValue());
-                        break;
-                    }
-                case TASKS_UID:
-                    {
-                        employeeErrorDto.setTasksUID(entry.getValue());
-                        break;
-                    }
+                case NAME: {
+                    employeeErrorDto.setName(entry.getValue());
+                    break;
+                }
+                case SURNAME: {
+                    employeeErrorDto.setSurname(entry.getValue());
+                    break;
+                }
+                case POSITION: {
+                    employeeErrorDto.setPosition(entry.getValue());
+                    break;
+                }
+                case GRADE: {
+                    employeeErrorDto.setGrade(entry.getValue());
+                    break;
+                }
+                case DESCRIPTION: {
+                    employeeErrorDto.setDescription(entry.getValue());
+                    break;
+                }
+                case AGE: {
+                    employeeErrorDto.setAge(entry.getValue());
+                    break;
+                }
+                case SALARY: {
+                    employeeErrorDto.setSalary(entry.getValue());
+                    break;
+                }
+                case TASKS_UID: {
+                    employeeErrorDto.setTasksUID(entry.getValue());
+                    break;
+                }
                 default:
                     break;
             }

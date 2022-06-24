@@ -1,16 +1,16 @@
-/* (C)2022 */
 package com.example.employeesoap.service.mapper;
-
-import static com.example.employeesoap.type.Status.*;
 
 import com.example.employeesoap.api.EmployeeMapper;
 import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.entity.Employee;
 import com.example.employeesoap.entity.Task;
+import org.springframework.stereotype.Service;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import org.springframework.stereotype.Service;
+
+import static com.example.employeesoap.type.Status.SUCCESS;
 
 @Service
 public class EmployeeMapperImpl implements EmployeeMapper {

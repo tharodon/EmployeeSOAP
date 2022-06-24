@@ -1,4 +1,3 @@
-/* (C)2022 */
 package com.example.employeesoap.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;

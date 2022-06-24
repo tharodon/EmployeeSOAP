@@ -1,8 +1,8 @@
-/* (C)2022 */
 package com.example.employeesoap.service.util;
 
-import java.nio.charset.StandardCharsets;
 import org.springframework.util.DigestUtils;
+
+import java.nio.charset.StandardCharsets;
 
 public class UidGeneratorRandom {
 

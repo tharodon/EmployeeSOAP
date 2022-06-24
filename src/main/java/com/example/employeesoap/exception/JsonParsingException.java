@@ -1,11 +1,11 @@
-/* (C)2022 */
 package com.example.employeesoap.exception;
-
-import static com.example.employeesoap.support.ConstantsSupport.*;
 
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
+
+import static com.example.employeesoap.support.ConstantsSupport.FILENAME;
+import static com.example.employeesoap.support.ConstantsSupport.JSON_BUNDLE_KEY;
 
 public class JsonParsingException extends RuntimeException {
     public JsonParsingException(String jsonObj, String message) {

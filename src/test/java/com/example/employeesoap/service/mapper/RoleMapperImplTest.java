@@ -1,16 +1,17 @@
-/* (C)2022 */
 package com.example.employeesoap.service.mapper;
-
-import static com.example.employeesoap.type.RoleName.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import com.example.employeesoap.api.RoleMapper;
 import com.example.employeesoap.entity.Role;
 import com.example.employeesoap.support.IntegrationTest;
-import java.util.HashSet;
-import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import static com.example.employeesoap.type.RoleName.ROLE_ADMIN;
+import static com.example.employeesoap.type.RoleName.ROLE_USER;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RoleMapperImplTest extends IntegrationTest {
 

@@ -1,9 +1,9 @@
-/* (C)2022 */
 package com.example.employeesoap.entity;
 
 import com.example.employeesoap.type.RoleName;
-import javax.persistence.*;
 import lombok.*;
+
+import javax.persistence.*;
 
 @Getter
 @Setter

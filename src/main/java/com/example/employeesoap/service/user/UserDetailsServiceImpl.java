@@ -1,4 +1,3 @@
-/* (C)2022 */
 package com.example.employeesoap.service.user;
 
 import com.example.employeesoap.entity.User;

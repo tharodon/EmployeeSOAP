@@ -1,4 +1,3 @@
-/* (C)2022 */
 package com.example.employeesoap.config;
 
 import com.example.employeesoap.jwt.AuthEntryPointJwt;

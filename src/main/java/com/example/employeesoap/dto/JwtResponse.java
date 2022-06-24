@@ -1,12 +1,12 @@
-/* (C)2022 */
 package com.example.employeesoap.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.util.List;
 
 @AllArgsConstructor
 @Getter

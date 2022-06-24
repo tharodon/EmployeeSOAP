@@ -1,4 +1,3 @@
-/* (C)2022 */
 package com.example.employeesoap.kafka;
 
 import com.example.employeesoap.api.TaskCreator;

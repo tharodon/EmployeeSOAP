@@ -1,4 +1,3 @@
-/* (C)2022 */
 package com.example.employeesoap.config;
 
 import io.swagger.v3.oas.models.OpenAPI;

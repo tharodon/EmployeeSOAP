@@ -1,10 +1,10 @@
-/* (C)2022 */
 package com.example.employeesoap.entity;
 
+import lombok.*;
+
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.*;
-import lombok.*;
 
 @Getter
 @Setter
@@ -21,9 +21,12 @@ public class User {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column private String username;
-    @Column private String email;
-    @Column private String password;
+    @Column
+    private String username;
+    @Column
+    private String email;
+    @Column
+    private String password;
 
     @ManyToMany
     @JoinTable(

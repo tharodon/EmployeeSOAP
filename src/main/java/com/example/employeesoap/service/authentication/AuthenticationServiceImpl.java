@@ -1,4 +1,3 @@
-/* (C)2022 */
 package com.example.employeesoap.service.authentication;
 
 import com.example.employeesoap.api.AuthenticationService;
@@ -6,9 +5,6 @@ import com.example.employeesoap.dto.JwtResponse;
 import com.example.employeesoap.dto.LoginRequest;
 import com.example.employeesoap.jwt.JwtService;
 import com.example.employeesoap.service.user.UserDetailsImpl;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,6 +13,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service

@@ -1,10 +1,10 @@
-/* (C)2022 */
 package com.example.employeesoap.dto;
 
 import com.example.employeesoap.type.AuthStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.Set;
 import lombok.*;
+
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
