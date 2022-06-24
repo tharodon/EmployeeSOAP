@@ -6,14 +6,17 @@
 
 plugins {
     id 'java'
-    id 'maven-publish'
+    id 'org.springframework.boot' version '2.7.1'
+//    id 'maven-publish'
+}
+
+bootJar {
+    mainClass = 'com.example.employeesoap.EmployeeSoapApplication'
 }
 
 repositories {
-    mavenLocal()
-    maven {
-        url = uri('https://repo.maven.apache.org/maven2/')
-    }
+    mavenCentral()
+
 }
 
 dependencies {
@@ -32,8 +35,9 @@ dependencies {
     testImplementation 'org.testcontainers:kafka:1.17.2'
     testImplementation 'org.springframework.security:spring-security-test:4.2.2.RELEASE'
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.7'
-    implementation 'org.projectlombok:lombok:1.18.24'
+    compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor "org.projectlombok:lombok:1.18.24"
+    testImplementation 'org.projectlombok:lombok:1.18.24'
 }
 
 group = 'com.example'
@@ -41,18 +45,7 @@ version = '0.0.1-SNAPSHOT'
 description = 'EmployeeSOAP'
 java.sourceCompatibility = JavaVersion.VERSION_11
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            from(components.java)
-        }
-    }
-}
 
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
-}
-
-tasks.named('test') {
+test {
     useJUnitPlatform()
 }

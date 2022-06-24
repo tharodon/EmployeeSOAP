@@ -5,12 +5,16 @@ import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfWriter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -72,11 +76,11 @@ public class PDFGeneratorService {
         return image;
     }
 
-    private byte[] resourceImageToBytes() throws IOException {
+    public byte[] resourceImageToBytes() throws IOException {
         byte[] bytes;
         try (InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream(FILENAME)) {
-//            bytes = IOUtils.readAllBytes(resourceAsStream);
-            bytes = "hello, Anrdey".getBytes(StandardCharsets.UTF_8);// todo fix this bug
+            assert resourceAsStream != null;
+            bytes = resourceAsStream.readAllBytes();
         }
         return bytes;
     }
