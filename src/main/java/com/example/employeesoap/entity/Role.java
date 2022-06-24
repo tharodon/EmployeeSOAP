@@ -1,9 +1,9 @@
+/* (C)2022 */
 package com.example.employeesoap.entity;
 
 import com.example.employeesoap.type.RoleName;
-import lombok.*;
-
 import javax.persistence.*;
+import lombok.*;
 
 @Getter
 @Setter
@@ -21,6 +21,4 @@ public class Role {
     @Column
     @Enumerated(EnumType.STRING)
     private RoleName name;
-
-
 }

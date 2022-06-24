@@ -1,19 +1,19 @@
+/* (C)2022 */
 package com.example.employeesoap.service.validation;
+
+import static com.example.employeesoap.support.ConstantsSupport.*;
+import static com.example.employeesoap.type.Position.*;
 
 import com.example.employeesoap.api.ValidatorFieldsService;
 import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.entity.Employee;
-import com.example.employeesoap.service.employee.EmployeeErrorDtoInitializer;
 import com.example.employeesoap.service.checker.EmployeeChecker;
+import com.example.employeesoap.service.employee.EmployeeErrorDtoInitializer;
 import com.example.employeesoap.type.Position;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.util.HashMap;
 import java.util.Objects;
-
-import static com.example.employeesoap.support.ConstantsSupport.*;
-import static com.example.employeesoap.type.Position.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -38,9 +38,12 @@ public class ValidatorFieldsServiceImpl implements ValidatorFieldsService {
             employeeMessageError.addIllegalArgumentMessage(
                     employeeChecker.checkAdmissibleTaskCount(position, getCountTasks(employee)));
         } else {
-            employeeMessageError.addIllegalArgumentMessage(new HashMap<String, String>() {{
-                put(POSITION, INDEFINITE.getPosition());
-            }});
+            employeeMessageError.addIllegalArgumentMessage(
+                    new HashMap<String, String>() {
+                        {
+                            put(POSITION, INDEFINITE.getPosition());
+                        }
+                    });
         }
         if (employeeMessageError.hasErrors()) {
             return employeeMessageError.getEmployeeErrorDto();

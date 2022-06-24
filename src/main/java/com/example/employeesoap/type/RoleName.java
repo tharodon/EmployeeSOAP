@@ -1,13 +1,14 @@
+/* (C)2022 */
 package com.example.employeesoap.type;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
 @AllArgsConstructor
 public enum RoleName {
-    ROLE_USER("user"), ROLE_ADMIN("admin");
+    ROLE_USER("user"),
+    ROLE_ADMIN("admin");
 
     private final String title;
 

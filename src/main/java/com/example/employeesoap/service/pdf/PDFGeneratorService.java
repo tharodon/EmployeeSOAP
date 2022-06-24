@@ -1,25 +1,20 @@
+/* (C)2022 */
 package com.example.employeesoap.service.pdf;
 
 import com.example.employeesoap.dto.EmployeeDto;
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfWriter;
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
-import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import javax.servlet.http.HttpServletResponse;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
@@ -47,6 +42,7 @@ public class PDFGeneratorService {
     private static final int WIDTH = 100;
     private static final int HEIGHT = 100;
     private static final int FONT_DATE_OF_DOWNLOAD_SIZE = 11;
+
     @SneakyThrows
     public void export(HttpServletResponse response, EmployeeDto employeeDto) {
         responseInit(response);
@@ -78,7 +74,8 @@ public class PDFGeneratorService {
 
     public byte[] resourceImageToBytes() throws IOException {
         byte[] bytes;
-        try (InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream(FILENAME)) {
+        try (InputStream resourceAsStream =
+                getClass().getClassLoader().getResourceAsStream(FILENAME)) {
             assert resourceAsStream != null;
             bytes = resourceAsStream.readAllBytes();
         }

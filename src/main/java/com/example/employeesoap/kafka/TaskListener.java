@@ -1,14 +1,11 @@
+/* (C)2022 */
 package com.example.employeesoap.kafka;
 
 import com.example.employeesoap.api.EmployeeDao;
 import com.example.employeesoap.entity.Employee;
-import com.example.employeesoap.exception.JsonParsingException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 

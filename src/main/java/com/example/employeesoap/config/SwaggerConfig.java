@@ -1,3 +1,4 @@
+/* (C)2022 */
 package com.example.employeesoap.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
@@ -19,8 +20,6 @@ public class SwaggerConfig {
                                         new Contact()
                                                 .email("tosha-pavlov-1998@mail.ru")
                                                 .url("https://google.com")
-                                                .name("Anton Pavlov")
-                                )
-                );
+                                                .name("Anton Pavlov")));
     }
 }

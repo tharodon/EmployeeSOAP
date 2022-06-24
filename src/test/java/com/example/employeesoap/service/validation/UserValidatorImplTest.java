@@ -1,31 +1,35 @@
+/* (C)2022 */
 package com.example.employeesoap.service.validation;
-
-import com.example.employeesoap.support.IntegrationTest;
-import com.example.employeesoap.api.UserValidator;
-import com.example.employeesoap.dto.UserDto;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.HashSet;
 
 import static com.example.employeesoap.support.testdata.Constants.*;
 import static com.example.employeesoap.type.AuthStatus.ERROR;
 import static com.example.employeesoap.type.AuthStatus.OK;
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.example.employeesoap.api.UserValidator;
+import com.example.employeesoap.dto.UserDto;
+import com.example.employeesoap.support.IntegrationTest;
+import java.util.HashSet;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
 class UserValidatorImplTest extends IntegrationTest {
 
     private final UserValidator userValidator;
 
-    UserDto userDtoTemplate = UserDto.builder()
-            .username(USERNAME)
-            .email(EMAIL)
-            .password(PASSWORD)
-            .roles(new HashSet<String>() {{
-                add("user");
-            }})
-            .status(OK)
-            .build();
+    UserDto userDtoTemplate =
+            UserDto.builder()
+                    .username(USERNAME)
+                    .email(EMAIL)
+                    .password(PASSWORD)
+                    .roles(
+                            new HashSet<String>() {
+                                {
+                                    add("user");
+                                }
+                            })
+                    .status(OK)
+                    .build();
 
     @Autowired
     public UserValidatorImplTest(UserValidator userValidator) {

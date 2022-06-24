@@ -1,3 +1,4 @@
+/* (C)2022 */
 package com.example.employeesoap.kafka;
 
 import com.example.employeesoap.api.TaskCreator;
@@ -19,23 +20,26 @@ public class TaskCreatorImpl implements TaskCreator {
 
     @Value("${topic.save}")
     private String topicSaveName;
+
     private final KafkaTemplate<String, Employee> kafkaTemplate;
 
     @Override
     public void createTask(@NonNull Employee employee) {
         log.info("request task: {}", employee);
-        ListenableFuture<SendResult<String, Employee>> send = kafkaTemplate.send(topicSaveName, employee.getUid(), employee);
-        send.addCallback(new ListenableFutureCallback<SendResult<String, Employee>>() {
-            @Override
-            public void onFailure(Throwable ex) {
-                log.info("Failure send: {}", ex.getMessage());
-            }
+        ListenableFuture<SendResult<String, Employee>> send =
+                kafkaTemplate.send(topicSaveName, employee.getUid(), employee);
+        send.addCallback(
+                new ListenableFutureCallback<SendResult<String, Employee>>() {
+                    @Override
+                    public void onFailure(Throwable ex) {
+                        log.info("Failure send: {}", ex.getMessage());
+                    }
 
-            @Override
-            public void onSuccess(SendResult<String, Employee> result) {
-                log.info("Success send: {}", result);
-            }
-        });
+                    @Override
+                    public void onSuccess(SendResult<String, Employee> result) {
+                        log.info("Success send: {}", result);
+                    }
+                });
         kafkaTemplate.flush();
     }
 }

@@ -1,14 +1,14 @@
+/* (C)2022 */
 package com.example.employeesoap.masking;
 
 import ch.qos.logback.classic.PatternLayout;
 import ch.qos.logback.classic.spi.ILoggingEvent;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @Setter
@@ -45,12 +45,11 @@ public class MaskingPatternLayout extends PatternLayout {
     }
 
     private int getValueLength(int pos, StringBuilder message) {
-        while (pos < message.length() &&
-                message.charAt(pos) != SEPARATOR &&
-                message.charAt(pos) != END_OF_ENTITY_FIELDS) {
+        while (pos < message.length()
+                && message.charAt(pos) != SEPARATOR
+                && message.charAt(pos) != END_OF_ENTITY_FIELDS) {
             pos++;
         }
         return pos;
     }
-
 }

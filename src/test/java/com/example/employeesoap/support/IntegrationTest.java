@@ -1,3 +1,4 @@
+/* (C)2022 */
 package com.example.employeesoap.support;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -7,17 +8,16 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
-@Sql(scripts = {
-        "/sql/delete_employees.sql",
-        "/sql/insert_employees.sql",
-        "/sql/insert_roles.sql",
-        "/sql/insert_users.sql",
-})
+@Sql(
+        scripts = {
+            "/sql/delete_employees.sql",
+            "/sql/insert_employees.sql",
+            "/sql/insert_roles.sql",
+            "/sql/insert_users.sql",
+        })
 @ActiveProfiles("test")
 @SpringBootTest
-@ContextConfiguration(initializers = {
-        Containers.Initializer.class
-})
+@ContextConfiguration(initializers = {Containers.Initializer.class})
 @Transactional
 public abstract class IntegrationTest {
 
@@ -26,4 +26,3 @@ public abstract class IntegrationTest {
         Containers.Initializer.start();
     }
 }
-

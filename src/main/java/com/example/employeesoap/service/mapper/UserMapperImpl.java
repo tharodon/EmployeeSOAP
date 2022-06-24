@@ -1,14 +1,14 @@
+/* (C)2022 */
 package com.example.employeesoap.service.mapper;
 
 import com.example.employeesoap.api.UserMapper;
+import com.example.employeesoap.dto.UserDto;
 import com.example.employeesoap.entity.Role;
 import com.example.employeesoap.entity.User;
-import com.example.employeesoap.dto.UserDto;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -25,5 +25,4 @@ public class UserMapperImpl implements UserMapper {
                 .roles(roles)
                 .build();
     }
-
 }

@@ -1,10 +1,11 @@
+/* (C)2022 */
 package com.example.employeesoap.service.checker;
-
-import com.example.employeesoap.entity.Employee;
-import org.junit.jupiter.api.Test;
 
 import static com.example.employeesoap.type.Position.*;
 import static org.junit.jupiter.api.Assertions.*;
+
+import com.example.employeesoap.entity.Employee;
+import org.junit.jupiter.api.Test;
 
 class EmployeeCheckerTest {
 
@@ -101,114 +102,123 @@ class EmployeeCheckerTest {
 
     @Test
     void checkRequiredFieldsValidJuniorEmployee() {
-        Employee employee = Employee.builder()
-                .position("Junior")
-                .age(19L)
-                .name("Vasiliy")
-                .surname("Matronus")
-                .salary(80_000L)
-                .build();
+        Employee employee =
+                Employee.builder()
+                        .position("Junior")
+                        .age(19L)
+                        .name("Vasiliy")
+                        .surname("Matronus")
+                        .salary(80_000L)
+                        .build();
         assertTrue(employeeChecker.checkRequiredFields(employee).isEmpty());
     }
 
     @Test
     void checkRequiredFieldsValidMiddleEmployee() {
-        Employee employee = Employee.builder()
-                .position("Middle")
-                .age(25L)
-                .name("Vasiliy")
-                .surname("Matronus")
-                .salary(170_000L)
-                .build();
+        Employee employee =
+                Employee.builder()
+                        .position("Middle")
+                        .age(25L)
+                        .name("Vasiliy")
+                        .surname("Matronus")
+                        .salary(170_000L)
+                        .build();
         assertTrue(employeeChecker.checkRequiredFields(employee).isEmpty());
     }
 
     @Test
     void checkRequiredFieldsValidManagerEmployee() {
-        Employee employee = Employee.builder()
-                .position("Manager")
-                .age(25L)
-                .name("Vasiliy")
-                .surname("Matronus")
-                .salary(140_000L)
-                .grade("first")
-                .build();
+        Employee employee =
+                Employee.builder()
+                        .position("Manager")
+                        .age(25L)
+                        .name("Vasiliy")
+                        .surname("Matronus")
+                        .salary(140_000L)
+                        .grade("first")
+                        .build();
         assertTrue(employeeChecker.checkRequiredFields(employee).isEmpty());
     }
 
     @Test
     void checkRequiredFieldsValidSeniorEmployee() {
-        Employee employee = Employee.builder()
-                .position("Senior")
-                .age(31L)
-                .name("Vasiliy")
-                .surname("Matronus")
-                .salary(410_000L)
-                .grade("first")
-                .description("test")
-                .build();
+        Employee employee =
+                Employee.builder()
+                        .position("Senior")
+                        .age(31L)
+                        .name("Vasiliy")
+                        .surname("Matronus")
+                        .salary(410_000L)
+                        .grade("first")
+                        .description("test")
+                        .build();
         assertTrue(employeeChecker.checkRequiredFields(employee).isEmpty());
     }
 
     @Test
     void checkRequiredFieldsShouldBeErrorNullableGradeOfSenior() {
-        Employee employee = Employee.builder()
-                .position("Senior")
-                .age(31L)
-                .name("Vasiliy")
-                .surname("Matronus")
-                .salary(410_000L)
-                .description("test")
-                .build();
+        Employee employee =
+                Employee.builder()
+                        .position("Senior")
+                        .age(31L)
+                        .name("Vasiliy")
+                        .surname("Matronus")
+                        .salary(410_000L)
+                        .description("test")
+                        .build();
         assertFalse(employeeChecker.checkRequiredFields(employee).isEmpty());
     }
 
     @Test
     void checkRequiredFieldsShouldBeErrorNullableDescriptionOfSenior() {
-        Employee employee = Employee.builder()
-                .position("Senior")
-                .age(31L)
-                .name("Vasiliy")
-                .surname("Matronus")
-                .salary(410_000L)
-                .grade("first")
-                .build();
+        Employee employee =
+                Employee.builder()
+                        .position("Senior")
+                        .age(31L)
+                        .name("Vasiliy")
+                        .surname("Matronus")
+                        .salary(410_000L)
+                        .grade("first")
+                        .build();
         assertFalse(employeeChecker.checkRequiredFields(employee).isEmpty());
     }
 
     @Test
     void checkRequiredFieldsShouldBeErrorNullableGradeOfManager() {
-        Employee employee = Employee.builder()
-                .position("Manager")
-                .age(25L)
-                .name("Vasiliy")
-                .surname("Matronus")
-                .salary(140_000L)
-                .build();
+        Employee employee =
+                Employee.builder()
+                        .position("Manager")
+                        .age(25L)
+                        .name("Vasiliy")
+                        .surname("Matronus")
+                        .salary(140_000L)
+                        .build();
         assertFalse(employeeChecker.checkRequiredFields(employee).isEmpty());
     }
 
     @Test
     void checkRequiredFieldsShouldBeErrorNullableAge() {
-        Employee employee = Employee.builder()
-                .position("Junior")
-                .age(null)
-                .name("Vasiliy")
-                .surname("Matronus")
-                .salary(80_000L)
-                .build();
+        Employee employee =
+                Employee.builder()
+                        .position("Junior")
+                        .age(null)
+                        .name("Vasiliy")
+                        .surname("Matronus")
+                        .salary(80_000L)
+                        .build();
         assertFalse(employeeChecker.checkRequiredFields(employee).isEmpty());
     }
 
     @Test
     void checkRequiredFieldsShouldBeErrorNullableName() {
-        Employee employee = Employee.builder()
-                .position("Junior")
-                .age(19L)
-                .name(null)
-                .surname("Matronus")
-                .salary(80_000L)
-                .build();
+        Employee employee =
+                Employee.builder()
+                        .position("Junior")
+                        .age(19L)
+                        .name(null)
+                        .surname("Matronus")
+                        .salary(80_000L)
+                        .build();
         assertFalse(employeeChecker.checkRequiredFields(employee).isEmpty());
         employee.setName("");
         assertFalse(employeeChecker.checkRequiredFields(employee).isEmpty());
@@ -216,13 +226,14 @@ class EmployeeCheckerTest {
 
     @Test
     void checkRequiredFieldsShouldBeErrorNullableSurname() {
-        Employee employee = Employee.builder()
-                .position("Junior")
-                .age(19L)
-                .name("Vasiliy")
-                .surname(null)
-                .salary(80_000L)
-                .build();
+        Employee employee =
+                Employee.builder()
+                        .position("Junior")
+                        .age(19L)
+                        .name("Vasiliy")
+                        .surname(null)
+                        .salary(80_000L)
+                        .build();
         assertFalse(employeeChecker.checkRequiredFields(employee).isEmpty());
         employee.setSurname("");
         assertFalse(employeeChecker.checkRequiredFields(employee).isEmpty());
@@ -230,25 +241,27 @@ class EmployeeCheckerTest {
 
     @Test
     void checkRequiredFieldsShouldBeErrorNullableSalary() {
-        Employee employee = Employee.builder()
-                .position("Junior")
-                .age(19L)
-                .name("Vasiliy")
-                .surname("Petrov")
-                .salary(null)
-                .build();
+        Employee employee =
+                Employee.builder()
+                        .position("Junior")
+                        .age(19L)
+                        .name("Vasiliy")
+                        .surname("Petrov")
+                        .salary(null)
+                        .build();
         assertFalse(employeeChecker.checkRequiredFields(employee).isEmpty());
     }
 
     @Test
     void checkRequiredFieldsShouldBeErrorNullablePosition() {
-        Employee employee = Employee.builder()
-                .position(null)
-                .age(19L)
-                .name("Vasiliy")
-                .surname("Petrov")
-                .salary(80_000L)
-                .build();
+        Employee employee =
+                Employee.builder()
+                        .position(null)
+                        .age(19L)
+                        .name("Vasiliy")
+                        .surname("Petrov")
+                        .salary(80_000L)
+                        .build();
         assertFalse(employeeChecker.checkRequiredFields(employee).isEmpty());
         employee.setPosition("");
         assertFalse(employeeChecker.checkRequiredFields(employee).isEmpty());

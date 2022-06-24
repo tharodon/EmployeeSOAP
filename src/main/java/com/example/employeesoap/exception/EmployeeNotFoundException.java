@@ -1,3 +1,4 @@
+/* (C)2022 */
 package com.example.employeesoap.exception;
 
 import org.springframework.http.HttpStatus;

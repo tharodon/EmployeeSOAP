@@ -1,3 +1,4 @@
+/* (C)2022 */
 package com.example.employeesoap.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -14,6 +15,7 @@ import lombok.ToString;
 public class LoginRequest {
     @Schema(description = "Логин", example = "Ivan123@mail.ru", required = true)
     private String login;
+
     @Schema(description = "Пароль", example = "YourPasswordExample", required = true)
     private String password;
 }

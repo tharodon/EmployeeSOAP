@@ -1,17 +1,17 @@
+/* (C)2022 */
 package com.example.employeesoap.service.validation;
+
+import static com.example.employeesoap.type.AuthStatus.*;
 
 import com.example.employeesoap.api.UserValidator;
 import com.example.employeesoap.dto.UserDto;
 import com.example.employeesoap.repository.UserRepository;
 import com.example.employeesoap.type.RoleName;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.text.MessageFormat;
 import java.util.*;
 import java.util.stream.Collectors;
-
-import static com.example.employeesoap.type.AuthStatus.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -45,13 +45,17 @@ public class UserValidatorImpl implements UserValidator {
 
     private void rolesValidate(UserDto request, UserDto userDto) {
         if (Objects.isNull(request.getRoles()) || request.getRoles().isEmpty()) {
-            userDto.setRoles(new HashSet<String>() {{
-                add(USER_ROLE);
-            }});
+            userDto.setRoles(
+                    new HashSet<String>() {
+                        {
+                            add(USER_ROLE);
+                        }
+                    });
         } else {
-            userDto.setRoles(request.getRoles().stream()
-                    .map(role -> checkRole(role, userDto))
-                    .collect(Collectors.toSet()));
+            userDto.setRoles(
+                    request.getRoles().stream()
+                            .map(role -> checkRole(role, userDto))
+                            .collect(Collectors.toSet()));
         }
     }
 
@@ -87,7 +91,6 @@ public class UserValidatorImpl implements UserValidator {
             userDto.setUsername(request.getUsername());
         }
     }
-
 
     private String checkRole(String role, UserDto userDto) {
         if (Objects.isNull(RoleName.getRoleName(role))) {

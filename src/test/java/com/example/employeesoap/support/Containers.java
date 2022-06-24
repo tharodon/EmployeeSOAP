@@ -1,3 +1,4 @@
+/* (C)2022 */
 package com.example.employeesoap.support;
 
 import lombok.experimental.UtilityClass;
@@ -17,19 +18,21 @@ public class Containers {
     public static final KafkaContainer kafkaContainer =
             new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:latest"));
 
-    public static class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+    public static class Initializer
+            implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
         @Override
         public void initialize(@NotNull ConfigurableApplicationContext applicationContext) {
             TestPropertyValues.of(
-                    "spring.datasource.url=" + postgresContainer.getJdbcUrl(),
-                    "spring.datasource.username=" + postgresContainer.getUsername(),
-                    "spring.datasource.password=" + postgresContainer.getPassword(),
-                    "spring.flyway.url=" + postgresContainer.getJdbcUrl(),
-                    "spring.flyway.user=" + postgresContainer.getUsername(),
-                    "spring.flyway.password=" + postgresContainer.getPassword(),
-                    "spring.kafka.bootstrap-servers=" + kafkaContainer.getBootstrapServers()
-            ).applyTo(applicationContext);
+                            "spring.datasource.url=" + postgresContainer.getJdbcUrl(),
+                            "spring.datasource.username=" + postgresContainer.getUsername(),
+                            "spring.datasource.password=" + postgresContainer.getPassword(),
+                            "spring.flyway.url=" + postgresContainer.getJdbcUrl(),
+                            "spring.flyway.user=" + postgresContainer.getUsername(),
+                            "spring.flyway.password=" + postgresContainer.getPassword(),
+                            "spring.kafka.bootstrap-servers="
+                                    + kafkaContainer.getBootstrapServers())
+                    .applyTo(applicationContext);
         }
 
         public static void start() {

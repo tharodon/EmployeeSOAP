@@ -1,26 +1,27 @@
+/* (C)2022 */
 package com.example.employeesoap.jwt;
 
 import com.example.employeesoap.service.user.UserDetailsImpl;
 import io.jsonwebtoken.*;
+import java.util.Date;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
 
 @Slf4j
 @Service
 public class JwtService {
     @Value("${app.jwt.secret}")
     private String jwtSecret;
+
     @Value("${app.jwt.expiration}")
     private Integer expiration;
 
     public String generateJwtToken(Authentication authentication) {
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
-        return Jwts.builder().
-                setSubject(userPrincipal.getUsername())
+        return Jwts.builder()
+                .setSubject(userPrincipal.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime() + expiration))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)

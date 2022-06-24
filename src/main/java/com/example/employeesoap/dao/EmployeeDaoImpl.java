@@ -1,3 +1,4 @@
+/* (C)2022 */
 package com.example.employeesoap.dao;
 
 import com.example.employeesoap.api.EmployeeDao;
@@ -7,7 +8,6 @@ import com.example.employeesoap.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
 import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
@@ -19,7 +19,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public Employee findEmployeeById(String id) throws EmployeeNotFoundException {
-        return employeeRepository.findByUid(id).orElseThrow(() -> new EmployeeNotFoundException(id));
+        return employeeRepository
+                .findByUid(id)
+                .orElseThrow(() -> new EmployeeNotFoundException(id));
     }
 
     @Transactional

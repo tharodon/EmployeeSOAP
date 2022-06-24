@@ -1,3 +1,4 @@
+/* (C)2022 */
 package com.example.employeesoap;
 
 import org.springframework.boot.SpringApplication;
@@ -9,5 +10,4 @@ public class EmployeeSoapApplication {
     public static void main(String[] args) {
         SpringApplication.run(EmployeeSoapApplication.class, args);
     }
-
 }
