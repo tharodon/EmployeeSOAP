@@ -69,6 +69,6 @@ class EmployeeDaoImplTest extends IntegrationTest {
     void shouldDeleteEmployeeTest() {
         employeeDao.delete("1");
         assertThrows(EmployeeNotFoundException.class, () -> employeeDao.findEmployeeById("1"));
-        assertEquals(3, employeeRepository.findAll().size()); //todo fix dependency from other tests
+        assertEquals(3, employeeRepository.findAll().size());
     }
 }
