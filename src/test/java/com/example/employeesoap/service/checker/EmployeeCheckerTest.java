@@ -1,11 +1,11 @@
 package com.example.employeesoap.service.checker;
 
-import com.example.employeesoap.entity.Employee;
-import org.junit.jupiter.api.Test;
-
 import static com.example.employeesoap.type.Position.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import com.example.employeesoap.entity.Employee;
+import org.junit.jupiter.api.Test;
 
 class EmployeeCheckerTest {
 

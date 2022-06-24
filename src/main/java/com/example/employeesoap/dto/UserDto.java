@@ -1,10 +1,10 @@
 package com.example.employeesoap.dto;
 
+
 import com.example.employeesoap.type.AuthStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
 import java.util.Set;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor

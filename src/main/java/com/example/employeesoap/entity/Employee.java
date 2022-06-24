@@ -1,12 +1,12 @@
 package com.example.employeesoap.entity;
 
+
 import com.example.employeesoap.type.Position;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.*;
+import lombok.*;
 
 @Builder(toBuilder = true)
 @Getter

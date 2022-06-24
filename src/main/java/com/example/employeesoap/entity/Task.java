@@ -1,11 +1,11 @@
 package com.example.employeesoap.entity;
 
+
 import io.swagger.v3.oas.annotations.media.Schema;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.*;
 
 @Entity
 @Getter

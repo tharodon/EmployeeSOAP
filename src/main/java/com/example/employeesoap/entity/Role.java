@@ -1,9 +1,9 @@
 package com.example.employeesoap.entity;
 
-import com.example.employeesoap.type.RoleName;
-import lombok.*;
 
+import com.example.employeesoap.type.RoleName;
 import javax.persistence.*;
+import lombok.*;
 
 @Getter
 @Setter

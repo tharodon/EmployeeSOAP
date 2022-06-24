@@ -1,5 +1,6 @@
 package com.example.employeesoap.type;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

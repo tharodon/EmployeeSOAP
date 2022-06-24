@@ -1,5 +1,6 @@
 package com.example.employeesoap.dto;
 
+
 import com.example.employeesoap.type.Position;
 import com.example.employeesoap.type.Status;
 import io.swagger.v3.oas.annotations.media.Schema;

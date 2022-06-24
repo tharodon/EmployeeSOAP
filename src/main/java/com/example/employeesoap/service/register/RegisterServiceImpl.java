@@ -1,15 +1,15 @@
 package com.example.employeesoap.service.register;
 
+
 import com.example.employeesoap.api.*;
 import com.example.employeesoap.dto.UserDto;
 import com.example.employeesoap.entity.Role;
 import com.example.employeesoap.entity.User;
 import com.example.employeesoap.type.AuthStatus;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.util.Set;
 
 @Slf4j
 @Service

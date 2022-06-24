@@ -1,13 +1,9 @@
 package com.example.employeesoap.service.pdf;
 
+
 import com.example.employeesoap.dto.EmployeeDto;
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfWriter;
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
@@ -15,6 +11,10 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import javax.servlet.http.HttpServletResponse;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
@@ -75,7 +75,7 @@ public class PDFGeneratorService {
     public byte[] resourceImageToBytes() throws IOException {
         byte[] bytes;
         try (InputStream resourceAsStream =
-                     getClass().getClassLoader().getResourceAsStream(FILENAME)) {
+                getClass().getClassLoader().getResourceAsStream(FILENAME)) {
             assert resourceAsStream != null;
             bytes = resourceAsStream.readAllBytes();
         }

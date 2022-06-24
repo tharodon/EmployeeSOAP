@@ -1,21 +1,20 @@
 package com.example.employeesoap.service.validation;
 
+import static com.example.employeesoap.type.AuthStatus.ERROR;
+import static com.example.employeesoap.type.AuthStatus.OK;
+
 import com.example.employeesoap.api.UserValidator;
 import com.example.employeesoap.dto.UserDto;
 import com.example.employeesoap.repository.UserRepository;
 import com.example.employeesoap.type.RoleName;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.text.MessageFormat;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
-
-import static com.example.employeesoap.type.AuthStatus.ERROR;
-import static com.example.employeesoap.type.AuthStatus.OK;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
