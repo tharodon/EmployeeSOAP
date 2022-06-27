@@ -25,6 +25,8 @@ public class Constants {
     public static final String KARL_UID = "3";
     public static final String ANNA_UID = "4";
 
+    public static final Integer COUNT_OF_EMPLOYEES = 4;
+
     public static final EmployeeDto LEGAL_EMPLOYEE_2 =
             EmployeeDto.builder()
                     .uid("4")
@@ -53,6 +55,49 @@ public class Constants {
                     .surname("Pupkin")
                     .salary(65_000L)
                     .build();
+
+    public static Employee getLegalJunior() {
+        return Employee.builder()
+                .position("Junior")
+                .age(19L)
+                .name("Vasiliy")
+                .surname("Matronus")
+                .salary(80_000L)
+                .build();
+    }
+
+    public static Employee getLegalMiddle() {
+        return Employee.builder()
+                .position("Middle")
+                .age(25L)
+                .name("Vasiliy")
+                .surname("Matronus")
+                .salary(170_000L)
+                .build();
+    }
+
+    public static Employee getLegalManager() {
+        return Employee.builder()
+                .position("Manager")
+                .age(25L)
+                .name("Vasiliy")
+                .surname("Matronus")
+                .salary(140_000L)
+                .grade("first")
+                .build();
+    }
+
+    public static Employee getLegalSenior() {
+        return Employee.builder()
+                .position("Senior")
+                .age(31L)
+                .name("Vasiliy")
+                .surname("Matronus")
+                .salary(410_000L)
+                .grade("first")
+                .description("test")
+                .build();
+    }
 
     public static UserDto getValidUserDto() {
         return UserDto.builder()

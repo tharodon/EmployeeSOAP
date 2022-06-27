@@ -72,7 +72,7 @@ public class EmployeeChecker {
 
     public Map<String, String> checkAdmissibleTaskCount(Position position, Long countTasks) {
         Map<String, String> response = new HashMap<>();
-        if (countTasks > position.getCountTasksMax()) {
+        if (countTasks > position.getCountTasksMax() || countTasks < 0) {
             String message =
                     MessageFormat.format(
                             resourceBundle.getString(TASKS_BUNDLE_KEY),

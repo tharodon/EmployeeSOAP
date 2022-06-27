@@ -1,5 +1,6 @@
 package com.example.employeesoap.dao;
 
+import static com.example.employeesoap.support.testdata.Constants.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -23,7 +24,7 @@ class EmployeeDaoImplTest extends IntegrationTest {
     }
 
     @Test
-    void findEmployeeByExistIdTest() {
+    void findEmployeeByExistId() {
         assertThrows(
                 EmployeeNotFoundException.class, () -> employeeDao.findEmployeeById("not exist 1"));
         assertThrows(
@@ -35,15 +36,15 @@ class EmployeeDaoImplTest extends IntegrationTest {
     }
 
     @Test
-    void shouldThrowEmployeeNotFoundExceptionTest() throws EmployeeNotFoundException {
-        assertEquals(employeeRepository.findByUid("1").get(), employeeDao.findEmployeeById("1"));
-        assertEquals(employeeRepository.findByUid("2").get(), employeeDao.findEmployeeById("2"));
-        assertEquals(employeeRepository.findByUid("3").get(), employeeDao.findEmployeeById("3"));
-        assertEquals(employeeRepository.findByUid("4").get(), employeeDao.findEmployeeById("4"));
+    void shouldThrowEmployeeNotFoundException() throws EmployeeNotFoundException {
+        assertEquals(employeeRepository.findByUid(VICTOR_UID).get(), employeeDao.findEmployeeById(VICTOR_UID));
+        assertEquals(employeeRepository.findByUid(OLEG_UID).get(), employeeDao.findEmployeeById(OLEG_UID));
+        assertEquals(employeeRepository.findByUid(KARL_UID).get(), employeeDao.findEmployeeById(KARL_UID));
+        assertEquals(employeeRepository.findByUid(ANNA_UID).get(), employeeDao.findEmployeeById("4"));
     }
 
     @Test
-    void shouldSaveEmployeeTest() throws EmployeeNotFoundException {
+    void saveEmployeeShouldSaveSuccess() throws EmployeeNotFoundException {
         Employee employee =
                 Employee.builder()
                         .uid("5")
@@ -54,11 +55,11 @@ class EmployeeDaoImplTest extends IntegrationTest {
                         .salary(80_000L)
                         .build();
         employeeDao.save(employee);
-        assertEquals(employee, employeeDao.findEmployeeById("5"));
+        assertEquals(employee, employeeDao.findEmployeeById(employee.getUid()));
     }
 
     @Test
-    void shouldUpdateEmployeeTest() {
+    void updateEmployeeShouldUpdateSuccess() {
         Employee employee =
                 Employee.builder()
                         .uid("4")
@@ -69,13 +70,13 @@ class EmployeeDaoImplTest extends IntegrationTest {
                         .salary(80_000L)
                         .build();
         employeeDao.update(employee);
-        assertEquals(employee, employeeRepository.findByUid("4").get());
+        assertEquals(employee, employeeRepository.findByUid(employee.getUid()).get());
     }
 
     @Test
-    void shouldDeleteEmployeeTest() {
-        employeeDao.delete("1");
-        assertThrows(EmployeeNotFoundException.class, () -> employeeDao.findEmployeeById("1"));
-        assertEquals(3, employeeRepository.findAll().size());
+    void deleteEmployeeShouldDecreaseTheCountOfEmployees() {
+        employeeDao.delete(VICTOR_UID);
+        assertThrows(EmployeeNotFoundException.class, () -> employeeDao.findEmployeeById(VICTOR_UID));
+        assertEquals(COUNT_OF_EMPLOYEES - 1, employeeRepository.findAll().size());
     }
 }

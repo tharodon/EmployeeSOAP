@@ -1,5 +1,6 @@
 package com.example.employeesoap.service.checker;
 
+import static com.example.employeesoap.support.testdata.Constants.*;
 import static com.example.employeesoap.type.Position.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -12,35 +13,35 @@ class EmployeeCheckerTest {
     private final EmployeeChecker employeeChecker = new EmployeeChecker();
 
     @Test
-    void checkLegalSalaryJunior() {
+    void checkLegalSalaryJuniorShouldGetEmptyResponse() {
         assertTrue(employeeChecker.checkSalary(JUNIOR, 50_000L).isEmpty());
         assertTrue(employeeChecker.checkSalary(JUNIOR, 70_000L).isEmpty());
         assertTrue(employeeChecker.checkSalary(JUNIOR, 55_000L).isEmpty());
     }
 
     @Test
-    void checkLegalSalaryMiddle() {
+    void checkLegalSalaryMiddleShouldGetEmptyResponse() {
         assertTrue(employeeChecker.checkSalary(MIDDLE, 90_000L).isEmpty());
         assertTrue(employeeChecker.checkSalary(MIDDLE, 210_000L).isEmpty());
         assertTrue(employeeChecker.checkSalary(MIDDLE, 115_000L).isEmpty());
     }
 
     @Test
-    void checkLegalSalarySenior() {
+    void checkLegalSalarySeniorShouldGetEmptyResponse() {
         assertTrue(employeeChecker.checkSalary(SENIOR, 210_000L).isEmpty());
         assertTrue(employeeChecker.checkSalary(SENIOR, 450_000L).isEmpty());
         assertTrue(employeeChecker.checkSalary(SENIOR, 355_000L).isEmpty());
     }
 
     @Test
-    void checkLegalSalaryManager() {
+    void checkLegalSalaryManagerShouldGetEmptyResponse() {
         assertTrue(employeeChecker.checkSalary(MANAGER, 70_000L).isEmpty());
         assertTrue(employeeChecker.checkSalary(MANAGER, 150_000L).isEmpty());
         assertTrue(employeeChecker.checkSalary(MANAGER, 120_000L).isEmpty());
     }
 
     @Test
-    void checkIllegalSalaryJunior() {
+    void checkIllegalSalaryJuniorShouldGetErrorResponse() {
         assertFalse(employeeChecker.checkSalary(JUNIOR, 49_000L).isEmpty());
         assertFalse(employeeChecker.checkSalary(JUNIOR, 71_000L).isEmpty());
         assertFalse(employeeChecker.checkSalary(MIDDLE, 89_000L).isEmpty());
@@ -52,25 +53,25 @@ class EmployeeCheckerTest {
     }
 
     @Test
-    void checkIllegalSalaryMiddle() {
+    void checkIllegalSalaryMiddleShouldGetErrorResponse() {
         assertFalse(employeeChecker.checkSalary(MIDDLE, 89_000L).isEmpty());
         assertFalse(employeeChecker.checkSalary(MIDDLE, 211_000L).isEmpty());
     }
 
     @Test
-    void checkIllegalSalarySenior() {
+    void checkIllegalSalarySeniorShouldGetErrorResponse() {
         assertFalse(employeeChecker.checkSalary(SENIOR, 209_000L).isEmpty());
         assertFalse(employeeChecker.checkSalary(SENIOR, 451_000L).isEmpty());
     }
 
     @Test
-    void checkIllegalSalaryManager() {
+    void checkIllegalSalaryManagerShouldGetErrorResponse() {
         assertFalse(employeeChecker.checkSalary(MANAGER, 69_000L).isEmpty());
         assertFalse(employeeChecker.checkSalary(MANAGER, 151_000L).isEmpty());
     }
 
     @Test
-    void checkAge() {
+    void checkAgeShouldGetEmptyResponse() {
         assertTrue(employeeChecker.checkAge(JUNIOR, 18L).isEmpty());
         assertTrue(employeeChecker.checkAge(JUNIOR, 23L).isEmpty());
         assertTrue(employeeChecker.checkAge(JUNIOR, 43L).isEmpty());
@@ -89,7 +90,7 @@ class EmployeeCheckerTest {
     }
 
     @Test
-    void checkIllegalAge() {
+    void checkIllegalAgeShouldGetErrorResponse() {
         assertFalse(employeeChecker.checkAge(JUNIOR, 17L).isEmpty());
         assertFalse(employeeChecker.checkAge(MIDDLE, 20L).isEmpty());
         assertFalse(employeeChecker.checkAge(MIDDLE, 14L).isEmpty());
@@ -101,211 +102,144 @@ class EmployeeCheckerTest {
     }
 
     @Test
-    void checkRequiredFieldsValidJuniorEmployee() {
-        Employee employee =
-                Employee.builder()
-                        .position("Junior")
-                        .age(19L)
-                        .name("Vasiliy")
-                        .surname("Matronus")
-                        .salary(80_000L)
-                        .build();
-        assertTrue(employeeChecker.checkRequiredFields(employee).isEmpty());
+    void checkRequiredFieldsValidJuniorEmployeeShouldGetEmptyResponse() {
+        assertTrue(employeeChecker.checkRequiredFields(getLegalJunior()).isEmpty());
     }
 
     @Test
-    void checkRequiredFieldsValidMiddleEmployee() {
-        Employee employee =
-                Employee.builder()
-                        .position("Middle")
-                        .age(25L)
-                        .name("Vasiliy")
-                        .surname("Matronus")
-                        .salary(170_000L)
-                        .build();
-        assertTrue(employeeChecker.checkRequiredFields(employee).isEmpty());
+    void checkRequiredFieldsValidMiddleEmployeeShouldGetEmptyResponse() {
+        assertTrue(employeeChecker.checkRequiredFields(getLegalMiddle()).isEmpty());
     }
 
     @Test
-    void checkRequiredFieldsValidManagerEmployee() {
-        Employee employee =
-                Employee.builder()
-                        .position("Manager")
-                        .age(25L)
-                        .name("Vasiliy")
-                        .surname("Matronus")
-                        .salary(140_000L)
-                        .grade("first")
-                        .build();
-        assertTrue(employeeChecker.checkRequiredFields(employee).isEmpty());
+    void checkRequiredFieldsValidManagerEmployeeShouldGetEmptyResponse() {
+        assertTrue(employeeChecker.checkRequiredFields(getLegalManager()).isEmpty());
     }
 
     @Test
-    void checkRequiredFieldsValidSeniorEmployee() {
-        Employee employee =
-                Employee.builder()
-                        .position("Senior")
-                        .age(31L)
-                        .name("Vasiliy")
-                        .surname("Matronus")
-                        .salary(410_000L)
-                        .grade("first")
-                        .description("test")
-                        .build();
-        assertTrue(employeeChecker.checkRequiredFields(employee).isEmpty());
+    void checkRequiredFieldsValidSeniorEmployeeShouldGetEmptyResponse() {
+        assertTrue(employeeChecker.checkRequiredFields(getLegalSenior()).isEmpty());
     }
 
     @Test
-    void checkRequiredFieldsShouldBeErrorNullableGradeOfSenior() {
-        Employee employee =
-                Employee.builder()
-                        .position("Senior")
-                        .age(31L)
-                        .name("Vasiliy")
-                        .surname("Matronus")
-                        .salary(410_000L)
-                        .description("test")
-                        .build();
+    void checkRequiredFieldsNullableGradeOfSeniorShouldGetErrorResponse() {
+        Employee employee = getLegalSenior();
+        employee.setGrade(null);
         assertFalse(employeeChecker.checkRequiredFields(employee).isEmpty());
     }
 
     @Test
-    void checkRequiredFieldsShouldBeErrorNullableDescriptionOfSenior() {
-        Employee employee =
-                Employee.builder()
-                        .position("Senior")
-                        .age(31L)
-                        .name("Vasiliy")
-                        .surname("Matronus")
-                        .salary(410_000L)
-                        .grade("first")
-                        .build();
+    void checkRequiredFieldsNullableDescriptionOfSeniorShouldGetErrorResponse() {
+        Employee employee = getLegalSenior();
+        employee.setDescription(null);
         assertFalse(employeeChecker.checkRequiredFields(employee).isEmpty());
     }
 
     @Test
-    void checkRequiredFieldsShouldBeErrorNullableGradeOfManager() {
-        Employee employee =
-                Employee.builder()
-                        .position("Manager")
-                        .age(25L)
-                        .name("Vasiliy")
-                        .surname("Matronus")
-                        .salary(140_000L)
-                        .build();
+    void checkRequiredFieldsNullableGradeOfManageShouldGetErrorResponse() {
+        Employee employee = getLegalManager();
+        employee.setGrade(null);
         assertFalse(employeeChecker.checkRequiredFields(employee).isEmpty());
     }
 
     @Test
-    void checkRequiredFieldsShouldBeErrorNullableAge() {
-        Employee employee =
-                Employee.builder()
-                        .position("Junior")
-                        .age(null)
-                        .name("Vasiliy")
-                        .surname("Matronus")
-                        .salary(80_000L)
-                        .build();
+    void checkRequiredFieldsNullableAgeShouldGetErrorResponse() {
+        Employee employee = getLegalJunior();
+        employee.setAge(null);
         assertFalse(employeeChecker.checkRequiredFields(employee).isEmpty());
     }
 
     @Test
-    void checkRequiredFieldsShouldBeErrorNullableName() {
-        Employee employee =
-                Employee.builder()
-                        .position("Junior")
-                        .age(19L)
-                        .name(null)
-                        .surname("Matronus")
-                        .salary(80_000L)
-                        .build();
+    void checkRequiredFieldsNullableNameShouldGetErrorResponse() {
+        Employee employee = getLegalJunior();
+        employee.setName(null);
         assertFalse(employeeChecker.checkRequiredFields(employee).isEmpty());
         employee.setName("");
         assertFalse(employeeChecker.checkRequiredFields(employee).isEmpty());
     }
 
     @Test
-    void checkRequiredFieldsShouldBeErrorNullableSurname() {
-        Employee employee =
-                Employee.builder()
-                        .position("Junior")
-                        .age(19L)
-                        .name("Vasiliy")
-                        .surname(null)
-                        .salary(80_000L)
-                        .build();
+    void checkRequiredFieldsNullableSurnameShouldGetErrorResponse() {
+        Employee employee = getLegalJunior();
+        employee.setSurname(null);
         assertFalse(employeeChecker.checkRequiredFields(employee).isEmpty());
         employee.setSurname("");
         assertFalse(employeeChecker.checkRequiredFields(employee).isEmpty());
     }
 
     @Test
-    void checkRequiredFieldsShouldBeErrorNullableSalary() {
-        Employee employee =
-                Employee.builder()
-                        .position("Junior")
-                        .age(19L)
-                        .name("Vasiliy")
-                        .surname("Petrov")
-                        .salary(null)
-                        .build();
+    void checkRequiredFieldsNullableSalaryShouldGetErrorResponse() {
+        Employee employee = getLegalJunior();
+        employee.setSalary(null);
         assertFalse(employeeChecker.checkRequiredFields(employee).isEmpty());
     }
 
     @Test
-    void checkRequiredFieldsShouldBeErrorNullablePosition() {
-        Employee employee =
-                Employee.builder()
-                        .position(null)
-                        .age(19L)
-                        .name("Vasiliy")
-                        .surname("Petrov")
-                        .salary(80_000L)
-                        .build();
+    void checkRequiredFieldsNullablePositionShouldGetErrorResponse() {
+        Employee employee = getLegalJunior();
+        employee.setPosition(null);
         assertFalse(employeeChecker.checkRequiredFields(employee).isEmpty());
         employee.setPosition("");
         assertFalse(employeeChecker.checkRequiredFields(employee).isEmpty());
     }
 
     @Test
-    void checkAdmissibleTaskCountJunior() {
+    void checkAdmissibleTaskLegalCountJuniorShouldGetEmptyResponse() {
         assertTrue(employeeChecker.checkAdmissibleTaskCount(JUNIOR, 3L).isEmpty());
         assertTrue(employeeChecker.checkAdmissibleTaskCount(JUNIOR, 0L).isEmpty());
         assertTrue(employeeChecker.checkAdmissibleTaskCount(JUNIOR, 1L).isEmpty());
-        assertFalse(employeeChecker.checkAdmissibleTaskCount(JUNIOR, 17L).isEmpty());
     }
 
     @Test
-    void checkAdmissibleTaskCountMiddle() {
+    void checkAdmissibleTaskLegalCountMiddleShouldGetEmptyResponse() {
         assertTrue(employeeChecker.checkAdmissibleTaskCount(MIDDLE, 10L).isEmpty());
         assertTrue(employeeChecker.checkAdmissibleTaskCount(MIDDLE, 9L).isEmpty());
         assertTrue(employeeChecker.checkAdmissibleTaskCount(MIDDLE, 0L).isEmpty());
+    }
+
+    @Test
+    void checkAdmissibleTaskLegalCountSeniorShouldGetEmptyResponse() {
+        assertTrue(employeeChecker.checkAdmissibleTaskCount(SENIOR, 15L).isEmpty());
+        assertTrue(employeeChecker.checkAdmissibleTaskCount(SENIOR, 14L).isEmpty());
+        assertTrue(employeeChecker.checkAdmissibleTaskCount(SENIOR, 9L).isEmpty());
+        assertTrue(employeeChecker.checkAdmissibleTaskCount(SENIOR, 0L).isEmpty());
+        assertTrue(employeeChecker.checkAdmissibleTaskCount(SENIOR, 10L).isEmpty());
+    }
+
+    @Test
+    void checkAdmissibleTaskLegalCountManagerShouldGetEmptyResponse() {
+        assertTrue(employeeChecker.checkAdmissibleTaskCount(MANAGER, 15L).isEmpty());
+        assertTrue(employeeChecker.checkAdmissibleTaskCount(MANAGER, 14L).isEmpty());
+        assertTrue(employeeChecker.checkAdmissibleTaskCount(MANAGER, 9L).isEmpty());
+        assertTrue(employeeChecker.checkAdmissibleTaskCount(MANAGER, 0L).isEmpty());
+        assertTrue(employeeChecker.checkAdmissibleTaskCount(MANAGER, 10L).isEmpty());
+    }
+
+    @Test
+    void checkAdmissibleTaskIllegalCountJuniorShouldGetErrorResponse() {
+        assertFalse(employeeChecker.checkAdmissibleTaskCount(JUNIOR, 17L).isEmpty());
+        assertFalse(employeeChecker.checkAdmissibleTaskCount(JUNIOR, -1L).isEmpty());
+        assertFalse(employeeChecker.checkAdmissibleTaskCount(JUNIOR, 187L).isEmpty());
+    }
+
+    @Test
+    void checkAdmissibleTaskIllegalCountMiddleShouldGetErrorResponse() {
         assertFalse(employeeChecker.checkAdmissibleTaskCount(MIDDLE, 17L).isEmpty());
         assertFalse(employeeChecker.checkAdmissibleTaskCount(MIDDLE, 27L).isEmpty());
         assertFalse(employeeChecker.checkAdmissibleTaskCount(MIDDLE, 11L).isEmpty());
     }
 
     @Test
-    void checkAdmissibleTaskCountSenior() {
-        assertTrue(employeeChecker.checkAdmissibleTaskCount(SENIOR, 15L).isEmpty());
-        assertTrue(employeeChecker.checkAdmissibleTaskCount(SENIOR, 14L).isEmpty());
-        assertTrue(employeeChecker.checkAdmissibleTaskCount(SENIOR, 9L).isEmpty());
-        assertTrue(employeeChecker.checkAdmissibleTaskCount(SENIOR, 0L).isEmpty());
-        assertTrue(employeeChecker.checkAdmissibleTaskCount(SENIOR, 10L).isEmpty());
-        assertFalse(employeeChecker.checkAdmissibleTaskCount(SENIOR, 25L).isEmpty());
-        assertFalse(employeeChecker.checkAdmissibleTaskCount(SENIOR, 27L).isEmpty());
-        assertFalse(employeeChecker.checkAdmissibleTaskCount(SENIOR, 18L).isEmpty());
-    }
-
-    @Test
-    void checkAdmissibleTaskCountManager() {
-        assertTrue(employeeChecker.checkAdmissibleTaskCount(MANAGER, 15L).isEmpty());
-        assertTrue(employeeChecker.checkAdmissibleTaskCount(MANAGER, 14L).isEmpty());
-        assertTrue(employeeChecker.checkAdmissibleTaskCount(MANAGER, 9L).isEmpty());
-        assertTrue(employeeChecker.checkAdmissibleTaskCount(MANAGER, 0L).isEmpty());
-        assertTrue(employeeChecker.checkAdmissibleTaskCount(MANAGER, 10L).isEmpty());
+    void checkAdmissibleTaskIllegalCountManagerShouldGetErrorResponse() {
         assertFalse(employeeChecker.checkAdmissibleTaskCount(MANAGER, 25L).isEmpty());
         assertFalse(employeeChecker.checkAdmissibleTaskCount(MANAGER, 27L).isEmpty());
         assertFalse(employeeChecker.checkAdmissibleTaskCount(MANAGER, 18L).isEmpty());
+    }
+
+    @Test
+    void checkAdmissibleTaskIllegalCountSeniorShouldGetErrorResponse() {
+        assertFalse(employeeChecker.checkAdmissibleTaskCount(SENIOR, 25L).isEmpty());
+        assertFalse(employeeChecker.checkAdmissibleTaskCount(SENIOR, 27L).isEmpty());
+        assertFalse(employeeChecker.checkAdmissibleTaskCount(SENIOR, 18L).isEmpty());
     }
 }
