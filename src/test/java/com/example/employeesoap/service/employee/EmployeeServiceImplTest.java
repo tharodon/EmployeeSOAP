@@ -1,12 +1,12 @@
 package com.example.employeesoap.service.employee;
 
+import static com.example.employeesoap.support.testdata.Constants.*;
 import static com.example.employeesoap.type.Status.ERROR;
 import static com.example.employeesoap.type.Status.SUCCESS;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import com.example.employeesoap.api.EmployeeService;
-import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.entity.Employee;
 import com.example.employeesoap.repository.EmployeeRepository;
 import com.example.employeesoap.support.IntegrationTest;
@@ -28,105 +28,44 @@ class EmployeeServiceImplTest extends IntegrationTest {
     }
 
     @Test
-    void addValidEmployees() {
-        Employee employee1 =
-                Employee.builder()
-                        .position("Junior")
-                        .age(19L)
-                        .name("Matis")
-                        .surname("Matronus")
-                        .salary(65_000L)
-                        .build();
-        Employee employee2 =
-                Employee.builder()
-                        .position("Manager")
-                        .age(24L)
-                        .name("Ivan")
-                        .surname("Pupkin")
-                        .grade("first")
-                        .salary(70_000L)
-                        .build();
-        assertEquals(
-                SUCCESS,
-                employeeService
-                        .addEmployees(Arrays.asList(employee1, employee2))
-                        .get(0)
-                        .getStatus());
-        assertEquals(
-                SUCCESS,
-                employeeService
-                        .addEmployees(Arrays.asList(employee1, employee2))
-                        .get(1)
-                        .getStatus());
+    void addValidEmployeesShouldGetSuccessStatus() {
+        Employee employee1 = getLegalJunior();
+        Employee employee2 = getLegalManager();
+        assertEquals(SUCCESS, employeeService.addEmployees(Arrays.asList(employee1, employee2)).get(0).getStatus());
+        assertEquals(SUCCESS, employeeService.addEmployees(Arrays.asList(employee1, employee2)).get(1).getStatus());
     }
 
     @Test
-    void addEmployeesShouldBeErrorIllegalEmployee() {
-        Employee employee1 =
-                Employee.builder()
-                        .position("Junior")
-                        .age(19L)
-                        .name("Matis")
-                        .surname("Matronus")
-                        .salary(65_000L)
-                        .build();
-        Employee employee2 =
-                Employee.builder()
-                        .position("Manager")
-                        .age(17L)
-                        .name("Ivan")
-                        .surname("Pupkin")
-                        .salary(65_000L)
-                        .build();
-        assertEquals(
-                SUCCESS,
-                employeeService
-                        .addEmployees(Arrays.asList(employee1, employee2))
-                        .get(0)
-                        .getStatus());
-        assertEquals(
-                ERROR,
-                employeeService
-                        .addEmployees(Arrays.asList(employee1, employee2))
-                        .get(1)
-                        .getStatus());
+    void addEmployeesIllegalEmployeeShouldGetErrorStatus() {
+        Employee employee1 = getLegalJunior();
+        employee1.setSalary(35_000L);
+        Employee employee2 = getLegalSenior();
+        employee2.setAge(24L);
+        assertEquals(ERROR, employeeService.addEmployees(Arrays.asList(employee1, employee2)).get(0).getStatus());
+        assertEquals(ERROR, employeeService.addEmployees(Arrays.asList(employee1, employee2)).get(1).getStatus());
     }
 
     @Test
-    void updateEmployee() {
-        Employee employee =
-                Employee.builder()
-                        .uid("4")
-                        .position("Junior")
-                        .age(19L)
-                        .name("Matis")
-                        .surname("Matronus")
-                        .salary(65_000L)
-                        .build();
+    void updateLegalEmployeeShouldGetSuccessStatus() {
+        Employee employee = getLegalJunior();
         assertEquals(SUCCESS, employeeService.updateEmployee(employee).getStatus());
+    }
+
+    @Test
+    void updateEmployeeWithNullableAgeShouldGetErrorStatus() {
+        Employee employee = getLegalJunior();
         employee.setAge(null);
         assertEquals(ERROR, employeeService.updateEmployee(employee).getStatus());
     }
 
     @Test
     void deleteEmployeeShouldDeleteInDataBase() {
-        employeeService.deleteEmployee("1");
-        assertFalse(employeeRepository.findByUid("1").isPresent());
+        employeeService.deleteEmployee(VICTOR_UID);
+        assertFalse(employeeRepository.findByUid(VICTOR_UID).isPresent());
     }
 
     @Test
-    void getExistEmployeeById() {
-        EmployeeDto employee =
-                EmployeeDto.builder()
-                        .uid("4")
-                        .position("Manager")
-                        .age("44")
-                        .name("Anna")
-                        .surname("Volatilisina")
-                        .salary("75000")
-                        .status(SUCCESS)
-                        .tasksUID(Arrays.toString(new Long[0]))
-                        .build();
-        assertEquals(employee, employeeService.getEmployeeById("4"));
+    void getEmployeeById() {
+        assertEquals(EMPLOYEE_DTO_ANNA, employeeService.getEmployeeById(ANNA_UID));
     }
 }

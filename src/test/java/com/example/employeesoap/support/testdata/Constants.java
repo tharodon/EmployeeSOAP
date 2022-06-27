@@ -25,6 +25,18 @@ public class Constants {
     public static final String KARL_UID = "3";
     public static final String ANNA_UID = "4";
 
+    public static final EmployeeDto EMPLOYEE_DTO_ANNA =
+            EmployeeDto.builder()
+                    .uid("4")
+                    .position("Manager")
+                    .age("44")
+                    .name("Anna")
+                    .surname("Volatilisina")
+                    .salary("75000")
+                    .status(SUCCESS)
+                    .tasksUID(Arrays.toString(new Long[0]))
+                    .build();
+
     public static final Integer COUNT_OF_EMPLOYEES = 4;
 
     public static final EmployeeDto LEGAL_EMPLOYEE_2 =
@@ -62,7 +74,7 @@ public class Constants {
                 .age(19L)
                 .name("Vasiliy")
                 .surname("Matronus")
-                .salary(80_000L)
+                .salary(65_000L)
                 .build();
     }
 
