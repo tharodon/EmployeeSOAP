@@ -25,15 +25,13 @@ class RegisterServiceImplTest extends IntegrationTest {
 
     private final UserRepository userRepository;
 
-    private final UserMapper userMapper = new UserMapperImpl(new BCryptPasswordEncoder());
-
     private final User user =
             User.builder()
                     .username(USERNAME)
                     .email(EMAIL)
                     .password(PASSWORD)
                     .roles(
-                            new HashSet<Role>() {
+                            new HashSet<>() {
                                 {
                                     add(new Role(null, ROLE_USER));
                                 }
@@ -46,7 +44,7 @@ class RegisterServiceImplTest extends IntegrationTest {
                     .email(EMAIL)
                     .password(PASSWORD)
                     .roles(
-                            new HashSet<String>() {
+                            new HashSet<>() {
                                 {
                                     add("user");
                                 }
@@ -61,26 +59,26 @@ class RegisterServiceImplTest extends IntegrationTest {
     }
 
     @Test
-    void registerSaveShouldSaveUserTest() {
+    void registerSaveShouldSaveUser() {
         registerService.register(userDto);
         assertEquals(user, userRepository.findByUsername(USERNAME).get());
     }
 
     @Test
-    void registerShouldReturnValidUserDtoTest() {
+    void registerShouldReturnValidUserDto() {
         UserDto register = registerService.register(userDto);
         assertEquals(userDto, register);
     }
 
     @Test
-    void registerStatusWithDuplicateUsernameShouldErrorTest() {
+    void registerStatusWithDuplicateUsernameShouldError() {
         userDto.setUsername(USERNAME_DUPLICATE);
         UserDto register = registerService.register(userDto);
         assertEquals(ERROR, register.getStatus());
     }
 
     @Test
-    void registerStatusWithDuplicateEmailShouldErrorTest() {
+    void registerStatusWithDuplicateEmailShouldError() {
         userDto.setEmail(EMAIL_DUPLICATE);
         UserDto register = registerService.register(userDto);
         assertEquals(ERROR, register.getStatus());

@@ -1,11 +1,9 @@
 package com.example.employeesoap.service.mapper;
 
-import static com.example.employeesoap.type.RoleName.ROLE_ADMIN;
-import static com.example.employeesoap.type.RoleName.ROLE_USER;
+import static com.example.employeesoap.support.testdata.Constants.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.example.employeesoap.api.RoleMapper;
-import com.example.employeesoap.entity.Role;
 import com.example.employeesoap.support.IntegrationTest;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,14 +14,6 @@ class RoleMapperImplTest extends IntegrationTest {
 
     private final RoleMapper roleMapper;
 
-    private final Set<Role> roles =
-            new HashSet<Role>() {
-                {
-                    add(new Role(null, ROLE_USER));
-                    add(new Role(null, ROLE_ADMIN));
-                }
-            };
-
     @Autowired
     public RoleMapperImplTest(RoleMapper roleMapper) {
         this.roleMapper = roleMapper;
@@ -32,12 +22,12 @@ class RoleMapperImplTest extends IntegrationTest {
     @Test
     void toRole() {
         Set<String> rolesStr =
-                new HashSet<String>() {
+                new HashSet<>() {
                     {
-                        add("user");
-                        add("admin");
+                        add(USER);
+                        add(ADMIN);
                     }
                 };
-        assertEquals(roles, roleMapper.toRole(rolesStr));
+        assertEquals(ROLES, roleMapper.toRole(rolesStr));
     }
 }

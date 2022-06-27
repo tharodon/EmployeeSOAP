@@ -37,12 +37,12 @@ class EmployeeMapperImplTest {
                     .build();
 
     @Test
-    void employeeToEmployeeDto() {
+    void employeeToEmployeeDtoShouldReturnEmployeeDto() {
         assertEquals(employeeDto, employeeMapper.employeeToEmployeeDto(employee));
     }
 
     @Test
-    void employeeDtoToEmployee() {
+    void employeeDtoToEmployeeShouldReturnEmployee() {
         assertEquals(employee, employeeMapper.employeeDtoToEmployee(employeeDto));
     }
 }

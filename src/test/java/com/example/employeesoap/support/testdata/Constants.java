@@ -3,9 +3,14 @@ package com.example.employeesoap.support.testdata;
 import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.dto.UserDto;
 import com.example.employeesoap.entity.Employee;
+import com.example.employeesoap.entity.Role;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
+import static com.example.employeesoap.type.RoleName.ROLE_ADMIN;
+import static com.example.employeesoap.type.RoleName.ROLE_USER;
 import static com.example.employeesoap.type.Status.SUCCESS;
 
 public class Constants {
@@ -20,10 +25,24 @@ public class Constants {
 
     public static final String PASSWORD = "myPassword123";
 
+    public static final String USER = "user";
+
+    public static final String ADMIN = "admin";
+
     public static final String VICTOR_UID = "1";
     public static final String OLEG_UID = "2";
     public static final String KARL_UID = "3";
     public static final String ANNA_UID = "4";
+
+    public static final Integer COUNT_OF_EMPLOYEES = 4;
+
+    public static final Set<Role> ROLES =
+            new HashSet<>() {
+                {
+                    add(new Role(null, ROLE_USER));
+                    add(new Role(null, ROLE_ADMIN));
+                }
+            };
 
     public static final EmployeeDto EMPLOYEE_DTO_ANNA =
             EmployeeDto.builder()
@@ -37,7 +56,6 @@ public class Constants {
                     .tasksUID(Arrays.toString(new Long[0]))
                     .build();
 
-    public static final Integer COUNT_OF_EMPLOYEES = 4;
 
     public static final EmployeeDto LEGAL_EMPLOYEE_2 =
             EmployeeDto.builder()
@@ -137,8 +155,4 @@ public class Constants {
                 .password(PASSWORD)
                 .build();
     }
-
-
-//    ShouldGetError
-//    ShouldNotExists
 }

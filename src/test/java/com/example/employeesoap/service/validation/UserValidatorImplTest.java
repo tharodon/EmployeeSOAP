@@ -22,9 +22,9 @@ class UserValidatorImplTest extends IntegrationTest {
                     .email(EMAIL)
                     .password(PASSWORD)
                     .roles(
-                            new HashSet<String>() {
+                            new HashSet<>() {
                                 {
-                                    add("user");
+                                    add(USER);
                                 }
                             })
                     .status(OK)
@@ -36,54 +36,54 @@ class UserValidatorImplTest extends IntegrationTest {
     }
 
     @Test
-    void validateCorrectUserTest() {
+    void validateCorrectUserShouldSuccess() {
         assertEquals(userDtoTemplate, userValidator.validate(userDtoTemplate));
     }
 
     @Test
-    void validateEmptyUsernameShouldErrorTest() {
+    void validateEmptyUsernameShouldGetError() {
         userDtoTemplate.setUsername("");
         assertEquals(ERROR, userValidator.validate(userDtoTemplate).getStatus());
     }
 
     @Test
-    void validateNullUsernameShouldErrorTest() {
+    void validateNullUsernameShouldGetError() {
         userDtoTemplate.setUsername(null);
         assertEquals(ERROR, userValidator.validate(userDtoTemplate).getStatus());
     }
 
     @Test
-    void validateExistUsernameShouldErrorTest() {
+    void validateExistUsernameShouldGetError() {
         userDtoTemplate.setUsername(USERNAME_DUPLICATE);
         assertEquals(ERROR, userValidator.validate(userDtoTemplate).getStatus());
     }
 
     @Test
-    void validateEmptyEmailShouldErrorTest() {
+    void validateEmptyEmailShouldGetError() {
         userDtoTemplate.setEmail("");
         assertEquals(ERROR, userValidator.validate(userDtoTemplate).getStatus());
     }
 
     @Test
-    void validateNullEmailShouldErrorTest() {
+    void validateNullEmailShouldGetError() {
         userDtoTemplate.setEmail(null);
         assertEquals(ERROR, userValidator.validate(userDtoTemplate).getStatus());
     }
 
     @Test
-    void validateEmptyPasswordShouldErrorTest() {
+    void validateEmptyPasswordShouldGetError() {
         userDtoTemplate.setPassword("");
         assertEquals(ERROR, userValidator.validate(userDtoTemplate).getStatus());
     }
 
     @Test
-    void validateNullPasswordShouldErrorTest() {
+    void validateNullPasswordShouldGetError() {
         userDtoTemplate.setPassword(null);
         assertEquals(ERROR, userValidator.validate(userDtoTemplate).getStatus());
     }
 
     @Test
-    void validateIncorrectRoleShouldErrorTest() {
+    void validateIncorrectRoleShouldGetError() {
         userDtoTemplate.getRoles().add("incorrect_role");
         assertEquals(ERROR, userValidator.validate(userDtoTemplate).getStatus());
     }
