@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Sql(
         scripts = {
+            "/sql/delete_users.sql",
             "/sql/delete_employees.sql",
             "/sql/insert_employees.sql",
             "/sql/insert_roles.sql",
