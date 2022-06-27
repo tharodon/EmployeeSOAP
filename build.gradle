@@ -15,9 +15,24 @@ spotless {
 		trimTrailingWhitespace()
 		indentWithTabs() // or spaces. Takes an integer argument if you don't like 4
 		endWithNewline()
-
 	}
 	java {
+		custom 'noWildcardImports', {
+			def wildcard = it =~ /(import.*\*;)/
+			def packageName = it =~ /(package.*;)/
+			def string = String.valueOf(it)
+			if (packageName.find()) {
+				print(
+						'no use wildcard in '
+						+ string.subSequence(packageName.start(), packageName.end())
+						+ ' '
+				)
+			}
+			if (wildcard.find()) {
+				println(string.subSequence(wildcard.start(), wildcard.end()))
+			}
+		}
+		bumpThisNumberIfACustomStepChanges(1)
 		googleJavaFormat('1.8').aosp().reflowLongStrings()
 		removeUnusedImports()
 		importOrder()

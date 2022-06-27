@@ -1,17 +1,18 @@
 package com.example.employeesoap.service.employee;
 
-import static com.example.employeesoap.type.Status.SUCCESS;
-
 import com.example.employeesoap.api.*;
 import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.entity.Employee;
 import com.example.employeesoap.service.util.UidGeneratorRandom;
-import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.example.employeesoap.type.Status.SUCCESS;
 
 @Slf4j
 @Service
@@ -33,9 +34,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                         .collect(Collectors.toList());
         employees.stream()
                 .filter(employee -> checkSuccessStatus(employees.indexOf(employee), response))
-                .peek(
-                        employee ->
-                                employee.setUid(response.get(employees.indexOf(employee)).getUid()))
+                .peek(employee -> employee.setUid(response.get(employees.indexOf(employee)).getUid()))
                 .forEach(taskCreator::createTask);
         return response;
     }
