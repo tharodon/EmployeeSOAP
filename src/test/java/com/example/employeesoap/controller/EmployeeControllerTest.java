@@ -1,21 +1,20 @@
 package com.example.employeesoap.controller;
 
-import com.example.employeesoap.dto.EmployeeDto;
-import com.example.employeesoap.repository.EmployeeRepository;
-import com.example.employeesoap.support.IntegrationTest;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.test.context.support.WithMockUser;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-
 import static com.example.employeesoap.support.testdata.Constants.*;
 import static com.example.employeesoap.type.Status.ERROR;
 import static com.example.employeesoap.type.Status.SUCCESS;
 import static org.junit.jupiter.api.Assertions.*;
+
+import com.example.employeesoap.dto.EmployeeDto;
+import com.example.employeesoap.repository.EmployeeRepository;
+import com.example.employeesoap.support.IntegrationTest;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithMockUser;
 
 class EmployeeControllerTest extends IntegrationTest {
 
@@ -34,7 +33,8 @@ class EmployeeControllerTest extends IntegrationTest {
     void addEmployee() {
         ResponseEntity<List<EmployeeDto>> responseEntity =
                 (ResponseEntity<List<EmployeeDto>>)
-                        employeeController.addEmployee(Arrays.asList(ILLEGAL_EMPLOYEE, LEGAL_EMPLOYEE));
+                        employeeController.addEmployee(
+                                Arrays.asList(ILLEGAL_EMPLOYEE, LEGAL_EMPLOYEE));
         assertSame(Objects.requireNonNull(responseEntity.getBody()).get(0).getStatus(), ERROR);
         assertSame(Objects.requireNonNull(responseEntity.getBody()).get(1).getStatus(), SUCCESS);
         assertTrue(responseEntity.getStatusCode().is2xxSuccessful());

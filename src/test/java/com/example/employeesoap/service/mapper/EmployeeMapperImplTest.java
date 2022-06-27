@@ -1,14 +1,13 @@
 package com.example.employeesoap.service.mapper;
 
+import static com.example.employeesoap.type.Status.SUCCESS;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import com.example.employeesoap.api.EmployeeMapper;
 import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.entity.Employee;
-import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
-
-import static com.example.employeesoap.type.Status.SUCCESS;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 class EmployeeMapperImplTest {
 

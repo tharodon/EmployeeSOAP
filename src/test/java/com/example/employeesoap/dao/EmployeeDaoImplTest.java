@@ -1,5 +1,9 @@
 package com.example.employeesoap.dao;
 
+import static com.example.employeesoap.support.testdata.Constants.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import com.example.employeesoap.api.EmployeeDao;
 import com.example.employeesoap.entity.Employee;
 import com.example.employeesoap.exception.EmployeeNotFoundException;
@@ -7,10 +11,6 @@ import com.example.employeesoap.repository.EmployeeRepository;
 import com.example.employeesoap.support.IntegrationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import static com.example.employeesoap.support.testdata.Constants.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class EmployeeDaoImplTest extends IntegrationTest {
     private final EmployeeDao employeeDao;
@@ -37,10 +37,17 @@ class EmployeeDaoImplTest extends IntegrationTest {
 
     @Test
     void shouldThrowEmployeeNotFoundException() throws EmployeeNotFoundException {
-        assertEquals(employeeRepository.findByUid(VICTOR_UID).get(), employeeDao.findEmployeeById(VICTOR_UID));
-        assertEquals(employeeRepository.findByUid(OLEG_UID).get(), employeeDao.findEmployeeById(OLEG_UID));
-        assertEquals(employeeRepository.findByUid(KARL_UID).get(), employeeDao.findEmployeeById(KARL_UID));
-        assertEquals(employeeRepository.findByUid(ANNA_UID).get(), employeeDao.findEmployeeById("4"));
+        assertEquals(
+                employeeRepository.findByUid(VICTOR_UID).get(),
+                employeeDao.findEmployeeById(VICTOR_UID));
+        assertEquals(
+                employeeRepository.findByUid(OLEG_UID).get(),
+                employeeDao.findEmployeeById(OLEG_UID));
+        assertEquals(
+                employeeRepository.findByUid(KARL_UID).get(),
+                employeeDao.findEmployeeById(KARL_UID));
+        assertEquals(
+                employeeRepository.findByUid(ANNA_UID).get(), employeeDao.findEmployeeById("4"));
     }
 
     @Test
@@ -76,7 +83,8 @@ class EmployeeDaoImplTest extends IntegrationTest {
     @Test
     void deleteEmployeeShouldDecreaseTheCountOfEmployees() {
         employeeDao.delete(VICTOR_UID);
-        assertThrows(EmployeeNotFoundException.class, () -> employeeDao.findEmployeeById(VICTOR_UID));
+        assertThrows(
+                EmployeeNotFoundException.class, () -> employeeDao.findEmployeeById(VICTOR_UID));
         assertEquals(COUNT_OF_EMPLOYEES - 1, employeeRepository.findAll().size());
     }
 }

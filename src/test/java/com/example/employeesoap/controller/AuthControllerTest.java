@@ -1,21 +1,20 @@
 package com.example.employeesoap.controller;
 
+import static com.example.employeesoap.support.testdata.Constants.*;
+import static com.example.employeesoap.type.AuthStatus.ERROR;
+import static com.example.employeesoap.type.AuthStatus.OK;
+import static org.junit.jupiter.api.Assertions.*;
+
 import com.example.employeesoap.dto.JwtResponse;
 import com.example.employeesoap.dto.LoginRequest;
 import com.example.employeesoap.dto.UserDto;
 import com.example.employeesoap.repository.UserRepository;
 import com.example.employeesoap.support.IntegrationTest;
+import java.util.HashSet;
+import java.util.Objects;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-
-import java.util.HashSet;
-import java.util.Objects;
-
-import static com.example.employeesoap.support.testdata.Constants.*;
-import static com.example.employeesoap.type.AuthStatus.ERROR;
-import static com.example.employeesoap.type.AuthStatus.OK;
-import static org.junit.jupiter.api.Assertions.*;
 
 class AuthControllerTest extends IntegrationTest {
 
@@ -149,14 +148,16 @@ class AuthControllerTest extends IntegrationTest {
     @Test
     void registerUserDuplicateUsernameShouldGetError() {
         ResponseEntity<UserDto> responseEntity =
-                (ResponseEntity<UserDto>) authController.registerUser(getUserDtoWithUsernameDuplicate());
+                (ResponseEntity<UserDto>)
+                        authController.registerUser(getUserDtoWithUsernameDuplicate());
         assertSame(ERROR, Objects.requireNonNull(responseEntity.getBody()).getStatus());
     }
 
     @Test
     void registerUserDuplicateEmailShouldGetError() {
         ResponseEntity<UserDto> responseEntity =
-                (ResponseEntity<UserDto>) authController.registerUser(getUserDtoWithEmailDuplicate());
+                (ResponseEntity<UserDto>)
+                        authController.registerUser(getUserDtoWithEmailDuplicate());
         assertSame(ERROR, Objects.requireNonNull(responseEntity.getBody()).getStatus());
     }
 

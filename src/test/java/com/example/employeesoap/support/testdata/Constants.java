@@ -1,17 +1,16 @@
 package com.example.employeesoap.support.testdata;
 
+import static com.example.employeesoap.type.RoleName.ROLE_ADMIN;
+import static com.example.employeesoap.type.RoleName.ROLE_USER;
+import static com.example.employeesoap.type.Status.SUCCESS;
+
 import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.dto.UserDto;
 import com.example.employeesoap.entity.Employee;
 import com.example.employeesoap.entity.Role;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-
-import static com.example.employeesoap.type.RoleName.ROLE_ADMIN;
-import static com.example.employeesoap.type.RoleName.ROLE_USER;
-import static com.example.employeesoap.type.Status.SUCCESS;
 
 public class Constants {
 
@@ -55,7 +54,6 @@ public class Constants {
                     .status(SUCCESS)
                     .tasksUID(Arrays.toString(new Long[0]))
                     .build();
-
 
     public static final EmployeeDto LEGAL_EMPLOYEE_2 =
             EmployeeDto.builder()
