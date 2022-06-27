@@ -1,12 +1,8 @@
-FROM docker:dind AS DOCKER
-FROM openjdk:8
+FROM openjdk:11
 
 ENV   POSTGRES="pg-net" KAFKA="kafka-net" KAFKA_LISTEN="9092" EUREKA="eur-net"
 
-
 COPY . .
-
-COPY --from=DOCKER . .
 
 RUN chmod +x gradlew && ./gradlew bootJar
 
