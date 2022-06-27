@@ -1,14 +1,14 @@
 package com.example.employeesoap.service.mapper;
 
-import static com.example.employeesoap.support.testdata.Constants.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import com.example.employeesoap.api.UserMapper;
 import com.example.employeesoap.dto.UserDto;
 import com.example.employeesoap.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import static com.example.employeesoap.support.testdata.Constants.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class UserMapperImplTest {
     private final UserMapper userMapper = new UserMapperImpl(new BCryptPasswordEncoder());

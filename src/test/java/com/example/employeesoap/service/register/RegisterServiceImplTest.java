@@ -1,23 +1,21 @@
 package com.example.employeesoap.service.register;
 
+import com.example.employeesoap.api.RegisterService;
+import com.example.employeesoap.dto.UserDto;
+import com.example.employeesoap.entity.Role;
+import com.example.employeesoap.entity.User;
+import com.example.employeesoap.repository.UserRepository;
+import com.example.employeesoap.support.IntegrationTest;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.HashSet;
+
 import static com.example.employeesoap.support.testdata.Constants.*;
 import static com.example.employeesoap.type.AuthStatus.ERROR;
 import static com.example.employeesoap.type.AuthStatus.OK;
 import static com.example.employeesoap.type.RoleName.ROLE_USER;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import com.example.employeesoap.api.RegisterService;
-import com.example.employeesoap.api.UserMapper;
-import com.example.employeesoap.dto.UserDto;
-import com.example.employeesoap.entity.Role;
-import com.example.employeesoap.entity.User;
-import com.example.employeesoap.repository.UserRepository;
-import com.example.employeesoap.service.mapper.UserMapperImpl;
-import com.example.employeesoap.support.IntegrationTest;
-import java.util.HashSet;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 class RegisterServiceImplTest extends IntegrationTest {
 

@@ -1,16 +1,17 @@
 package com.example.employeesoap.service.validation;
 
+import com.example.employeesoap.api.UserValidator;
+import com.example.employeesoap.dto.UserDto;
+import com.example.employeesoap.support.IntegrationTest;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.HashSet;
+
 import static com.example.employeesoap.support.testdata.Constants.*;
 import static com.example.employeesoap.type.AuthStatus.ERROR;
 import static com.example.employeesoap.type.AuthStatus.OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import com.example.employeesoap.api.UserValidator;
-import com.example.employeesoap.dto.UserDto;
-import com.example.employeesoap.support.IntegrationTest;
-import java.util.HashSet;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 class UserValidatorImplTest extends IntegrationTest {
 

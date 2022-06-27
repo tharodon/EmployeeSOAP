@@ -1,14 +1,15 @@
 package com.example.employeesoap.service.mapper;
 
-import static com.example.employeesoap.support.testdata.Constants.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import com.example.employeesoap.api.RoleMapper;
 import com.example.employeesoap.support.IntegrationTest;
-import java.util.HashSet;
-import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import static com.example.employeesoap.support.testdata.Constants.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RoleMapperImplTest extends IntegrationTest {
 
