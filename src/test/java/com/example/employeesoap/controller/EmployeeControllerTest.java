@@ -1,11 +1,11 @@
 package com.example.employeesoap.controller;
 
+import static com.example.employeesoap.support.testdata.Constants.*;
 import static com.example.employeesoap.type.Status.ERROR;
 import static com.example.employeesoap.type.Status.SUCCESS;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.example.employeesoap.dto.EmployeeDto;
-import com.example.employeesoap.entity.Employee;
 import com.example.employeesoap.repository.EmployeeRepository;
 import com.example.employeesoap.support.IntegrationTest;
 import java.util.Arrays;
@@ -22,35 +22,6 @@ class EmployeeControllerTest extends IntegrationTest {
 
     private final EmployeeRepository employeeRepository;
 
-    private final EmployeeDto requestAnna =
-            EmployeeDto.builder()
-                    .uid("4")
-                    .position("Manager")
-                    .age("44")
-                    .name("Anna")
-                    .surname("Volatilisina")
-                    .salary("75000")
-                    .status(SUCCESS)
-                    .tasksUID(Arrays.toString(new Long[0]))
-                    .build();
-
-    private final Employee requestPavel =
-            Employee.builder()
-                    .position("Junior")
-                    .age(19L)
-                    .name("Pavel")
-                    .surname("Matronus")
-                    .salary(65_000L)
-                    .build();
-    private final Employee requestIvan =
-            Employee.builder()
-                    .position("Manager")
-                    .age(17L)
-                    .name("Ivan")
-                    .surname("Pupkin")
-                    .salary(65_000L)
-                    .build();
-
     @Autowired
     public EmployeeControllerTest(
             EmployeeController employeeController, EmployeeRepository employeeRepository) {
@@ -62,7 +33,7 @@ class EmployeeControllerTest extends IntegrationTest {
     void addEmployee() {
         ResponseEntity<List<EmployeeDto>> responseEntity =
                 (ResponseEntity<List<EmployeeDto>>)
-                        employeeController.addEmployee(Arrays.asList(requestIvan, requestPavel));
+                        employeeController.addEmployee(Arrays.asList(ILLEGAL_EMPLOYEE, LEGAL_EMPLOYEE));
         assertSame(Objects.requireNonNull(responseEntity.getBody()).get(0).getStatus(), ERROR);
         assertSame(Objects.requireNonNull(responseEntity.getBody()).get(1).getStatus(), SUCCESS);
         assertTrue(responseEntity.getStatusCode().is2xxSuccessful());
@@ -71,11 +42,11 @@ class EmployeeControllerTest extends IntegrationTest {
     @Test
     void updateEmployeeTest() {
         ResponseEntity<EmployeeDto> responseEntity =
-                (ResponseEntity<EmployeeDto>) employeeController.updateEmployee(requestIvan);
+                (ResponseEntity<EmployeeDto>) employeeController.updateEmployee(ILLEGAL_EMPLOYEE);
         assertSame(Objects.requireNonNull(responseEntity.getBody()).getStatus(), ERROR);
         assertTrue(responseEntity.getStatusCode().is2xxSuccessful());
         responseEntity =
-                (ResponseEntity<EmployeeDto>) employeeController.updateEmployee(requestPavel);
+                (ResponseEntity<EmployeeDto>) employeeController.updateEmployee(LEGAL_EMPLOYEE);
         assertSame(Objects.requireNonNull(responseEntity.getBody()).getStatus(), SUCCESS);
         assertTrue(responseEntity.getStatusCode().is2xxSuccessful());
     }
@@ -83,9 +54,9 @@ class EmployeeControllerTest extends IntegrationTest {
     @Test
     @WithMockUser(username = "test")
     void getEmployeeWithExistsEmployee() {
-        ResponseEntity<?> response = employeeController.getEmployee("4");
+        ResponseEntity<?> response = employeeController.getEmployee(ANNA_UID);
         assertTrue(
-                Objects.equals(requestAnna, response.getBody())
+                Objects.equals(LEGAL_EMPLOYEE_2, response.getBody())
                         && response.getStatusCode().is2xxSuccessful());
     }
 
@@ -97,13 +68,13 @@ class EmployeeControllerTest extends IntegrationTest {
 
     @Test
     void deleteExistsEmployeeTest() {
-        employeeController.deleteEmployee("1");
-        employeeController.deleteEmployee("2");
-        employeeController.deleteEmployee("3");
-        employeeController.deleteEmployee("4");
-        assertFalse(employeeRepository.findByUid("1").isPresent());
-        assertFalse(employeeRepository.findByUid("2").isPresent());
-        assertFalse(employeeRepository.findByUid("3").isPresent());
-        assertFalse(employeeRepository.findByUid("4").isPresent());
+        employeeController.deleteEmployee(VICTOR_UID);
+        employeeController.deleteEmployee(OLEG_UID);
+        employeeController.deleteEmployee(KARL_UID);
+        employeeController.deleteEmployee(ANNA_UID);
+        assertFalse(employeeRepository.findByUid(VICTOR_UID).isPresent());
+        assertFalse(employeeRepository.findByUid(OLEG_UID).isPresent());
+        assertFalse(employeeRepository.findByUid(KARL_UID).isPresent());
+        assertFalse(employeeRepository.findByUid(ANNA_UID).isPresent());
     }
 }

@@ -1,6 +1,12 @@
 package com.example.employeesoap.support.testdata;
 
+import com.example.employeesoap.dto.EmployeeDto;
 import com.example.employeesoap.dto.UserDto;
+import com.example.employeesoap.entity.Employee;
+
+import java.util.Arrays;
+
+import static com.example.employeesoap.type.Status.SUCCESS;
 
 public class Constants {
 
@@ -14,7 +20,41 @@ public class Constants {
 
     public static final String PASSWORD = "myPassword123";
 
-    public static UserDto getValidUserDto(){
+    public static final String VICTOR_UID = "1";
+    public static final String OLEG_UID = "2";
+    public static final String KARL_UID = "3";
+    public static final String ANNA_UID = "4";
+
+    public static final EmployeeDto LEGAL_EMPLOYEE_2 =
+            EmployeeDto.builder()
+                    .uid("4")
+                    .position("Manager")
+                    .age("44")
+                    .name("Anna")
+                    .surname("Volatilisina")
+                    .salary("75000")
+                    .status(SUCCESS)
+                    .tasksUID(Arrays.toString(new Long[0]))
+                    .build();
+
+    public static final Employee LEGAL_EMPLOYEE =
+            Employee.builder()
+                    .position("Junior")
+                    .age(19L)
+                    .name("Pavel")
+                    .surname("Matronus")
+                    .salary(65_000L)
+                    .build();
+    public static final Employee ILLEGAL_EMPLOYEE =
+            Employee.builder()
+                    .position("Manager")
+                    .age(17L)
+                    .name("Ivan")
+                    .surname("Pupkin")
+                    .salary(65_000L)
+                    .build();
+
+    public static UserDto getValidUserDto() {
         return UserDto.builder()
                 .username(USERNAME)
                 .roles(null)
@@ -23,7 +63,7 @@ public class Constants {
                 .build();
     }
 
-    public static UserDto getUserDtoWithUsernameDuplicate(){
+    public static UserDto getUserDtoWithUsernameDuplicate() {
         return UserDto.builder()
                 .username(USERNAME_DUPLICATE)
                 .roles(null)
@@ -32,7 +72,7 @@ public class Constants {
                 .build();
     }
 
-    public static  UserDto getUserDtoWithEmailDuplicate(){
+    public static UserDto getUserDtoWithEmailDuplicate() {
         return UserDto.builder()
                 .username(USERNAME)
                 .roles(null)
@@ -40,6 +80,7 @@ public class Constants {
                 .password(PASSWORD)
                 .build();
     }
+
 
 //    ShouldGetError
 //    ShouldNotExists
