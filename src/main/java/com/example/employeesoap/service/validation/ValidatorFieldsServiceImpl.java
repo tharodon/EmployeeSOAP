@@ -39,7 +39,7 @@ public class ValidatorFieldsServiceImpl implements ValidatorFieldsService {
                     employeeChecker.checkAdmissibleTaskCount(position, getCountTasks(employee)));
         } else {
             employeeMessageError.addIllegalArgumentMessage(
-                    new HashMap<String, String>() {
+                    new HashMap<>() {
                         {
                             put(POSITION, INDEFINITE.getPosition());
                         }
